@@ -78,5 +78,28 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 ---
 
 # Built With
+
 * React ([Next.js](https://github.com/zeit/next.js "Next.js"))
 * Node.js
+
+
+# Contributors
+
+Thank you to:
+
+* FalseHonesty
+* Cowtongue (Chris Lee)
+* Gging
+* Autonom
+* Rubiks_cube
+* ReformedPacifist
+
+
+We are definitely open to having anyone help and contribute.
+
+
+Check out [this spreadsheet](https://docs.google.com/spreadsheets/d/1bagEOztm2Xc8Jy4QuxvFzflC8ZwQ6hvCaJcULJ9OEAU/edit#gid=0<Paste>) and add your name!
+
+
+And, once again, come chat with us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
+
