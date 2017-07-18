@@ -7,8 +7,8 @@ Maybe you're feeling risky and want to invest in a low-viewer streamer in the ho
 
 ### Everything, such as using viewer count as value, is tentative at this point.
 
-# Live site
-Here is the live site: link
+# Live Site
+Here is the live site: (Not ready)
 
 ---
 
@@ -28,13 +28,13 @@ I recommend using Node Version Manager: [Linux/macOS](https://github.com/creatio
 git clone https://github.com/ChrisALee/twitch-stocks.git
 ```
 
-4. CD to the directory (twitch-stocks by default)
+4. Navigate to the directory (twitch-stocks by default).
 
 ```
 cd twitch-stocks
 ```
 
-5. Run NPM install. This will give you all the dependecies needed to locally run the project.
+5. Run NPM install. This will give you all the dependencies needed to locally run the project.
 
 ```
 npm install
@@ -50,9 +50,9 @@ npm run dev
 
 Any contributions are appreciated.
 
-For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md)
+For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md).
 
-### Learning resources
+### Learning Resources
 
 #### Next.js: 
 * [Learn Next.js](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
