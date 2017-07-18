@@ -8,7 +8,7 @@ Maybe you're feeling risky and want to invest in a low-viewer streamer in the ho
 ### Everything, such as using viewer count as value, is tentative at this point.
 
 # Live Site
-Here is the live site: (Not ready)
+Come check out the live site: https://twitch-stocks.now.sh/
 
 ---
 
