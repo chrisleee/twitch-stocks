@@ -1,10 +1,12 @@
 # Twitch Stocks
-A placeholder project description
+Twitch Stocks allows you to invest in Twitch streamers using virtual points. (No money involved)
+Say your favorite streamer averages 20,000 viewers one week and you invest in them.
+The next week they managed to bump their average viewer count to 22,000. You just profited!
+Maybe you're feeling risky and want to invest in a low-viewer streamer in the hopes that they blow up in viewership.
+### Everything, such as using viewer count as value, is tentative at this point.
 
 # Live site
 Here is the live site: link
-
-# Usage
 
 ---
 
@@ -22,6 +24,7 @@ Follow these steps to contribute:
 * Push to the branch (git push origin improve-feature)
 * Create a Pull Request
 
+Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
 ## Bug / Feature Request
 
@@ -32,5 +35,5 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 ---
 
 # Built With
-* React
+* React ([Next.js](https://github.com/zeit/next.js "Next.js"))
 * Node or Java
