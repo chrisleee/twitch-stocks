@@ -1,0 +1,29 @@
+{
+  "name": "twitch-stocks",
+  "version": "1.0.0",
+  "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
+  },
+  "keywords": [
+    "twitch"
+  ],
+  "author": "Chris Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisALee/twitch-stocks/issues"
+  },
+  "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
+  "dependencies": {
+    "next": "^3.0.1-beta.17",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}

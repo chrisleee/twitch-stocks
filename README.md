@@ -1,30 +1,73 @@
 # Twitch Stocks
 Twitch Stocks allows you to invest in Twitch streamers using virtual points. (No money involved)
+
 Say your favorite streamer averages 20,000 viewers one week and you invest in them.
 The next week they managed to bump their average viewer count to 22,000. You just profited!
 Maybe you're feeling risky and want to invest in a low-viewer streamer in the hopes that they blow up in viewership.
+
 ### Everything, such as using viewer count as value, is tentative at this point.
 
-# Live site
-Here is the live site: link
+# Live Site
+Come check out the live site: https://twitch-stocks.now.sh/
 
 ---
 
-## Development
+# Development
+
+### Getting Started
+
+1. Install [Node.js](https://nodejs.org/en/ "Node.js").
+
+I recommend using Node Version Manager: [Linux/macOS](https://github.com/creationix/nvm)  [Windows](https://github.com/coreybutler/nvm-windows)
+
+2. Fork the repo.
+
+3. Clone the project.
+
+```
+git clone https://github.com/ChrisALee/twitch-stocks.git
+```
+
+4. Navigate to the directory (twitch-stocks by default).
+
+```
+cd twitch-stocks
+```
+
+5. Run NPM install. This will give you all the dependencies needed to locally run the project.
+
+```
+npm install
+```
+
+6. Run the project.
+
+```
+npm run dev
+```
+
+7. Go to http://localhost:3000 to view the project.
 
 Any contributions are appreciated.
 
-Follow these steps to contribute:
+For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md).
 
-* Fork the repo
-* Create a new branch (git checkout -b improve-feature)
-* Make the appropriate changes in the files
-* Add changes to reflect the changes made
-* Commit your changes (git commit -am 'Improve feature')
-* Push to the branch (git push origin improve-feature)
-* Create a Pull Request
+### Learning Resources
+
+#### Next.js: 
+* [Learn Next.js](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
+* [Next.js examples](https://github.com/zeit/next.js/tree/v3-beta/examples "Next.js examples")
+
+#### React:
+* [Eric Douglas' curated list of React resources](https://github.com/ericdouglas/react-learning) - I'd look at React, ES2015+, Redux, and Bundlers.
+
+#### Node.js/Express:
+* Need a good resource
 
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
+
+Please be sure to ask any questions if you get stuck on anything related to the project or languages used.
+We're all learning here, and teaching is a great way to reinforce concepts.
 
 ## Bug / Feature Request
 
@@ -35,5 +78,28 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 ---
 
 # Built With
+
 * React ([Next.js](https://github.com/zeit/next.js "Next.js"))
-* Node or Java
+* Node.js
+
+
+# Contributors
+
+Thank you to:
+
+* FalseHonesty
+* Cowtongue (Chris Lee)
+* Gging
+* Autonom
+* Rubiks_cube
+* ReformedPacifist
+
+
+We are definitely open to having anyone help and contribute.
+
+
+Check out [this spreadsheet](https://docs.google.com/spreadsheets/d/1bagEOztm2Xc8Jy4QuxvFzflC8ZwQ6hvCaJcULJ9OEAU/edit#gid=0<Paste>) and add your name!
+
+
+And, once again, come chat with us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
+
