@@ -36,4 +36,4 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 # Built With
 * React ([Next.js](https://github.com/zeit/next.js "Next.js"))
-* Node or Java
+* Node
