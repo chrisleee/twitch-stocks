@@ -29,7 +29,7 @@ Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")
 ### Learning resources
 
 #### Next.js: 
-* [Learn Nextjs](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
+* [Learn Next.js](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
 * [Next.js examples](https://github.com/zeit/next.js/tree/v3-beta/examples "Next.js examples")
 
 #### React:
@@ -48,4 +48,4 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 # Built With
 * React ([Next.js](https://github.com/zeit/next.js "Next.js"))
-* Node
+* Node.js
