@@ -14,17 +14,43 @@ Here is the live site: link
 
 # Development
 
+### Getting Started
+
+1. Install [Node.js](https://nodejs.org/en/ "Node.js").
+
+I recommend using Node Version Manager: [Linux/macOS](https://github.com/creationix/nvm)  [Windows](https://github.com/coreybutler/nvm-windows)
+
+2. Fork the repo.
+
+3. Clone the project.
+
+```
+git clone https://github.com/ChrisALee/twitch-stocks.git
+```
+
+4. CD to the directory (twitch-stocks by default)
+
+```
+cd twitch-stocks
+```
+
+5. Run NPM install. This will give you all the dependecies needed to locally run the project.
+
+```
+npm install
+```
+
+6. Run the project.
+
+```
+npm run dev
+```
+
+7. Go to http://localhost:3000 to view the project.
+
 Any contributions are appreciated.
 
-Follow these steps to contribute:
-
-* Fork the repo
-* Create a new branch (git checkout -b improve-feature)
-* Make the appropriate changes in the files
-* Add changes to reflect the changes made
-* Commit your changes (git commit -am 'Improve feature')
-* Push to the branch (git push origin improve-feature)
-* Create a Pull Request
+For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md)
 
 ### Learning resources
 
