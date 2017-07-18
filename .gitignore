@@ -1,0 +1,37 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+.tags
+.tmproj
+nbproject
+Thumbs.db
+tags
+
+# NPM packages folder.
+node_modules/
+
+# Brunch folder for temporary files.
+tmp/
+
+# Brunch output folder.
+public/
+
+# API Docs
+docs/api/
+
+# DotEnv
+.env
