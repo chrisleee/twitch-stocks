@@ -26,6 +26,18 @@ Follow these steps to contribute:
 
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
+### Learning resources
+
+#### Next.js: 
+* [Learn Nextjs](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
+* [Next.js examples](https://github.com/zeit/next.js/tree/v3-beta/examples "Next.js examples")
+
+#### React:
+* [Eric Douglas' curated list of React resources](https://github.com/ericdouglas/react-learning) - I'd look at React, ES2015+, Redux, and Bundlers.
+
+#### Node.js/Express:
+* Need a good resource
+
 ## Bug / Feature Request
 
 If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue here by including your search query and the expected result.
