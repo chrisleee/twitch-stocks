@@ -15,7 +15,7 @@
   "pre-commit": [
     "prettier",
     "tslint"
-  ]
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
