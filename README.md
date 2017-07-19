@@ -73,6 +73,12 @@ The same information can also be found on the [project](https://github.com/Chris
 * [Node.js MongoDB Tutorial](https://www.guru99.com/node-js-mongodb.html)
 * [Mongoose](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
 
+#### Typescript:
+* [Learn Typescript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) - Ignore the parts about installing and compiling since that's already set up with our project.
+* [Learn Typescript with React](https://www.typescriptlang.org/docs/handbook/jsx.html) - I'd recommend knowing the basics of React from previous resources before trying to understand this.
+* [Typescript Playground](https://www.typescriptlang.org/play/index.html)
+* [Typescript React examples](https://www.typescriptlang.org/play/index.html) - Folder structure in these examples will differ from ours. I'd look at how the specific components are written rather than any outer index/app files.
+
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
 Please be sure to ask any questions if you get stuck on anything related to the project or languages used.
