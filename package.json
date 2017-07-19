@@ -4,9 +4,12 @@
   "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tsc --watch\" next",
-    "build": "next build",
-    "start": "next start"
+    "prebuild": "tsc && cp -R static dist/",
+    "build": "next build dist",
+    "predev": "tsc && cp -R static dist/",
+    "dev": "concurrently \"tsc --watch\" \"next dist\"",
+    "start": "next start dist",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -22,14 +25,18 @@
   },
   "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
   "dependencies": {
+    "@types/node": "^8.0.14",
+    "@types/react": "^15.0.38",
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "typescript": "^2.4.1"
   },
   "devDependencies": {
-    "@types/react": "^15.0.38",
     "concurrently": "^3.5.0",
-    "typescript": "^2.4.1"
+    "prettier": "^1.5.3",
+    "tslint": "^5.5.0",
+    "tslint-config-prettier": "^1.1.0"
   },
   "now": {
     "alias": "twitch-stocks"
