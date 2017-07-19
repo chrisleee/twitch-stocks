@@ -4,9 +4,7 @@
   "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "dev": "concurrently \"tsc --watch\" next"
   },
   "repository": {
     "type": "git",
@@ -25,5 +23,10 @@
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.38",
+    "concurrently": "^3.5.0",
+    "typescript": "^2.4.1"
   }
 }
