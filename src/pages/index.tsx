@@ -9,4 +9,4 @@ export default () =>
             you're trying to learn React, go ahead and mess around with it a bit.
         </p>
         <TestComponent />
-    </div>
+    </div>;
