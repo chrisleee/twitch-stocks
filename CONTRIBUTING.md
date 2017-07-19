@@ -43,7 +43,7 @@ This will check for lint errors and yell at you if it finds any. Please fix any 
 
 Below are the rules that we follow. They can also be found in the tslint.json file.
 
-```
+```json
 We use AirBnB as a base and manually overwrite any matching rules with whats defined below:
 "rules": {
     "class-name": true,
@@ -100,5 +100,6 @@ We use AirBnB as a base and manually overwrite any matching rules with whats def
     "no-null-keyword": true,
     "jsdoc-format": true
 }
-We inject the Prettier rules at the end. These overwrite any matching rules from AirBnB. These will be documented once we work out what they are.
+We inject the Prettier rules at the end. These overwrite any matching rules from AirBnB.
+These will be documented once we work out what they are.
 ```
