@@ -56,13 +56,17 @@ For details on how to contribute (code style and more) please visit our [contrib
 
 #### Next.js: 
 * [Learn Next.js](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
-* [Next.js examples](https://github.com/zeit/next.js/tree/v3-beta/examples "Next.js examples")
+* [Next.js examples](https://github.com/zeit/next.js/tree/v3-beta/examples "Next.js examples") - Treat this as a reference for figuring out how to do certain tasks or integrate other tools with Next.js.
 
 #### React:
-* [Eric Douglas' curated list of React resources](https://github.com/ericdouglas/react-learning) - I'd look at React, ES2015+, Redux, and Bundlers.
+* [Eric Douglas' curated list of React resources](https://github.com/ericdouglas/react-learning) - I'd look at React, ES2015+, Redux, and Bundlers. Just be aware that we're using Next.js, so some stuff like routing is abstracted away. If you went through Learn Next.js, you might be able to spot the differences.
 
 #### Node.js/Express:
-* Need a good resource
+* [Build a RESTful API Using Node and Express](https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4) - This tutorial is from 2014, so be aware that some things might possibly be outdated.
+
+#### MongoDB:
+* [Node.js MongoDB Tutorial](https://www.guru99.com/node-js-mongodb.html)
+* [Mongoose](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
 
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
