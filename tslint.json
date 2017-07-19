@@ -1,10 +1,7 @@
 {
+    "extends": "tslint-config-airbnb",
     "rules": {
         "class-name": true,
-        "comment-format": [
-            true,
-            "check-space"
-        ],
         "indent": [
             true,
             "spaces"
@@ -18,7 +15,8 @@
         "quotemark": [
             true,
             "single",
-            "avoid-escape"
+            "avoid-escape",
+            "jsx-double"
         ],
         "semicolon": [
             true,
@@ -30,6 +28,7 @@
             "check-branch",
             "check-decl",
             "check-operator",
+            "check-preblock",
             "check-module",
             "check-separator",
             "check-type"
@@ -54,11 +53,11 @@
         "no-internal-module": true,
         "no-trailing-whitespace": true,
         "no-null-keyword": true,
-        "prefer-const": true,
         "jsdoc-format": true
     },
     "extends": [
         "tslint:latest",
+        "tslint-react",
         "tslint-config-prettier"
     ]
 }

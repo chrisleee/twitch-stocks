@@ -35,6 +35,8 @@
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "tslint-config-airbnb": "^5.2.1",
+    "tslint-react": "^3.0.0",
     "typescript": "^2.4.1"
   },
   "devDependencies": {
