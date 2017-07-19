@@ -52,6 +52,11 @@ Any contributions are appreciated.
 
 For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md).
 
+Check out the [issues](https://github.com/ChrisALee/twitch-stocks/issues) tab for our project's TODO's, bugs, and questions.
+
+
+The same information can also be found on the [project](https://github.com/ChrisALee/twitch-stocks/projects/1) page.
+
 ### Learning Resources
 
 #### Next.js: 
