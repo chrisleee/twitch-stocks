@@ -40,3 +40,65 @@ We use TSLint and Prettier to keep code consistent. Please run the following in 
 npm run tslint
 ```
 This will check for lint errors and yell at you if it finds any. Please fix any errors found before creating a pull request.
+
+Below are the rules that we follow. They can also be found in the tslint.json file.
+
+```
+We use AirBnB as a base and manually overwrite any matching rules with whats defined below:
+"rules": {
+    "class-name": true,
+    "indent": [
+        true,
+        "spaces"
+    ],
+    "one-line": [
+        true,
+        "check-open-brace",
+        "check-whitespace"
+    ],
+    "no-var-keyword": true,
+    "quotemark": [
+        true,
+        "single",
+        "avoid-escape",
+        "jsx-double"
+    ],
+    "semicolon": [
+        true,
+        "always",
+        "ignore-bound-class-methods"
+    ],
+    "whitespace": [
+        true,
+        "check-branch",
+        "check-decl",
+        "check-operator",
+        "check-preblock",
+        "check-module",
+        "check-separator",
+        "check-type"
+    ],
+    "typedef-whitespace": [
+        true,
+        {
+            "call-signature": "nospace",
+            "index-signature": "nospace",
+            "parameter": "nospace",
+            "property-declaration": "nospace",
+            "variable-declaration": "nospace"
+        },
+        {
+            "call-signature": "onespace",
+            "index-signature": "onespace",
+            "parameter": "onespace",
+            "property-declaration": "onespace",
+            "variable-declaration": "onespace"
+        }
+    ],
+    "no-internal-module": true,
+    "no-trailing-whitespace": true,
+    "no-null-keyword": true,
+    "jsdoc-format": true
+}
+We inject the Prettier rules at the end. These overwrite any matching rules from AirBnB. These will be documented once we work out what they are.
+```
