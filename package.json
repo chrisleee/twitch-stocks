@@ -12,6 +12,10 @@
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json"
   },
+  "pre-commit": [
+    "prettier",
+    "tslint"
+  ]
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
@@ -35,6 +39,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.5.3",
     "tslint": "^5.5.0",
     "tslint-config-prettier": "^1.1.0"
