@@ -24,7 +24,7 @@
     "twitch"
   ],
   "author": "Chris Lee",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ChrisALee/twitch-stocks/issues"
   },
