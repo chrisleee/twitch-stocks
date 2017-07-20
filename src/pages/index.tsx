@@ -9,4 +9,7 @@ export default () =>
       trying to learn React, go ahead and mess around with it a bit.
     </p>
     <TestComponent />
+    <p>
+      {process.env.TEST}
+    </p>
   </div>;
