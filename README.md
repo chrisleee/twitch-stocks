@@ -16,6 +16,8 @@ Come check out the live site: https://twitch-stocks.now.sh/
 
 ### Getting Started
 
+Firstly, check out the project's [Roadmap](https://github.com/ChrisALee/twitch-stocks/wiki/Roadmap) and [issues](https://github.com/ChrisALee/twitch-stocks/issues).
+
 1. Install [Node.js](https://nodejs.org/en/ "Node.js").
 
 I recommend using Node Version Manager: [Linux/macOS](https://github.com/creationix/nvm)  [Windows](https://github.com/coreybutler/nvm-windows)
