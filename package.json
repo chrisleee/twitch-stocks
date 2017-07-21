@@ -10,19 +10,15 @@
     "dev": "concurrently \"tsc --watch\" \"next dist\"",
     "start": "next start dist",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.tsx\"",
-    "tslint": "tslint -c tslint.json -p tsconfig.json"
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "test": ""
   },
-  "pre-commit": [
-    "prettier",
-    "tslint"
-  ],
+  "pre-commit": ["prettier", "tslint"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
