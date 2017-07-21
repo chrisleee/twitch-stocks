@@ -1,4 +1,7 @@
 # Twitch Stocks
+[![Build Status](https://travis-ci.org/ChrisALee/twitch-stocks.svg?branch=master)](https://travis-ci.org/ChrisALee/twitch-stocks)
+
+
 Twitch Stocks allows you to invest in Twitch streamers using virtual points. (No money involved)
 
 Say your favorite streamer averages 20,000 viewers one week and you invest in them.
