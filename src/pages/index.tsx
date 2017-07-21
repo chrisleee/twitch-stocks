@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import TestComponent from '../components/TestComponent';
+import TestComponentWithState from '../components/TestComponentWithState';
 
 export default () =>
   <div>
@@ -9,6 +10,7 @@ export default () =>
       trying to learn React, go ahead and mess around with it a bit.
     </p>
     <TestComponent />
+    <TestComponentWithState />
     <p>
       {process.env.TEST}
     </p>
