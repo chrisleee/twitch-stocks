@@ -4,26 +4,49 @@
   "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "prebuild": "tsc && cp -R static dist/",
+    "build": "next build dist",
+    "predev": "tsc && cp -R static dist/",
+    "dev": "concurrently \"tsc --watch\" \"next dist\"",
+    "start": "next start dist",
+    "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.tsx\"",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "test": ""
   },
+  "pre-commit": ["prettier", "tslint"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ChrisALee/twitch-stocks/issues"
   },
   "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
   "dependencies": {
+    "@types/node": "^8.0.14",
+    "@types/react": "^15.0.38",
+    "babel-plugin-inline-dotenv": "^1.1.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.1.1",
+    "mongoose": "^4.11.3",
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "typescript": "^2.4.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.5.3",
+    "tslint": "^5.5.0",
+    "tslint-config-airbnb": "^5.2.1",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-react": "^3.0.0"
+  },
+  "now": {
+    "alias": "twitch-stocks",
+    "dotenv": ".env.production"
   }
 }

@@ -17,6 +17,7 @@
 .settings
 .tags
 .tmproj
+.vscode
 nbproject
 Thumbs.db
 tags
@@ -34,4 +35,7 @@ public/
 docs/api/
 
 # DotEnv
-.env
+.env*
+
+# Dist
+dist
