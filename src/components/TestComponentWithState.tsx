@@ -15,7 +15,7 @@ export default class TestComponentWithState extends React.Component<any, any> {
    * This method is called once all our children Elements and our Component instances are mounted onto the Native UI.
    */
   public componentDidMount() {
-      this.setState({ testValue: 'foo' });
+    this.setState({ testValue: 'foo' });
   }
 
   /**
@@ -26,8 +26,8 @@ export default class TestComponentWithState extends React.Component<any, any> {
       <div>
         <p>This component is using a state!</p>
         <p>
-        The following is stored in and displayed from this components' state:{' '}
-        {this.state.testValue}
+          The following is stored in and displayed from this components' state:{' '}
+          {this.state.testValue}
         </p>
       </div>
     );
