@@ -50,6 +50,10 @@ npm run dev
 
 7. Go to http://localhost:3000 to view the project.
 
+**Note to those on Windows**
+
+The build scripts require the use of linux console emulators such as [cmder](http://cmder.net/), [cygwin](https://www.cygwin.com/) or Bash on Ubuntu on Windows. Simply install one of the above then run `npm run dev` as usual in the console emulators instead of cmd or powershell.
+
 Any contributions are appreciated.
 
 For details on how to contribute (code style and more) please visit our [contributing guidelines](CONTRIBUTING.md).
