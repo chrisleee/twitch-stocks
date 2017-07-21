@@ -8,7 +8,7 @@ export default class TestComponentWithState extends React.Component<any, any> {
   constructor() {
     super();
     // initialize the state
-    this.state = {};
+    this.state = { testValue: '' };
   }
 
   /**
