@@ -87,7 +87,7 @@ The same information can also be found on the [project](https://github.com/Chris
 * [TypeScript Playground](https://www.typescriptlang.org/play/index.html)
 * [Learn Typescript with React](https://www.typescriptlang.org/docs/handbook/jsx.html) - I'd recommend knowing the basics of React from previous resources before trying to understand this.
 * [TypeScript React examples](https://github.com/Lemoncode/react-typescript-samples) - Folder structure in these examples will differ from ours. I'd look at how the specific components are written rather than any outer index/app files.
-* [Microsoft TypeScript Tic-Tac-Toe example](https://github.com/Microsoft/TypeScript-React-Conversion-Guide/blob/master/TicTacToe_TS/src/board.tsx) - This is a great reference for what the code for our classes will look like. Main two differences, however, will be that each class will be in its own file and interfaces will be in the types folder.
+* [Microsoft TypeScript Tic-Tac-Toe example](https://github.com/Microsoft/TypeScript-React-Conversion-Guide/blob/master/TicTacToe_TS/src/board.tsx) - This is a great reference for what the code for our classes will look like. Main difference, however, will be that each class will be in its own file.
 
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
