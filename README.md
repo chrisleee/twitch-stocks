@@ -116,7 +116,7 @@ Thank you to:
 * Cowtongue (Chris Lee)
 * kbaek11 (Kyung)
 * Gging
-* Autonom
+* jamiro24
 * Rubiks_cube
 * ReformedPacifist
 * notjason
