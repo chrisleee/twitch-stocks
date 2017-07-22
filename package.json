@@ -17,6 +17,17 @@
     "prettier",
     "tslint"
   ],
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
@@ -50,6 +61,7 @@
     "prettier": "^1.5.3",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
+    "ts-jest": "^20.0.7",
     "tslint": "^5.5.0",
     "tslint-config-airbnb": "^5.2.1",
     "tslint-config-prettier": "^1.1.0",
