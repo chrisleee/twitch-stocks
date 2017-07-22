@@ -15,7 +15,8 @@
   },
   "pre-commit": [
     "prettier",
-    "tslint"
+    "tslint",
+    "test"
   ],
   "jest": {
     "moduleFileExtensions": [
