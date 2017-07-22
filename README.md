@@ -53,7 +53,7 @@ npm run dev
 
 7. Go to http://localhost:3000 to view the project.
 
-**Note to those on Windows**
+**Note to those on Windows:**
 
 The build scripts require the use of linux console emulators such as [cmder](http://cmder.net/), [cygwin](https://www.cygwin.com/) or Bash on Ubuntu on Windows. Simply install one of the above then run `npm run dev` as usual in the console emulators instead of cmd or powershell.
 
@@ -88,6 +88,21 @@ The same information can also be found on the [project](https://github.com/Chris
 * [Learn Typescript with React](https://www.typescriptlang.org/docs/handbook/jsx.html) - I'd recommend knowing the basics of React from previous resources before trying to understand this.
 * [TypeScript React examples](https://github.com/Lemoncode/react-typescript-samples) - Folder structure in these examples will differ from ours. I'd look at how the specific components are written rather than any outer index/app files.
 * [Microsoft TypeScript Tic-Tac-Toe example](https://github.com/Microsoft/TypeScript-React-Conversion-Guide/blob/master/TicTacToe_TS/src/board.tsx) - This is a great reference for what the code for our classes will look like. Main difference, however, will be that each class will be in its own file.
+
+#### Testing Frameworks:
+* Unit Tests- Testing of individual functions or classes by mocking input and making sure the output is as expected.
+* Integration Tests- Testing several modules to ensure they work together as expected.
+* Functional Tests- Testing a scenario on the product itself (on the browser, for example) regardless the internal structure to ensure expected behavior.
+
+##### Jest:
+* [Facebook's Official Introduction and Guides](https://facebook.github.io/jest/docs/getting-started.html#content)
+* [Keon's Api Testing with Jest](https://hackernoon.com/api-testing-with-jest-d1ab74005c0a)
+
+##### Enzyme:
+* [Artem's Testing React Components with Jest and Enzyme](https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f)
+
+##### SuperTest:
+* [Albert's How to test Express.js with Jest and Supertest](http://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/)
 
 Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")!
 
