@@ -15,7 +15,7 @@
     "server:build": "tsc --watch",
     "server:watch": "nodemon \"dist/server/index.js\" --watch \"dist/server/*\"",
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
-    "server": "\"npm run server:watch\""
+    "server": "npm run server:watch"
   },
   "pre-commit": [
     "prettier",
