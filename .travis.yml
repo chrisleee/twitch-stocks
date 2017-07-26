@@ -1,8 +1,21 @@
 language: node_js
-
 node_js:
-    - stable
-
+- stable
+before_script:
+- ".travis/checkout.sh"
+script:
+- npm prettier
+- npm tslint
+- npm test
+- git add *.ts
+- git add *.tsx
+after_success:
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis CI"
+- ".travis/push.sh"
 cache:
   directories:
-    - "node_modules"
+  - node_modules
+env:
+  global:
+    secure: aCAdqvdoGphktrF4UiBj6kWyyFVP54PoXKclyba0YcQY+8wv/OPLvDlv1Nsy4ULvXR53omNb+9tXlX8OkTW0GrbokIiuhSo3sBH9gOxGHvcPTVox8XpXfqZuYjkULbw9A+hqAshYg5zXNhZEJP2I9vGYQOm1xB9jnjpNGBV/a7k7pQUwDwAynNd04UxhJUXeue39A5SR2zaHHqba0vamqruCqLscYCWqOCcAGMIBPI1BuhWDZdzAgBEVx5M7zCwxdYYik+4vaD1oHLvK2bmtfjGHDiLHUT1tm66bxZ/kFISBAU2K0Y6nfJZkPRPUic2IyPvYqQ5pRMEqyxP7pa/k3Gh+Ssk7AXLqzBwuA63vkkK8vhR7OHVsA8j3o2ohAyVXiU64TzpV5KmQ1u3QqGal1j2zmEBfJwbTn3Q+kTE0yzrV7WBUIWwnrAwUN8hSfzN35fLqkk28KuMA53VEyT3BXAOL4tcLzkW58uptv94UqfWkJuG9MPpcpE6jEfzjFTEptupuY9zl3dan6pw1i/r1bbG+YJdM394dkGPmZsbWRi1n5cYyR3ZhRy5wqpmmscJf61NikfCReKzAF1TiqUDdnTAgH/tSlWLuP8fFZ9fKiWTxSjMIxQkEa5k7vJZ2KdndWafbXFXqL7CJtP3x8uYj6bladeQh3ZQDJIFMS6gBREQ=
