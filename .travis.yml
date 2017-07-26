@@ -2,7 +2,8 @@ language: node_js
 node_js:
 - stable
 before_script:
-- sudo ".travis/checkout.sh"
+- chmod +x ".travis/checkout.sh"
+- ".travis/checkout.sh"
 script:
 - npm prettier
 - npm tslint
@@ -12,7 +13,8 @@ script:
 after_success:
 - git config --global user.email "travis@travis-ci.org"
 - git config --global user.name "Travis CI"
-- sudo ".travis/push.sh"
+- chmod +x ".travis/push.sh"
+- ".travis/push.sh"
 cache:
   directories:
   - node_modules
