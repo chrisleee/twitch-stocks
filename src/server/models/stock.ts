@@ -18,7 +18,7 @@ const stockSchema = new Schema({
   name: String,
   price: Number,
   sellers: [String],
-  totalShares: Number
+  totalShares: Number,
 });
 
 export const Stock = model<IStock>('Stock', stockSchema);
