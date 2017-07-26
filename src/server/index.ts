@@ -6,3 +6,5 @@ const port = 3001;
 
 const api = new WebAPI(express(), port);
 api.run();
+
+export default api.app;

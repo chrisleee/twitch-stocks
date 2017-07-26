@@ -5,7 +5,7 @@ import channels from './routes/channels';
 import stock from './routes/stock';
 
 export class WebAPI {
-  private app: express.Express;
+  public app: express.Express;
   private router: express.Router;
   private port: number;
   private db: mongoose.Connection;
