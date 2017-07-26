@@ -18,26 +18,28 @@ function route(app: Application, router: Router): void {
     })
     .post((req: Request, res: Response): void => {
       // Example using object references
-      Channel.findOne({ _id: '5976de9de8a23379f8d63d38' }, (err: Error, result: Document): void => {
-        if (err) {
-          res.send(err);
-          return;
-        } else if (result === undefined) {
-          res.send('Error retreiving channel record');
-          return;
-        }
-        const stock = new Stock(
-          {
+      Channel.findOne(
+        { _id: '5976de9de8a23379f8d63d38' },
+        (err: Error, result: Document): void => {
+          if (err) {
+            res.send(err);
+            return;
+          } else if (result === undefined) {
+            res.send('Error retreiving channel record');
+            return;
+          }
+          const stock = new Stock({
             channel: result._id,
             id: 'Testing',
           });
-        stock.save((saveErr: Error, record: Document): Response => {
-          if (err) {
-            return res.send(err);
-          }
-          return res.send({ message: 'stock created', record });
-        });
-      });
+          stock.save((saveErr: Error, record: Document): Response => {
+            if (err) {
+              return res.send(err);
+            }
+            return res.send({ message: 'stock created', record });
+          });
+        },
+      );
     });
 }
 
