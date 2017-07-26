@@ -5,8 +5,8 @@ before_script:
 - chmod +x ".travis/checkout.sh"
 - ".travis/checkout.sh"
 script:
-- npm prettier
-- npm tslint
+- npm run prettier
+- npm run tslint
 - npm test
 - git add *.ts
 - git add *.tsx
