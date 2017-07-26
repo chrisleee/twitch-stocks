@@ -1,6 +1,6 @@
 import { Application, Request, Response, Router } from 'express';
 import { Document, Error } from 'mongoose';
-import Channel from '../models/channels';
+import { Channel } from '../models/channels';
 
 /**
  * Defines the route for the channels endpoint.

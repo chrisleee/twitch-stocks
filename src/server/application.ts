@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as mongoose from 'mongoose';
 import channels from './routes/channels';
+import stock from './routes/stock';
 
 export class WebAPI {
   private app: express.Express;
@@ -39,6 +40,7 @@ export class WebAPI {
   private configureRoutes(app: express.Express, router: express.Router): void {
     app.use('/api', router);
     channels(app, router);
+    stock(app, router);
     // Add more routes here as needed
   }
 
