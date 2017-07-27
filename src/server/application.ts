@@ -6,8 +6,8 @@ import channels from './routes/channels';
 import stock from './routes/stock';
 
 export class WebAPI {
-  public app: Express;
-  public server: Server;
+  private app: Express;
+  private server: Server;
   private router: Router;
   private port: number;
   private db: mongoose.Connection;
@@ -23,6 +23,20 @@ export class WebAPI {
     this.db = this.openDatabase();
     this.configureMiddleware(this.app);
     this.configureRoutes(this.app, this.router);
+  }
+
+  /**
+   * Returns the express instance
+   */
+  public getApp(): Express {
+    return this.app;
+  }
+
+  /**
+   * Returns the http.Server instance used by the express instance
+   */
+  public getServer(): Server {
+    return this.server;
   }
 
   /**

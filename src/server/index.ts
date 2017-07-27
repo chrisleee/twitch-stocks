@@ -7,5 +7,5 @@ const port = 3001;
 const api = new WebAPI(express(), port);
 api.run();
 
-export const app = api.app;
-export const server = api.server;
+export const app = api.getApp();
+export const server = api.getServer();
