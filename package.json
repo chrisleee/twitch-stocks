@@ -23,7 +23,7 @@
   "lint-staged": { 
     "*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
-      "prettier",
+      "prettier --parser typescript --single-quote --trailing-comma all --write",
       "git add",
       "jest --bail --findRelatedTests"
     ]
