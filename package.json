@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "tsc && cp -R static dist/",
-    "build": "next build dist",
+    "build": "next build dist/client",
     "predev": "tsc && cp -R static dist/",
-    "dev": "concurrently \"tsc --watch\" \"next dist\"",
-    "start": "next start dist",
+    "dev": "concurrently \"tsc --watch\" \"next dist/client\"",
+    "start": "next start dist/client",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts*\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest",
