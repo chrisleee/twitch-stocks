@@ -17,7 +17,9 @@ Come check out the live site: https://twitch-stocks.now.sh/
 
 # Development
 
-### Getting Started
+## Getting Started
+
+### Front-end
 
 Firstly, check out the project's [Roadmap](https://github.com/ChrisALee/twitch-stocks/wiki/Roadmap) and [issues](https://github.com/ChrisALee/twitch-stocks/issues).
 
@@ -52,6 +54,45 @@ npm run dev
 ```
 
 7. Go to http://localhost:3000 to view the project.
+
+### Back-end
+
+1. Pull the `server` branch
+
+2. Run npm install to get the dependencies needed for the backend
+
+```
+npm install
+```
+
+3. Add your .env file.
+
+This is a small file of the form:
+
+```
+DB_USER=...
+DB_PASSWORD=...
+DB_HOST=...
+...
+```
+
+Fill it in with the relevent data before you run the server, or it will be unable to connect to a mongodb instance
+
+3. Run the project. The backend can be run independently from the front-end, or concurrently.
+
+To run independently, use
+
+```
+npm run server-dev
+```
+
+To run in conjunction with the front-end, use
+
+```
+npm run server
+```
+
+The server will start on port 3001 by default.
 
 **Note to those on Windows:**
 
