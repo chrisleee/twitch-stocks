@@ -1,5 +1,6 @@
 # Twitch Stocks
 [![Build Status](https://travis-ci.org/ChrisALee/twitch-stocks.svg?branch=master)](https://travis-ci.org/ChrisALee/twitch-stocks)
+[![Coverage Status](https://coveralls.io/repos/github/ChrisALee/twitch-stocks/badge.svg?branch=coveralls)](https://coveralls.io/github/ChrisALee/twitch-stocks?branch=coveralls)
 
 
 Twitch Stocks allows you to invest in Twitch streamers using virtual points. (No money involved)
