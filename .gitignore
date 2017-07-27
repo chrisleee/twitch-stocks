@@ -41,3 +41,4 @@ docs/api/
 dist
 
 coverage/
+.coveralls.yml
