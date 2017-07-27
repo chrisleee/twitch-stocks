@@ -12,6 +12,7 @@
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts*\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest",
+    "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "server:build": "tsc --watch",
     "server:watch": "nodemon \"dist/server/index.js\" --watch \"dist/server/*\"",
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
@@ -31,7 +32,7 @@
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "testRegex": "/__tests__/.*\\.(ts|tsx)$",
     "collectCoverage": true
   },
   "repository": {
