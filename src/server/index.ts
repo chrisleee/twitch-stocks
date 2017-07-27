@@ -9,3 +9,4 @@ api.run();
 
 export const app = api.getApp();
 export const server = api.getServer();
+export const db = api.getDb();
