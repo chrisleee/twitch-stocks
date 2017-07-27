@@ -20,21 +20,21 @@ function route(app: Application, router: Router): void {
       // Example using object references
       Channel.findOne(
         { _id: '5976de9de8a23379f8d63d38' },
-        (err: Error, result: Document): void => {
+        (err: Error, channel: Document): void => {
           if (err) {
             res.send(err);
             return;
-          } else if (result === undefined) {
+          } else if (channel === undefined) {
             res.send('Error retreiving channel record');
             return;
           }
           const stock = new Stock({
-            channel: result._id,
+            channel: channel._id,
             id: 'Testing',
           });
           stock.save((saveErr: Error, record: Document): Response => {
-            if (err) {
-              return res.send(err);
+            if (saveErr) {
+              return res.send(saveErr);
             }
             return res.send({ message: 'stock created', record });
           });

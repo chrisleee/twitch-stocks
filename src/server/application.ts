@@ -4,6 +4,7 @@ import { Server } from 'http';
 import * as mongoose from 'mongoose';
 import channels from './routes/channels';
 import stock from './routes/stock';
+import users from './routes/users';
 
 export class WebAPI {
   private app: Express;
@@ -55,6 +56,7 @@ export class WebAPI {
     app.use('/api', router);
     channels(app, router);
     stock(app, router);
+    users(app, router);
     // Add more routes here as needed
   }
 
