@@ -24,7 +24,7 @@ export default class TestComponentWithState extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <p>This component is using a state!</p>
+        <p>This component is using state!</p>
         <p>
           The following is stored in and displayed from this components' state:{' '}
           {this.state.testValue}
