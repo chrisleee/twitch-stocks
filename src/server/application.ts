@@ -1,12 +1,14 @@
 import * as bodyParser from 'body-parser';
-import * as express from 'express';
+import { Express, Router } from 'express';
+import { Server } from 'http';
 import * as mongoose from 'mongoose';
 import channels from './routes/channels';
 import stock from './routes/stock';
 
 export class WebAPI {
-  private app: express.Express;
-  private router: express.Router;
+  public app: Express;
+  public server: Server;
+  private router: Router;
   private port: number;
   private db: mongoose.Connection;
   /**
@@ -14,9 +16,9 @@ export class WebAPI {
    * @param application express application
    * @param portNum port to listen on
    */
-  constructor(private application: express.Express, private portNum: number) {
+  constructor(private application: Express, private portNum: number) {
     this.app = application;
-    this.router = express.Router();
+    this.router = Router();
     this.port = portNum;
     this.db = this.openDatabase();
     this.configureMiddleware(this.app);
@@ -27,9 +29,7 @@ export class WebAPI {
    * Start the application
    */
   public run(): void {
-    this.app.listen(this.port, () => {
-      // console.log(`Listening on ${this.port}`);
-    });
+    this.server = this.app.listen(this.port);
   }
 
   /**
@@ -37,7 +37,7 @@ export class WebAPI {
    * @param app express application
    * @param router express router
    */
-  private configureRoutes(app: express.Express, router: express.Router): void {
+  private configureRoutes(app: Express, router: Router): void {
     app.use('/api', router);
     channels(app, router);
     stock(app, router);
@@ -48,7 +48,7 @@ export class WebAPI {
    * Set up the needed middleware
    * @param app express application
    */
-  private configureMiddleware(app: express.Express): void {
+  private configureMiddleware(app: Express): void {
     app.use(bodyParser.json());
   }
 
