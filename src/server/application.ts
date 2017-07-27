@@ -41,6 +41,13 @@ export class WebAPI {
   }
 
   /**
+   * Returns the mongoose connection
+   */
+  public getDb(): mongoose.Connection {
+    return this.db;
+  }
+
+  /**
    * Start the application
    */
   public run(): void {

@@ -1,6 +1,7 @@
 import * as request from 'supertest';
 import { WebAPI } from '../application';
 import * as app from '../index';
+import * as db from '../index';
 
 describe('Get /', () => {
   afterEach(done => {
@@ -94,4 +95,8 @@ describe('get a user from /users/user/', () => {
       done();
     });
   });
+});
+
+afterAll(() => {
+  app.db.close();
 });
