@@ -13,16 +13,21 @@
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest",
     "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "lint-staged": "lint-staged",
     "server:build": "tsc --watch",
     "server:watch": "nodemon \"dist/server/index.js\" --watch \"dist/server/*\"",
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
     "server": "npm run server:watch"
   },
-  "pre-commit": [
-    "prettier",
-    "tslint",
-    "test"
-  ],
+  "pre-commit": "lint-staged",
+  "lint-staged": { 
+    "*.ts*": [
+      "tslint -c tslint.json -p tsconfig.json --fix",
+      "prettier",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
+  },
   "jest": {
     "moduleFileExtensions": [
       "ts",
@@ -73,7 +78,9 @@
     "@types/supertest": "^2.0.2",
     "concurrently": "^3.5.0",
     "enzyme": "^2.9.1",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
     "nodemon": "^1.11.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.5.3",
