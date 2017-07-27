@@ -22,7 +22,7 @@
   "pre-commit": "lint-staged",
   "lint-staged": { 
     "*.ts*": [
-      "tslint --fix",
+      "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier",
       "git add",
       "jest --bail --findRelatedTests"
