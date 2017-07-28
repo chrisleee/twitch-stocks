@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv';
-// import * as mongoose from 'mongoose';
-import * as request from 'request';
+import * as request from 'request-promise-native';
+// import * as request from 'request';
 import { Channel } from '../server/models/channels';
 import mongoose = require('mongoose');
-dotenv.config();
 mongoose.Promise = global.Promise;
+dotenv.config();
 
 mongoose.connect(
   `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env
@@ -26,40 +26,33 @@ async function getStreams(numberToGet: number) {
   };
   console.log('Running...');
 
-  request(httpOptions, async (err, res, body) => {
-    if (err) {
-      return err;
-    }
-    if (res.statusCode == 200) {
-      console.log('Recieved response from twitch');
+  let body = await request(httpOptions)
+  console.log('Recieved response from twitch');
+  const info = JSON.parse(body);
+  for (let i = 0; i < numberToGet; i++) {
+    const stream = info.streams[i];
+    console.log('ID: ', stream._id);
+    console.log('Viewers: ', stream.viewers);
+    console.log('Name: ', stream.channel.display_name);
+    console.log('URL: ', stream.channel.url);
+    const channels = await findRecord(stream._id);
+    if (channels) {
+      console.log('Found channel: ', channels);
+    } else {
+      console.log('Did not find channel: ', channels);
 
-      const info = JSON.parse(body);
-      for (let i = 0; i < numberToGet; i++) {
-        const stream = info.streams[i];
-        console.log('ID: ', stream._id);
-        console.log('Viewers: ', stream.viewers);
-        console.log('Name: ', stream.channel.display_name);
-        console.log('URL: ', stream.channel.url);
-        const channels = await findRecord(stream._id);
-        if (channels) {
-          console.log('Found channel: ', channels);
-        } else {
-          console.log('Did not find channel: ', channels);
-
-          const channel = new Channel(
-            {
-              _id: stream._id,
-              channelName: stream.channel.display_name,
-              channelURL: stream.channel.url,
-              currentViewers: stream.viewers,
-            }
-          );
-          const record = await channel.save();
-          console.log('The record that was saved: ', record);
+      const channel = new Channel(
+        {
+          _id: stream._id,
+          channelName: stream.channel.display_name,
+          channelURL: stream.channel.url,
+          currentViewers: stream.viewers,
         }
-        console.log();
-      }
+      );
+      const record = await channel.save();
+      console.log('The record that was saved: ', record);
     }
+    console.log();
   });
   return;
 }
@@ -71,8 +64,10 @@ async function findRecord(id) {
 
 async function run() {
   await getStreams(2);
-  // db.close();
+  db.close();
 }
+
+// console.log('test');
 
 run();
 
