@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 // Class that the schema is created as by mongoose
 export interface IChannel extends mongoose.Document {
   _id: string;
-  channelID: string;
+  channelName: string;
+  channelURL: string;
   averageViewers: {
     allTime: number;
     month: number;
@@ -24,14 +25,16 @@ export interface IChannel extends mongoose.Document {
 
 // Mongoose schema
 const channelSchema = new Schema({
+  _id: { type: String, required: true },
   averageViewers: {
     allTime: Number,
     day: Number,
     month: Number,
     week: Number,
   },
-  channelID: String,
+  channelName: { type: String, required: true },
   channelStock: String, // Add the correct type later
+  channelURL: String,
   currentViewers: Number,
   peakViewers: {
     allTime: Number,
