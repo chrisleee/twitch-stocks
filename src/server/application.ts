@@ -1,10 +1,11 @@
 import * as bodyParser from 'body-parser';
 import { Express, Router } from 'express';
 import { Server } from 'http';
-import * as mongoose from 'mongoose';
 import channels from './routes/channels';
 import stock from './routes/stock';
 import users from './routes/users';
+import mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 export class WebAPI {
   private app: Express;
