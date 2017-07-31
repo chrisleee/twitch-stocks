@@ -50,15 +50,25 @@ export class Twitch {
     }
     for (let i = 0; i < numToGet; i++) {
       const stream = info.streams[i];
-      const channel = await this.findRecord(stream._id);
+      let channel;
+      try {
+        channel = await this.findRecord(stream._id);
+      } catch (e) {
+        // console.log(e);
+      }
       if (!channel) {
         const newChannel = new Channel({
-          _id: stream._id,
+          channelId: stream._id,
           channelName: stream.channel.display_name,
           channelURL: stream.channel.url,
           currentViewers: stream.viewers,
         });
-        const record = await newChannel.save();
+        let record;
+        try {
+          record = await newChannel.save();
+        } catch (e) {
+          // console.log(e);
+        }
         // console.log(record);
       }
     }
@@ -66,6 +76,6 @@ export class Twitch {
   }
 
   private async findRecord(id: string): Promise<IChannel | null> {
-    return await Channel.findById(id);
+    return await Channel.findOne({ channelId: id });
   }
 }

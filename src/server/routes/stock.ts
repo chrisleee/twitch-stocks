@@ -1,7 +1,8 @@
 import { Application, Request, Response, Router } from 'express';
-import { Document, Error } from 'mongoose';
 import { Channel } from '../models/channels';
 import { Stock } from '../models/stock';
+import mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 function route(app: Application, router: Router): void {
   router
@@ -19,12 +20,13 @@ function route(app: Application, router: Router): void {
     .post((req: Request, res: Response): void => {
       // Example using object references
       Channel.findOne(
-        { _id: '5976de9de8a23379f8d63d38' },
-        (err: Error, channel: Document): void => {
+        { channelId: '25886424464' },
+        (err: mongoose.Error, channel: mongoose.Document): void => {
           if (err) {
             res.send(err);
             return;
-          } else if (channel === undefined) {
+          }
+          if (!channel) {
             res.send('Error retreiving channel record');
             return;
           }
@@ -32,12 +34,14 @@ function route(app: Application, router: Router): void {
             channel: channel._id,
             id: 'Testing',
           });
-          stock.save((saveErr: Error, record: Document): Response => {
-            if (saveErr) {
-              return res.send(saveErr);
-            }
-            return res.send({ message: 'stock created', record });
-          });
+          stock.save(
+            (saveErr: mongoose.Error, record: mongoose.Document): Response => {
+              if (saveErr) {
+                return res.send(saveErr);
+              }
+              return res.send({ message: 'stock created', record });
+            },
+          );
         },
       );
     });
