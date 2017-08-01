@@ -1,5 +1,5 @@
-import { log } from 'util';
 import * as request from 'request-promise-native';
+import { log } from 'util';
 import { Twitch } from './Twitch';
 import mongoose = require('mongoose');
 import { Channel, IChannel } from '../server/models/channels';
@@ -53,40 +53,45 @@ export class Application {
         stream._id,
         stream.channel.display_name,
         stream.channel.url,
-        stream.viewers
+        stream.viewers,
       );
       let channel: IChannel | null | undefined;
       try {
         channel = await Channel.findOne({ channelId: twitch.channelId });
       } catch (e) {
-        console.log(e);
+        // console.log('Error finding record ', e);
       }
       if (!channel) {
         try {
           channel = new Channel({
+            averageViewers: twitch.initializeViewers(),
             channelId: twitch.channelId,
             channelName: twitch.channelName,
             channelURL: twitch.channelURL,
-            currentViewers: twitch.currentViewers
+            currentViewers: twitch.currentViewers,
+            peakViewers: twitch.initializeViewers(),
           });
-          console.log('Channel is now: ', channel);
+          // console.log('Channel is now: ', channel);
         } catch (e) {
-          console.log(e);
+          // console.log('Error creating new record, ', e);
           continue;
         }
       }
-      const peakViewers = twitch.calculatePeakViewers(channel.peakViewers);
-      const averageViewers = twitch.calculateAverageViewers(channel.averageViewers);
       try {
         if (channel.isNew) {
-          channel.peakViewers = peakViewers;
-          channel.averageViewers = averageViewers;
-          console.log(await channel.save());
+          const result = await channel.save();
+          // console.log(result);
         } else {
-          await channel.update({ peakViewers, averageViewers, currentViewers: twitch.currentViewers });
+          const peakViewers = twitch.updatePeakViewers(channel.peakViewers);
+          await channel.update({
+            currentViewers: twitch.currentViewers,
+            peakViewers,
+          });
+          // console.log('Updated record');
         }
       } catch (e) {
-        console.log(e);
+        // console.log('Error saving record ', e);
+        break;
       }
     }
   }

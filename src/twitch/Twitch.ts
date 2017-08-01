@@ -1,5 +1,6 @@
 import * as request from 'request-promise-native';
-import { Channel, IAverage, IChannel } from '../server/models/channels';
+import { Channel, IChannel } from '../server/models/channels';
+import { IViewer, IViewerContainer } from '../server/models/viewerContainer';
 
 /**
  * Class to retrieve data from twitch and upload it to the database
@@ -10,7 +11,12 @@ export class Twitch {
   private ChannelURL: string;
   private CurrentViewers: number;
 
-  constructor(channelId: string, channelName: string, channelURL: string, currentViewers: number) {
+  constructor(
+    channelId: string,
+    channelName: string,
+    channelURL: string,
+    currentViewers: number,
+  ) {
     this.ChannelId = channelId;
     this.ChannelName = channelName;
     this.ChannelURL = channelURL;
@@ -38,61 +44,46 @@ export class Twitch {
   }
 
   public toString() {
-    return `{channelId: ${this.ChannelId}, channelName: ${this.ChannelName}, channelURL: ${this.ChannelURL}, currentViewers: ${this.CurrentViewers}}`;
+    return `{channelId: ${this.ChannelId}, channelName: ${this
+      .ChannelName}, channelURL: ${this.ChannelURL}, currentViewers: ${this
+      .CurrentViewers}}`;
   }
 
-  /**
-   * Calculate the peak viewers.
-   * Returns a peakViewers object with updated data
-   * @param currentPeak Object containing current peak viewers of channel
-   */
-  public calculatePeakViewers(currentPeak: { allTime: number, month: number, week: number, day: number }) {
-    const newPeak: { allTime: number, month: number, week: number, day: number } = { allTime: 0, month: 0, week: 0, day: 0 };
-    console.log(currentPeak);
-    
-    if (!currentPeak.allTime || currentPeak.allTime < this.CurrentViewers) {
-      newPeak.allTime = this.CurrentViewers;
+  public updatePeakViewers(currentPeak: IViewerContainer) {
+    if (currentPeak.allTime.value < this.CurrentViewers) {
+      currentPeak.allTime.value = this.CurrentViewers;
+      currentPeak.allTime.iterations++;
     }
-    if (!currentPeak.month || currentPeak.month < this.CurrentViewers) {
-      newPeak.month = this.CurrentViewers;
+    if (currentPeak.month.value < this.CurrentViewers) {
+      currentPeak.month.value = this.CurrentViewers;
+      currentPeak.month.iterations++;
     }
-    if (!currentPeak.week || currentPeak.week < this.CurrentViewers) {
-      newPeak.week = this.CurrentViewers;
+    if (currentPeak.week.value < this.CurrentViewers) {
+      currentPeak.week.value = this.CurrentViewers;
+      currentPeak.week.iterations++;
     }
-    if (!currentPeak.day || currentPeak.day < this.CurrentViewers) {
-      newPeak.day = this.CurrentViewers;
+    if (currentPeak.day.value < this.CurrentViewers) {
+      currentPeak.day.value = this.CurrentViewers;
+      currentPeak.day.iterations++;
     }
-    return newPeak;
+    return currentPeak;
   }
 
-  /**
-   * Calculates the running averages of a channel. Returns an averageViewers object with updated data
-   * @param channel Channel to calculate from
-   * @param currentViewers number of current viewers of channel
-   */
-  public calculateAverageViewers(averageViewers: { allTime: IAverage, month: IAverage, week: IAverage, day: IAverage }) {
-    if (this.isEmptyObject(averageViewers.allTime)) { // Test .allTime because mongoose initializes the object even if empty
-      averageViewers = {
-        allTime: this.initializeAverageProperties(this.CurrentViewers),
-        day: this.initializeAverageProperties(this.CurrentViewers),
-        month: this.initializeAverageProperties(this.CurrentViewers),
-        week: this.initializeAverageProperties(this.CurrentViewers),
-      };
-    }
-    return averageViewers;
+  public initializeViewers() {
+    return {
+      allTime: this.initializeView(this.CurrentViewers),
+      day: this.initializeView(this.CurrentViewers),
+      month: this.initializeView(this.CurrentViewers),
+      week: this.initializeView(this.CurrentViewers),
+    };
   }
 
-  /**
-   * Sets the values for an averageViewers object to their initial state. Returns an averageViewers object
-   * @param currentViewers number of current viewers of a channel
-   */
-  private initializeAverageProperties(currentViewers: number) {
-    const average: any = {
-      average: currentViewers,
+  private initializeView(value: number) {
+    return {
       iterations: 1,
       lastUpdated: new Date().toISOString(),
+      value,
     };
-    return average;
   }
 
   private isEmptyObject(obj: object): boolean {
