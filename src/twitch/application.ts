@@ -1,9 +1,11 @@
+import { log } from 'util';
 import * as request from 'request-promise-native';
-import { Channel, IAverage, IChannel } from '../server/models/channels';
+import { Twitch } from './Twitch';
 import mongoose = require('mongoose');
+import { Channel, IChannel } from '../server/models/channels';
 mongoose.Promise = global.Promise;
 
-export class Twitch {
+export class Application {
   private db: mongoose.Connection;
 
   constructor() {
@@ -22,19 +24,13 @@ export class Twitch {
     });
   }
 
-  public async run(numToGet?: number) {
-    await this.getStreams(numToGet);
+  public async run() {
+    await this.getStreams();
     this.db.close();
   }
 
-  /**
-   * Gets the active streams from twitch
-   * @param numToGet number of streams to process from twitch
-   */
-  private async getStreams(numToGet?: number): Promise<void> {
-    if (!numToGet) {
-      numToGet = 5; // Change this to 100 once not testing.
-    }
+  public async getStreams() {
+    const numToGet = 5;
     const httpOptions = {
       headers: {
         'Client-Id': process.env.TWITCH_CLIENT_ID,
@@ -53,114 +49,45 @@ export class Twitch {
     }
     for (let i = 0; i < numToGet; i++) {
       const stream = info.streams[i];
-      let channel;
+      const twitch = new Twitch(
+        stream._id,
+        stream.channel.display_name,
+        stream.channel.url,
+        stream.viewers
+      );
+      let channel: IChannel | null | undefined;
       try {
-        channel = await this.findRecord(stream._id);
+        channel = await Channel.findOne({ channelId: twitch.channelId });
       } catch (e) {
-        // console.log(e);
+        console.log(e);
       }
       if (!channel) {
-        const newChannel = new Channel({
-          channelId: stream._id,
-          channelName: stream.channel.display_name,
-          channelURL: stream.channel.url,
-          currentViewers: stream.viewers,
-        });
         try {
-          channel = await newChannel.save();
+          channel = new Channel({
+            channelId: twitch.channelId,
+            channelName: twitch.channelName,
+            channelURL: twitch.channelURL,
+            currentViewers: twitch.currentViewers
+          });
+          console.log('Channel is now: ', channel);
         } catch (e) {
-          // console.log(e);
+          console.log(e);
+          continue;
         }
       }
-      if (channel) {
-        await this.updateStreamDetails(channel, stream);
+      const peakViewers = twitch.calculatePeakViewers(channel.peakViewers);
+      const averageViewers = twitch.calculateAverageViewers(channel.averageViewers);
+      try {
+        if (channel.isNew) {
+          channel.peakViewers = peakViewers;
+          channel.averageViewers = averageViewers;
+          console.log(await channel.save());
+        } else {
+          await channel.update({ peakViewers, averageViewers, currentViewers: twitch.currentViewers });
+        }
+      } catch (e) {
+        console.log(e);
       }
     }
-    return;
-  }
-
-  /**
-   * Returns the channel requested by id of stream
-   * @param id channelId of the channel to retrieve
-   */
-  private async findRecord(id: string): Promise<IChannel | null> {
-    return await Channel.findOne({ channelId: id });
-  }
-
-  /**
-   * Update the average and peak viewers of a stream
-   * @param channel Channel to update
-   * @param stream stream object retrieved from twitch api
-   */
-  private async updateStreamDetails(
-    channel: IChannel,
-    stream: { viewers: number },
-  ) {
-    const viewers = stream.viewers;
-    const peakViewers = await this.calculatePeakViewers(channel, viewers);
-    const averageViewers = this.calculateAverageViewers(channel, viewers);
-
-    await channel.update({
-      peakViewers,
-      currentViewers: viewers,
-      averageViewers,
-    });
-  }
-
-  /**
-   * Calculate the peak viewers.
-   * Returns a peakViewers object with updated data
-   * @param channel Channel to calculate from
-   * @param currentViewers number of current viewers of channel
-   */
-  private async calculatePeakViewers(
-    channel: IChannel,
-    currentViewers: number,
-  ) {
-    const peakViewers = channel.peakViewers;
-    if (!peakViewers.allTime || peakViewers.allTime < currentViewers) {
-      peakViewers.allTime = currentViewers;
-    }
-    if (!peakViewers.month || peakViewers.month < currentViewers) {
-      peakViewers.month = currentViewers;
-    }
-    if (!peakViewers.week || peakViewers.week < currentViewers) {
-      peakViewers.week = currentViewers;
-    }
-    if (!peakViewers.day || peakViewers.day < currentViewers) {
-      peakViewers.day = currentViewers;
-    }
-    return peakViewers;
-  }
-
-  /**
-   * Calculates the running averages of a channel. Returns an averageViewers object with updated data
-   * @param channel Channel to calculate from
-   * @param currentViewers number of current viewers of channel
-   */
-  private calculateAverageViewers(channel: IChannel, currentViewers: number) {
-    let averageViewers = channel.averageViewers;
-    if (averageViewers !== undefined) {
-      averageViewers = {
-        allTime: this.initializeAverageProperties(currentViewers),
-        day: this.initializeAverageProperties(currentViewers),
-        month: this.initializeAverageProperties(currentViewers),
-        week: this.initializeAverageProperties(currentViewers),
-      };
-    }
-    return averageViewers;
-  }
-
-  /**
-   * Sets the values for an averageViewers object to their initial state. Returns an averageViewers object
-   * @param currentViewers number of current viewers of a channel
-   */
-  private initializeAverageProperties(currentViewers: number) {
-    const average: any = {
-      average: currentViewers,
-      iterations: 1,
-      lastUpdated: new Date().toISOString(),
-    };
-    return average;
   }
 }

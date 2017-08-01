@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import { Twitch } from './application';
+import { Application } from './application';
 dotenv.config();
 
-const app = new Twitch();
-app.run();
+const app = new Application();
+app.getStreams();
