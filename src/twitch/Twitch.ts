@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import * as request from 'request-promise-native';
 import { Channel, IChannel } from '../server/models/channels';
 import { IViewer, IViewerContainer } from '../server/models/viewerContainer';
@@ -49,41 +50,111 @@ export class Twitch {
       .CurrentViewers}}`;
   }
 
+  /**
+   * Updates the peakViewers value for an IViewerContainer with currentViewers value.
+   * Returns the updated IViewerContainer
+   * @param currentPeak IViewerContainer from a channel
+   */
   public updatePeakViewers(currentPeak: IViewerContainer) {
+    const now = moment();
+    let lastUpdated: moment.Moment;
+
+    // allTime should always be updated and never reset
     if (currentPeak.allTime.value < this.CurrentViewers) {
       currentPeak.allTime.value = this.CurrentViewers;
       currentPeak.allTime.iterations++;
     }
-    if (currentPeak.month.value < this.CurrentViewers) {
-      currentPeak.month.value = this.CurrentViewers;
-      currentPeak.month.iterations++;
+
+    // The other time periods should reset their values at the end of each period
+    lastUpdated = moment(currentPeak.month.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('month'), now)) {
+      if (currentPeak.month.value < this.CurrentViewers) {
+        this.updateViewer(currentPeak.month, this.CurrentViewers);
+      }
+    } else {
+      this.resetViewer(currentPeak.month);
     }
-    if (currentPeak.week.value < this.CurrentViewers) {
-      currentPeak.week.value = this.CurrentViewers;
-      currentPeak.week.iterations++;
+
+    lastUpdated = moment(currentPeak.week.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('week'), now)) {
+      if (currentPeak.week.value < this.CurrentViewers) {
+        this.updateViewer(currentPeak.week, this.CurrentViewers);
+      }
+    } else {
+      this.resetViewer(currentPeak.week);
     }
-    if (currentPeak.day.value < this.CurrentViewers) {
-      currentPeak.day.value = this.CurrentViewers;
-      currentPeak.day.iterations++;
+
+    lastUpdated = moment(currentPeak.day.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('day'), now)) {
+      if (currentPeak.day.value < this.CurrentViewers) {
+        this.updateViewer(currentPeak.day, this.CurrentViewers);
+      }
+    } else {
+      this.resetViewer(currentPeak.day);
     }
     return currentPeak;
   }
 
-  public initializeViewers() {
-    return {
-      allTime: this.initializeView(this.CurrentViewers),
-      day: this.initializeView(this.CurrentViewers),
-      month: this.initializeView(this.CurrentViewers),
-      week: this.initializeView(this.CurrentViewers),
-    };
+  /**
+   * Returns an object that represents the IViewerContainer without the mongoose properties
+   */
+  public initializeViewers(timestamp?: string) {
+    if (!timestamp) {
+      return {
+        allTime: this.initializeView(this.CurrentViewers),
+        day: this.initializeView(this.CurrentViewers),
+        month: this.initializeView(this.CurrentViewers),
+        week: this.initializeView(this.CurrentViewers),
+      };
+    } else {
+      return {
+        allTime: this.initializeView(this.CurrentViewers, timestamp),
+        day: this.initializeView(this.CurrentViewers, timestamp),
+        month: this.initializeView(this.CurrentViewers, timestamp),
+        week: this.initializeView(this.CurrentViewers, timestamp),
+      };
+    }
   }
 
-  private initializeView(value: number) {
-    return {
-      iterations: 1,
-      lastUpdated: new Date().toISOString(),
-      value,
-    };
+  /**
+   * Returns an object to represent the IViewer object without the mongoose properties
+   * @param value Number to set as the initial value of the viewer object
+   */
+  private initializeView(value: number, timestamp?: string) {
+    if (!timestamp) {
+      return {
+        iterations: 1,
+        lastUpdated: new Date().toISOString(),
+        value,
+      };
+    } else {
+      return {
+        iterations: 1,
+        lastUpdated: timestamp,
+        value,
+      };
+    }
+  }
+
+  /**
+   * Updates the date object with the the value, increments the iterations counter and updates the lastUpdated field
+   * @param date object to reset
+   * @param value number of viewers
+   */
+  private updateViewer(date: IViewer, value: number) {
+    date.value = value;
+    date.iterations++;
+    date.lastUpdated = moment().toISOString();
+  }
+
+  /**
+   * Resets a viewer to 0. Should be used when a viewers time period has expired
+   * @param date object to reset
+   */
+  private resetViewer(date: IViewer) {
+    date.value = 0;
+    date.iterations = 1;
+    date.lastUpdated = moment().toISOString();
   }
 
   private isEmptyObject(obj: object): boolean {

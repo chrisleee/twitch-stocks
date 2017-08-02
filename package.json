@@ -69,6 +69,7 @@
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.4",
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
