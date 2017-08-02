@@ -83,7 +83,11 @@ export class Application {
           // console.log(result);
         } else {
           const peakViewers = twitch.updatePeakViewers(channel.peakViewers);
+          const averageViewers = twitch.updateAverageViewers(
+            channel.averageViewers,
+          );
           await channel.update({
+            averageViewers,
             currentViewers: twitch.currentViewers,
             peakViewers,
           });

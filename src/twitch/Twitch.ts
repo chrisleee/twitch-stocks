@@ -50,6 +50,56 @@ export class Twitch {
       .CurrentViewers}}`;
   }
 
+  public updateAverageViewers(currentAverage: IViewerContainer) {
+    const now = moment();
+    let lastUpdated: moment.Moment;
+    let viewer = currentAverage.allTime;
+    // currentAverage.allTime.value = ((viewer.value * viewer.iterations) + this.CurrentViewers) / ++viewer.iterations;
+    currentAverage.allTime.value = this.calculateAverage(
+      viewer,
+      this.CurrentViewers,
+    );
+    currentAverage.allTime.lastUpdated = now.toISOString();
+
+    viewer = currentAverage.month;
+    lastUpdated = moment(viewer.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('month'), now)) {
+      currentAverage.month.value = this.calculateAverage(
+        viewer,
+        this.CurrentViewers,
+      );
+      currentAverage.month.lastUpdated = now.toISOString();
+    } else {
+      this.resetViewer(viewer);
+    }
+
+    viewer = currentAverage.week;
+    lastUpdated = moment(viewer.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('week'), now)) {
+      currentAverage.week.value = this.calculateAverage(
+        viewer,
+        this.CurrentViewers,
+      );
+      currentAverage.week.lastUpdated = now.toISOString();
+    } else {
+      this.resetViewer(viewer);
+    }
+
+    viewer = currentAverage.day;
+    lastUpdated = moment(viewer.lastUpdated);
+    if (lastUpdated.isBetween(moment().startOf('day'), now)) {
+      currentAverage.day.value = this.calculateAverage(
+        viewer,
+        this.CurrentViewers,
+      );
+      currentAverage.day.lastUpdated = now.toISOString();
+    } else {
+      this.resetViewer(viewer);
+    }
+
+    return currentAverage;
+  }
+
   /**
    * Updates the peakViewers value for an IViewerContainer with currentViewers value.
    * Returns the updated IViewerContainer
@@ -134,6 +184,12 @@ export class Twitch {
         value,
       };
     }
+  }
+
+  private calculateAverage(viewer: IViewer, currentViewers: number) {
+    return (
+      (viewer.value * viewer.iterations + currentViewers) / ++viewer.iterations
+    );
   }
 
   /**

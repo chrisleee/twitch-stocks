@@ -24,7 +24,7 @@ describe('test getting from twitch api', () => {
     expect(twitch.initializeViewers(timestamp)).toMatchObject(container);
     done();
   });
-  it('should update the viewer container object', done => {
+  it('should update the viewer container object for peaks', done => {
     const container = twitch.initializeViewers();
     expect(container).toHaveProperty('allTime');
     expect(container.allTime).toHaveProperty('value');
@@ -34,6 +34,23 @@ describe('test getting from twitch api', () => {
     expect(
       twitch.updatePeakViewers(container as IViewerContainer).day.value,
     ).toBe(10);
+    done();
+  });
+  it('should update the container object for averages', done => {
+    const container = twitch.initializeViewers();
+    expect(container).toHaveProperty('allTime');
+    expect(container.allTime).toHaveProperty('value');
+    expect(container.allTime.value).toEqual(1);
+    container.day.lastUpdated = moment().hour(5).toISOString();
+    twitch.currentViewers = 10;
+    expect(
+      twitch.updateAverageViewers(container as IViewerContainer).day.value,
+    ).toBe(5.5);
+    container.day.lastUpdated = moment().hour(5).toISOString();
+    twitch.currentViewers = 5;
+    expect(
+      twitch.updateAverageViewers(container as IViewerContainer).day.value,
+    ).toBeCloseTo(5.33);
     done();
   });
 });
