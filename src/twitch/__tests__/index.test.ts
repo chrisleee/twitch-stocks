@@ -8,7 +8,7 @@ describe('test getting from twitch api', () => {
     twitch = new Twitch('1234', 'test', 'www.fake.com', 1);
     done();
   });
-  it('should return initialized object', done => {
+  it('should return initialized object', () => {
     const timestamp = new Date().toISOString();
     const viewer = {
       iterations: 1,
@@ -22,35 +22,35 @@ describe('test getting from twitch api', () => {
       week: viewer,
     };
     expect(twitch.initializeViewers(timestamp)).toMatchObject(container);
-    done();
+    // done();
   });
-  it('should update the viewer container object for peaks', done => {
+  it('should update the viewer container object for peaks', () => {
     const container = twitch.initializeViewers();
     expect(container).toHaveProperty('allTime');
     expect(container.allTime).toHaveProperty('value');
     expect(container.allTime.value).toEqual(1);
-    container.day.lastUpdated = moment().hour(5).toISOString();
+    container.day.lastUpdated = moment().startOf('hour').toISOString();
     twitch.currentViewers = 10;
     expect(
       twitch.updatePeakViewers(container as IViewerContainer).day.value,
     ).toBe(10);
-    done();
+    // done();
   });
-  it('should update the container object for averages', done => {
+  it('should update the container object for averages', () => {
     const container = twitch.initializeViewers();
     expect(container).toHaveProperty('allTime');
     expect(container.allTime).toHaveProperty('value');
     expect(container.allTime.value).toEqual(1);
-    container.day.lastUpdated = moment().hour(5).toISOString();
+    container.day.lastUpdated = moment().startOf('hour').toISOString();
     twitch.currentViewers = 10;
     expect(
       twitch.updateAverageViewers(container as IViewerContainer).day.value,
     ).toBe(5.5);
-    container.day.lastUpdated = moment().hour(5).toISOString();
+    container.day.lastUpdated = moment().startOf('hour').toISOString();
     twitch.currentViewers = 5;
     expect(
       twitch.updateAverageViewers(container as IViewerContainer).day.value,
     ).toBeCloseTo(5.33);
-    done();
+    // done();
   });
 });
