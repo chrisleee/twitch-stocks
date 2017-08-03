@@ -31,23 +31,33 @@ export class Application {
 
   public async getStreams() {
     const numToGet = 5;
-    const httpOptions = {
-      headers: {
-        'Client-Id': process.env.TWITCH_CLIENT_ID,
-      },
-      url: 'https://api.twitch.tv/kraken/streams/',
-    };
+    const iterations = 2;
+    for (let i = 0; i < iterations * numToGet; i = i === 0 ? 5 : i * numToGet) {
+      const httpOptions = {
+        headers: {
+          'Client-Id': process.env.TWITCH_CLIENT_ID,
+        },
+        url: `https://api.twitch.tv/kraken/streams/?limit=${numToGet}&offset=${i}`,
+      };
 
-    let body;
-    let info;
-    try {
-      body = await request(httpOptions);
-      info = JSON.parse(body);
-    } catch (e) {
-      // Get specific error here for better error handling
-      // console.log(e);
+      let body;
+      let info;
+      try {
+        body = await request(httpOptions);
+        info = JSON.parse(body);
+        // console.log(info);
+      } catch (e) {
+        // Get specific error here for better error handling
+        // console.log(e);
+      }
+      await this.handleResults(info);
+      await this.wait(1000);
     }
-    for (let i = 0; i < numToGet; i++) {
+  }
+
+  private async handleResults(info: any) {
+    const len = info.streams.length;
+    for (let i = 0; i < len; i++) {
       const stream = info.streams[i];
       const twitch = new Twitch(
         stream._id,
@@ -81,6 +91,7 @@ export class Application {
         if (channel.isNew) {
           const result = await channel.save();
           // console.log(result);
+          // console.log('Added new record');
         } else {
           const peakViewers = twitch.updatePeakViewers(channel.peakViewers);
           const averageViewers = twitch.updateAverageViewers(
@@ -98,5 +109,10 @@ export class Application {
         break;
       }
     }
+  }
+  private async wait(length: number) {
+    return new Promise(resolve => {
+      setTimeout(resolve, length);
+    });
   }
 }
