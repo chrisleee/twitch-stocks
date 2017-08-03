@@ -13,6 +13,7 @@ export interface IChannel extends mongoose.Document {
   _id: string;
   channelId: string;
   channelName: string;
+  channelDisplayName: string;
   channelURL: string;
   averageViewers: IViewerContainer;
   currentViewers: number;
@@ -26,6 +27,7 @@ export interface IChannel extends mongoose.Document {
 const channelSchema = new Schema(
   {
     averageViewers: viewerContainerSchema,
+    channelDisplayName: { type: String, required: true },
     channelId: { type: String, required: true },
     channelName: { type: String, required: true },
     channelStock: String, // Add the correct type later

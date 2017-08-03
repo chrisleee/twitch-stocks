@@ -71,7 +71,8 @@ export class Application {
     for (let i = 0; i < len; i++) {
       const stream = info.streams[i];
       const twitch = new Twitch(
-        stream._id,
+        stream.channel._id,
+        stream.channel.name,
         stream.channel.display_name,
         stream.channel.url,
         stream.viewers,
@@ -86,6 +87,7 @@ export class Application {
         try {
           channel = new Channel({
             averageViewers: twitch.initializeViewers(),
+            channelDisplayName: twitch.channelDisplayName,
             channelId: twitch.channelId,
             channelName: twitch.channelName,
             channelURL: twitch.channelURL,

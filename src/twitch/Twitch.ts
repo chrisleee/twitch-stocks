@@ -9,17 +9,20 @@ import { IViewer, IViewerContainer } from '../server/models/viewerContainer';
 export class Twitch {
   private ChannelId: string;
   private ChannelName: string;
+  private ChannelDisplayName: string;
   private ChannelURL: string;
   private CurrentViewers: number;
 
   constructor(
     channelId: string,
     channelName: string,
+    channelDisplayName: string,
     channelURL: string,
     currentViewers: number,
   ) {
     this.ChannelId = channelId;
     this.ChannelName = channelName;
+    this.ChannelDisplayName = channelDisplayName;
     this.ChannelURL = channelURL;
     this.CurrentViewers = currentViewers;
   }
@@ -30,6 +33,10 @@ export class Twitch {
 
   get channelName(): string {
     return this.ChannelName;
+  }
+
+  get channelDisplayName(): string {
+    return this.ChannelDisplayName;
   }
 
   get channelURL(): string {
@@ -46,8 +53,9 @@ export class Twitch {
 
   public toString() {
     return `{channelId: ${this.ChannelId}, channelName: ${this
-      .ChannelName}, channelURL: ${this.ChannelURL}, currentViewers: ${this
-      .CurrentViewers}}`;
+      .ChannelName}, channelDisplayName: ${this
+      .ChannelDisplayName} channelURL: ${this
+      .ChannelURL}, currentViewers: ${this.CurrentViewers}}`;
   }
 
   public updateAverageViewers(currentAverage: IViewerContainer) {

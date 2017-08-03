@@ -5,7 +5,7 @@ import { Twitch } from '../Twitch';
 let twitch: Twitch;
 describe('test getting from twitch api', () => {
   beforeEach(done => {
-    twitch = new Twitch('1234', 'test', 'www.fake.com', 1);
+    twitch = new Twitch('1234', 'test', 'TeSt', 'www.fake.com', 1);
     done();
   });
   it('should return initialized object', () => {
