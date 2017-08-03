@@ -20,7 +20,7 @@ function route(app: Application, router: Router): void {
     .post((req: Request, res: Response): void => {
       // Example using object references
       Channel.findOne(
-        { channelId: '25886424464' },
+        { channelId: '17337557' },
         (err: mongoose.Error, channel: mongoose.Document): void => {
           if (err) {
             res.send(err);
@@ -31,8 +31,13 @@ function route(app: Application, router: Router): void {
             return;
           }
           const stock = new Stock({
+            buyers: [],
             channel: channel._id,
             id: 'Testing',
+            name: 'DrDisRespect',
+            price: 10,
+            sellers: [],
+            totalShares: 1000,
           });
           stock.save(
             (saveErr: mongoose.Error, record: mongoose.Document): Response => {
