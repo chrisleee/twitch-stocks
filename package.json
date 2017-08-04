@@ -20,7 +20,7 @@
     "server": "npm run server:watch"
   },
   "pre-commit": "lint-staged",
-  "lint-staged": { 
+  "lint-staged": {
     "*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",
@@ -60,6 +60,7 @@
     "@types/mongoose": "^4.7.19",
     "@types/node": "^8.0.14",
     "@types/react": "^15.0.38",
+    "@types/winston": "^2.3.4",
     "babel-plugin-inline-dotenv": "^1.1.1",
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "body-parser": "^1.17.2",
@@ -69,7 +70,8 @@
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.3",
