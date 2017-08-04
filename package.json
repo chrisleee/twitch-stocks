@@ -17,7 +17,9 @@
     "server:build": "tsc --watch",
     "server:watch": "nodemon \"dist/server/index.js\" --watch \"dist/server/*\"",
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
-    "server": "npm run server:watch"
+    "server": "npm run server:watch",
+    "twitch:watch": "nodemon \"dist/twitch/index.js\" --watch \"dist/twitch/*\"",
+    "twitch": "concurrently \"npm run server:build\" \"npm run twitch:watch\" \"npm run server:watch\""
   },
   "pre-commit": "lint-staged",
   "lint-staged": {
@@ -61,17 +63,22 @@
     "@types/node": "^8.0.14",
     "@types/react": "^15.0.38",
     "@types/winston": "^2.3.4",
+    "@types/request": "^2.0.0",
+    "@types/request-promise-native": "^1.0.6",
     "babel-plugin-inline-dotenv": "^1.1.1",
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.4",
     "next": "^3.0.1-beta.17",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "typescript": "^2.4.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.3",

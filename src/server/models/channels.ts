@@ -1,44 +1,42 @@
 import * as mongoose from 'mongoose';
+import {
+  IViewer,
+  IViewerContainer,
+  viewerContainerSchema,
+  viewerSchema,
+} from './viewerContainer';
 
 const Schema = mongoose.Schema;
 
 // Class that the schema is created as by mongoose
 export interface IChannel extends mongoose.Document {
   _id: string;
-  channelID: string;
-  averageViewers: {
-    allTime: number;
-    month: number;
-    week: number;
-    day: number;
-  };
+  channelId: string;
+  channelName: string;
+  channelDisplayName: string;
+  channelURL: string;
+  averageViewers: IViewerContainer;
   currentViewers: number;
-  peakViewers: {
-    allTime: number;
-    month: number;
-    week: number;
-    day: number;
-  };
+  lastUpdated: string;
+  iterations: number;
+  peakViewers: IViewerContainer;
   channelStock: string; // Add the correct type later
 }
 
 // Mongoose schema
-const channelSchema = new Schema({
-  averageViewers: {
-    allTime: Number,
-    day: Number,
-    month: Number,
-    week: Number,
+const channelSchema = new Schema(
+  {
+    averageViewers: viewerContainerSchema,
+    channelDisplayName: { type: String, required: true },
+    channelId: { type: String, required: true },
+    channelName: { type: String, required: true },
+    channelStock: String, // Add the correct type later
+    channelURL: String,
+    currentViewers: Number,
+    lastUpdated: String,
+    peakViewers: viewerContainerSchema,
   },
-  channelID: String,
-  channelStock: String, // Add the correct type later
-  currentViewers: Number,
-  peakViewers: {
-    allTime: Number,
-    day: Number,
-    month: Number,
-    week: Number,
-  },
-});
+  { minimize: false },
+);
 
 export const Channel = mongoose.model<IChannel>('Channel', channelSchema);

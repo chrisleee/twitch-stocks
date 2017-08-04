@@ -6,8 +6,8 @@ export interface IStock extends Document {
   name: string;
   totalShares: number;
   price: number;
-  sellers: [string];
-  buyers: [string];
+  sellers: string[];
+  buyers: string[];
   channel: IChannel;
 }
 
