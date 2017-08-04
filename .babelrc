@@ -2,12 +2,11 @@
   "presets": [
     "next/babel",
   ],
-  "plugins": [
-    ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ]
-  ],
   "env": {
     "development": {
-      "plugins": ["inline-dotenv"]
+      "plugins": [
+        ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ]
+      ]
     },
     "production": {
       "plugins": ["transform-inline-environment-variables"]
