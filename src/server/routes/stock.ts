@@ -1,4 +1,5 @@
 import { Application, Request, Response, Router } from 'express';
+import { logger } from '../../logger';
 import { Channel } from '../models/channels';
 import { Stock } from '../models/stock';
 import mongoose = require('mongoose');
@@ -8,8 +9,10 @@ function route(app: Application, router: Router): void {
   router
     .route('/stock')
     .get((req: Request, res: Response): void => {
+      logger.info(`GET /stock from ${req.ip}`);
       Stock.find((err: Error, stocks): Response => {
         if (err) {
+          logger.error('Error finding stock');
           return res.send(err);
         }
         return res.send(stocks);

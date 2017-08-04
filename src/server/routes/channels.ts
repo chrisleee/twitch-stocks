@@ -1,5 +1,6 @@
 import { Application, Request, Response, Router } from 'express';
 import { Document, Error } from 'mongoose';
+import { logger } from '../../logger';
 import { Channel } from '../models/channels';
 
 /**
@@ -9,12 +10,17 @@ import { Channel } from '../models/channels';
  * @param router express router
  */
 function route(app: Application, router: Router): void {
-  router.route('/channels').get((req: Request, res: Response): void => {
-    Channel.find((err: Error, channels): Response => {
-      if (err) {
-        return res.send(err);
-      }
-      return res.send(channels);
+  router
+    .route('/channels')
+    .get((req: Request, res: Response): void => {
+      logger.info(`GET /channels from ${req.ip}`);
+      Channel.find((err: Error, channels): Response => {
+        if (err) {
+          logger.error('Cannot find channels');
+          return res.send(err);
+        }
+        return res.send(channels);
+      });
     });
   });
 }
