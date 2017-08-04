@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Footer from './Footer';
 import Header from './Header';
 
 interface ILayoutProps {
@@ -18,6 +19,7 @@ export default class Layout extends React.Component<ILayoutProps, {}> {
       <div>
         <Header />
         {this.props.children}
+        <Footer />
       </div>
     );
   }

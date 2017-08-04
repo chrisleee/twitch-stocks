@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Footer from './Footer';
 import HeaderLanding from './HeaderLanding';
 
 interface ILayoutLandingProps {
@@ -20,6 +21,7 @@ export default class LayoutLanding extends React.Component<
       <div>
         <HeaderLanding />
         {this.props.children}
+        <Footer />
       </div>
     );
   }
