@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import HeaderLoginRegister from './HeaderLoginRegister';
+
 interface IProps {
   children: string | JSX.Element;
 }
@@ -8,6 +10,7 @@ interface IProps {
 const LayoutLoginRegister = (props: IProps) => {
   return (
     <div>
+      <HeaderLoginRegister />
       {props.children}
     </div>
   );

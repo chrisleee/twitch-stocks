@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import Header from './Header';
+
 interface IProps {
   children: string | JSX.Element;
 }
@@ -9,6 +11,7 @@ interface IProps {
 const Layout = (props: IProps) => {
   return (
     <div>
+      <Header />
       {props.children}
     </div>
   );
