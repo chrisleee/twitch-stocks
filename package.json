@@ -11,6 +11,7 @@
     "start": "next start dist/client",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts*\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint-fix": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest",
     "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint-staged": "lint-staged",
@@ -78,13 +79,15 @@
     "typescript": "^2.4.1",
     "winston": "^2.3.1",
     "request": "^2.81.0",
-    "request-promise-native": "^1.0.4"
+    "request-promise-native": "^1.0.4",
+    "styled-components": "^2.1.1"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.3",
     "@types/jest": "^20.0.4",
     "@types/react-test-renderer": "^15.5.2",
     "@types/supertest": "^2.0.2",
+    "babel-plugin-styled-components": "^1.1.7",
     "concurrently": "^3.5.0",
     "enzyme": "^2.9.1",
     "husky": "^0.14.3",
