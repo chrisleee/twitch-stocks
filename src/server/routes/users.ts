@@ -1,11 +1,14 @@
 import { Application, Request, Response, Router } from 'express';
 import { Document, Error } from 'mongoose';
+import { logger } from '../../logger';
 import { User } from '../models/users';
 
 function route(app: Application, router: Router): void {
   router.route('/users').get((req: Request, res: Response): void => {
+    logger.info(`GET /users from ${req.ip}`);
     User.find((err: Error, users): Response => {
       if (err) {
+        logger.error('Cannot find users');
         return res.send(err);
       }
       return res.send(users);
@@ -15,11 +18,13 @@ function route(app: Application, router: Router): void {
   router
     .route('/users/user/:user')
     .get((req: Request, res: Response): void => {
+      logger.info(`GET /users/user/${req.path}`);
       User.findById(req.params.user, (err: Error, user) => {
         if (err) {
           return res.send(err);
         }
         if (!user) {
+          logger.info(`Could not find user ${req.params.user}`);
           res.status(404);
           return res.send(JSON.stringify({ Error: 'Unable to find user' }));
         }
@@ -34,6 +39,7 @@ function route(app: Application, router: Router): void {
         if (saveErr) {
           return res.send(saveErr);
         }
+        logger.info(`Created new user`, record);
         return res.send({ message: 'user created', record });
       });
     });

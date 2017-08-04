@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser';
 import { Express, Router } from 'express';
 import { Server } from 'http';
+import { logger } from '../logger';
 import channels from './routes/channels';
 import stock from './routes/stock';
 import users from './routes/users';
@@ -52,6 +53,7 @@ export class WebAPI {
    * Start the application
    */
   public run(): void {
+    logger.info(`Listening on port ${this.port}`);
     this.server = this.app.listen(this.port);
   }
 
@@ -87,9 +89,13 @@ export class WebAPI {
       { useMongoClient: true },
     );
     const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'Mongoose connection error'));
+    db.on('error', () => {
+      logger.error(
+        'Could not connect to database - please check credentials are correct',
+      );
+    });
     db.once('open', (): void => {
-      // Do something here if needed
+      logger.info('Database connected');
     });
     return db;
   }
