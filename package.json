@@ -24,7 +24,7 @@
   },
   "pre-commit": "lint-staged",
   "lint-staged": {
-    "*.ts*": [
+    "src/*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",
       "git add",
