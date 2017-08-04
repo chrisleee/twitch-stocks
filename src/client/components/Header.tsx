@@ -8,7 +8,7 @@ const Navbar = styled.div`
   justify-content: space-around;
 `;
 
-// Re-usable header for outer pages, such as landing page
+// Re-usable header for dashboard, settings, etc.
 const Header = () =>
   <Navbar>
     <Link href="/">
