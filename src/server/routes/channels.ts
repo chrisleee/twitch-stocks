@@ -9,28 +9,14 @@ import { Channel } from '../models/channels';
  * @param router express router
  */
 function route(app: Application, router: Router): void {
-  router
-    .route('/channels')
-    .get((req: Request, res: Response): void => {
-      Channel.find((err: Error, channels): Response => {
-        if (err) {
-          return res.send(err);
-        }
-        return res.send(channels);
-      });
-    })
-    .post((req: Request, res: Response): void => {
-      const channel = new Channel({ channelID: 'testing' });
-      // Or, assign like this...
-      // channel.channelID = "testing";
-
-      channel.save((err: Error, record: Document): Response => {
-        if (err) {
-          return res.send(err);
-        }
-        return res.send({ message: 'channel created', record });
-      });
+  router.route('/channels').get((req: Request, res: Response): void => {
+    Channel.find((err: Error, channels): Response => {
+      if (err) {
+        return res.send(err);
+      }
+      return res.send(channels);
     });
+  });
 }
 
 export default route;
