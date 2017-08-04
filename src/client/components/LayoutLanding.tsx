@@ -2,18 +2,25 @@ import * as React from 'react';
 
 import HeaderLanding from './HeaderLanding';
 
-interface IProps {
+interface ILayoutLandingProps {
   children: string | JSX.Element;
 }
 
 // Re-usable layout for outer pages, such as landing page
-const LayoutLanding = (props: IProps) => {
-  return (
-    <div>
-      <HeaderLanding />
-      {props.children}
-    </div>
-  );
-};
+export default class LayoutLanding extends React.Component<
+  ILayoutLandingProps,
+  {}
+> {
+  constructor(props: ILayoutLandingProps) {
+    super(props);
+  }
 
-export default LayoutLanding;
+  public render() {
+    return (
+      <div>
+        <HeaderLanding />
+        {this.props.children}
+      </div>
+    );
+  }
+}

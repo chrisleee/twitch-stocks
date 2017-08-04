@@ -8,18 +8,21 @@ const Navbar = styled.div`
   justify-content: space-around;
 `;
 
-// Re-usable header for outer pages, such as landing page
-const HeaderLoginRegister = () =>
-  <Navbar>
-    <Link href="/">
-      <a>Twitch-Stocks</a>
-    </Link>
-    <Link href="/login">
-      <a>Login</a>
-    </Link>
-    <Link href="/register">
-      <a>Register</a>
-    </Link>
-  </Navbar>;
-
-export default HeaderLoginRegister;
+// Re-usable header for login and register pages
+export default class HeaderLoginRegister extends React.Component<{}, {}> {
+  public render() {
+    return (
+      <Navbar>
+        <Link href="/">
+          <a>Twitch-Stocks</a>
+        </Link>
+        <Link href="/login">
+          <a>Login</a>
+        </Link>
+        <Link href="/register">
+          <a>Register</a>
+        </Link>
+      </Navbar>
+    );
+  }
+}

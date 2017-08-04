@@ -9,14 +9,17 @@ const Navbar = styled.div`
 `;
 
 // Re-usable header for dashboard, settings, etc.
-const Header = () =>
-  <Navbar>
-    <Link href="/">
-      <a>Twitch-Stocks</a>
-    </Link>
-    <Link href="/">
-      <a>Logout</a>
-    </Link>
-  </Navbar>;
-
-export default Header;
+export default class Header extends React.Component<{}, {}> {
+  public render() {
+    return (
+      <Navbar>
+        <Link href="/">
+          <a>Twitch-Stocks</a>
+        </Link>
+        <Link href="/">
+          <a>Logout</a>
+        </Link>
+      </Navbar>
+    );
+  }
+}

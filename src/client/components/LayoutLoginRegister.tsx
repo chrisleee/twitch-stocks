@@ -2,18 +2,25 @@ import * as React from 'react';
 
 import HeaderLoginRegister from './HeaderLoginRegister';
 
-interface IProps {
+interface ILayoutLoginRegisterProps {
   children: string | JSX.Element;
 }
 
 // Re-usable layout for login and register pages
-const LayoutLoginRegister = (props: IProps) => {
-  return (
-    <div>
-      <HeaderLoginRegister />
-      {props.children}
-    </div>
-  );
-};
+export default class LayoutLoginRegister extends React.Component<
+  ILayoutLoginRegisterProps,
+  {}
+> {
+  constructor(props: ILayoutLoginRegisterProps) {
+    super(props);
+  }
 
-export default LayoutLoginRegister;
+  public render() {
+    return (
+      <div>
+        <HeaderLoginRegister />
+        {this.props.children}
+      </div>
+    );
+  }
+}

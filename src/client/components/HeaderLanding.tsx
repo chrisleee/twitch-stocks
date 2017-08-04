@@ -9,17 +9,20 @@ const Navbar = styled.div`
 `;
 
 // Re-usable header for outer pages, such as landing page
-const HeaderLanding = () =>
-  <Navbar>
-    <Link href="/">
-      <a>Twitch-Stocks</a>
-    </Link>
-    <Link href="/login">
-      <a>Login</a>
-    </Link>
-    <Link href="/register">
-      <a>Register</a>
-    </Link>
-  </Navbar>;
-
-export default HeaderLanding;
+export default class HeaderLanding extends React.Component<{}, {}> {
+  public render() {
+    return (
+      <Navbar>
+        <Link href="/">
+          <a>Twitch-Stocks</a>
+        </Link>
+        <Link href="/login">
+          <a>Login</a>
+        </Link>
+        <Link href="/register">
+          <a>Register</a>
+        </Link>
+      </Navbar>
+    );
+  }
+}
