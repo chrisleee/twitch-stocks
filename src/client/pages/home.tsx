@@ -4,5 +4,5 @@ import LayoutLanding from '../components/LayoutLanding';
 
 export default () =>
   <LayoutLanding>
-    <p>Index Page</p>
+    <p>Landing (home) page</p>
   </LayoutLanding>;
