@@ -18,7 +18,7 @@ function route(app: Application, router: Router): void {
   router
     .route('/users/user/:user')
     .get((req: Request, res: Response): void => {
-      logger.info(`GET /users/user/${req.path}`);
+      logger.info(`GET ${req.path} from ${req.ip}`);
       User.findById(req.params.user, (err: Error, user) => {
         if (err) {
           return res.send(err);
