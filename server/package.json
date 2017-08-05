@@ -58,8 +58,6 @@
     "@types/request": "^2.0.0",
     "@types/request-promise-native": "^1.0.6",
     "@types/winston": "^2.3.4",
-    "babel-plugin-inline-dotenv": "^1.1.1",
-    "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
