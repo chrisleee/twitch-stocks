@@ -43,7 +43,11 @@ cd twitch-stocks
 5. Choose one of the three directories to work on and follow from step 4:
 
 [Client](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/client)
+
+
 [Server](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/server)
+
+
 [Twitch](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/twitch)
 
 **Note to those on Windows:**
@@ -59,7 +63,9 @@ Check out the [issues](https://github.com/ChrisALee/twitch-stocks/issues) tab fo
 
 The same information can also be found on the [project](https://github.com/ChrisALee/twitch-stocks/projects/1) page.
 
-### Learning Resources
+---
+
+# Learning Resources
 
 #### Next.js: 
 * [Learn Next.js](https://learnnextjs.com/ "Learn Nextjs") - I'd suggest to start here.
@@ -103,7 +109,9 @@ Join us on Discord [#twitch-stocks](https://discord.gg/TWtSNdQ "#twitch-stocks")
 Please be sure to ask any questions if you get stuck on anything related to the project or languages used.
 We're all learning here, and teaching is a great way to reinforce concepts.
 
-## Bug / Feature Request
+---
+
+# Bug / Feature Request
 
 If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue here by including your search query and the expected result.
 
