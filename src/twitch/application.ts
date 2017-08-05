@@ -2,6 +2,7 @@ import * as request from 'request-promise-native';
 import { log } from 'util';
 import { Twitch } from './Twitch';
 import mongoose = require('mongoose');
+import { logger } from '../logger';
 import { Channel, IChannel } from '../server/models/channels';
 mongoose.Promise = global.Promise;
 
@@ -15,12 +16,13 @@ export class Application {
       { useMongoClient: true },
     );
     this.db = mongoose.connection;
-    this.db.on(
-      'error',
-      console.error.bind(console, 'Mongoose connection error'),
-    );
+    this.db.on('error', () => {
+      logger.error(
+        'Could not connect to database - Please ensure credentials in .env file are correct',
+      );
+    });
     this.db.once('open', (): void => {
-      // Do something here if needed
+      logger.info('Database connected');
     });
   }
 
@@ -33,6 +35,7 @@ export class Application {
    * get the online streams from twitch and add them to the database
    */
   public async getStreams() {
+    logger.info('Getting live streams from Twitch API');
     const numToGet = 5; // Twitch limit is 100
     const iterations = 2;
     for (
@@ -52,14 +55,13 @@ export class Application {
       try {
         body = await request(httpOptions);
         info = JSON.parse(body);
-        // console.log(info);
       } catch (e) {
-        // Get specific error here for better error handling
-        // console.log(e);
+        logger.error(e);
       }
       await this.handleResults(info);
       await this.wait(1000);
     }
+    logger.info('Finished processing twitch streams');
   }
 
   /**
@@ -81,7 +83,7 @@ export class Application {
       try {
         channel = await Channel.findOne({ channelId: twitch.channelId });
       } catch (e) {
-        // console.log('Error finding record ', e);
+        logger.error(`Error finding channel ${twitch.channelId}`, e);
       }
       if (!channel) {
         try {
@@ -94,17 +96,17 @@ export class Application {
             currentViewers: twitch.currentViewers,
             peakViewers: twitch.initializeViewers(),
           });
-          // console.log('Channel is now: ', channel);
         } catch (e) {
-          // console.log('Error creating new record, ', e);
+          logger.error(
+            `Error creating new record - skipping stream ${twitch.channelDisplayName}`,
+            e,
+          );
           continue;
         }
       }
       try {
         if (channel.isNew) {
           const result = await channel.save();
-          // console.log(result);
-          // console.log('Added new record');
         } else {
           const peakViewers = twitch.updatePeakViewers(channel.peakViewers);
           const averageViewers = twitch.updateAverageViewers(
@@ -115,11 +117,10 @@ export class Application {
             currentViewers: twitch.currentViewers,
             peakViewers,
           });
-          // console.log('Updated record');
         }
       } catch (e) {
-        // console.log('Error saving record ', e);
-        break;
+        logger.error('Error saving record', e);
+        continue;
       }
     }
   }
