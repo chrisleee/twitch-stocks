@@ -1,6 +1,6 @@
 # Twitch Stocks
 [![Build Status](https://travis-ci.org/ChrisALee/twitch-stocks.svg?branch=master)](https://travis-ci.org/ChrisALee/twitch-stocks)
-[![Coverage Status](https://coveralls.io/repos/github/ChrisALee/twitch-stocks/badge.svg?branch=coveralls)](https://coveralls.io/github/ChrisALee/twitch-stocks?branch=coveralls)
+[![Coverage Status](https://coveralls.io/repos/github/ChrisALee/twitch-stocks/badge.svg)](https://coveralls.io/github/ChrisALee/twitch-stocks?branch=coveralls)
 
 
 Twitch Stocks allows you to invest in Twitch streamers using virtual points. (No money involved)
@@ -42,13 +42,13 @@ cd twitch-stocks
 
 5. Choose one of the three directories to work on and follow from step 4:
 
-[Client](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/client)
+[Client](https://github.com/ChrisALee/twitch-stocks/tree/master/client)
 
 
-[Server](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/server)
+[Server](https://github.com/ChrisALee/twitch-stocks/tree/master/server)
 
 
-[Twitch](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/twitch)
+[Twitch](https://github.com/ChrisALee/twitch-stocks/tree/master/twitch)
 
 **Note to those on Windows:**
 
