@@ -4,23 +4,16 @@
   "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
   "main": "index.js",
   "scripts": {
-    "prebuild": "tsc && cp -R static dist/",
-    "build": "next build dist/client",
-    "predev": "tsc && cp -R static dist/",
-    "dev": "concurrently \"tsc --watch\" \"next dist/client\"",
-    "start": "next start dist/client",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts*\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "tslint-fix": "tslint -c tslint.json -p tsconfig.json",
+    "tslint-fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "test": "jest",
     "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint-staged": "lint-staged",
     "server:build": "tsc --watch",
-    "server:watch": "nodemon \"dist/server/index.js\" --watch \"dist/server/*\"",
+    "server:watch": "nodemon \"dist/index.js\" --watch \"dist/*\"",
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
-    "server": "npm run server:watch",
-    "twitch:watch": "nodemon \"dist/twitch/index.js\" --watch \"dist/twitch/*\"",
-    "twitch": "concurrently \"npm run server:build\" \"npm run twitch:watch\" \"npm run server:watch\""
+    "server": "npm run server:watch"
   },
   "pre-commit": "lint-staged",
   "lint-staged": {
@@ -32,11 +25,7 @@
     ]
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -47,9 +36,7 @@
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
@@ -106,9 +93,5 @@
     "tslint-config-airbnb": "^5.2.1",
     "tslint-config-prettier": "^1.1.0",
     "tslint-react": "^3.0.0"
-  },
-  "now": {
-    "alias": "twitch-stocks",
-    "dotenv": ".env.production"
   }
 }
