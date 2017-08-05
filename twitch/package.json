@@ -10,8 +10,9 @@
     "test": "jest",
     "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint-staged": "lint-staged",
+    "twitch:build": "tsc --watch",
     "twitch:watch": "nodemon \"dist/index.js\" --watch \"dist/*\"",
-    "twitch": "concurrently \"npm run server:build\" \"npm run twitch:watch\" \"npm run server:watch\""
+    "twitch": "concurrently \"npm run twitch:build\" \"npm run twitch:watch\""
   },
   "pre-commit": "lint-staged",
   "lint-staged": {

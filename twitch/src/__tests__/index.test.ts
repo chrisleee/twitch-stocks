@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import { IViewer, IViewerContainer } from '../../server/models/viewerContainer';
 import { Twitch } from '../Twitch';
+import { IViewer, IViewerContainer } from './..//models/viewerContainer';
 
 let twitch: Twitch;
 describe('test getting from twitch api', () => {

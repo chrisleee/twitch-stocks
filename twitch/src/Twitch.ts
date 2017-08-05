@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as request from 'request-promise-native';
-import { Channel, IChannel } from '../server/models/channels';
-import { IViewer, IViewerContainer } from '../server/models/viewerContainer';
+import { Channel, IChannel } from './models/channels';
+import { IViewer, IViewerContainer } from './models/viewerContainer';
 
 /**
  * Class to retrieve data from twitch and upload it to the database
