@@ -1,7 +1,7 @@
 import { Application, Request, Response, Router } from 'express';
-import { logger } from '../../logger';
 import { Channel } from '../models/channels';
 import { Stock } from '../models/stock';
+import { logger } from './../logger';
 import mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 

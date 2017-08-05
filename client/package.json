@@ -1,0 +1,95 @@
+{
+  "name": "twitch-stocks",
+  "version": "1.0.0",
+  "description": "A web platform that allows you to invest in Twitch streamers with imaginary points.",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "tsc && cp -R static dist/",
+    "build": "next build dist/",
+    "predev": "tsc && cp -R static dist/",
+    "dev": "concurrently \"tsc --watch\" \"next dist/\"",
+    "start": "next start dist/",
+    "prettier": "prettier --parser typescript --single-quote --trailing-comma all --write \"./**/*.ts*\"",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint-fix": "tslint -c tslint.json -p tsconfig.json --fix",
+    "test": "jest",
+    "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "lint-staged": "lint-staged"
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.ts*": [
+      "tslint -c tslint.json -p tsconfig.json --fix",
+      "prettier --parser typescript --single-quote --trailing-comma all --write",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx)$",
+    "collectCoverage": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
+  },
+  "keywords": [
+    "twitch"
+  ],
+  "author": "Chris Lee",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ChrisALee/twitch-stocks/issues"
+  },
+  "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
+  "dependencies": {
+    "@types/dotenv": "^4.0.0",
+    "@types/react": "^15.0.38",
+    "@types/winston": "^2.3.4",
+    "babel-plugin-inline-dotenv": "^1.1.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.1.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "moment": "^2.18.1",
+    "next": "^3.0.1-beta.17",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "styled-components": "^2.1.1",
+    "typescript": "^2.4.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^2.8.3",
+    "@types/jest": "^20.0.4",
+    "@types/react-test-renderer": "^15.5.2",
+    "@types/supertest": "^2.0.2",
+    "babel-plugin-styled-components": "^1.1.7",
+    "concurrently": "^3.5.0",
+    "coveralls": "^2.13.1",
+    "enzyme": "^2.9.1",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.5.3",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1",
+    "ts-jest": "^20.0.7",
+    "tslint": "^5.5.0",
+    "tslint-config-airbnb": "^5.2.1",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-react": "^3.0.0"
+  },
+  "now": {
+    "alias": "twitch-stocks",
+    "dotenv": ".env.production"
+  }
+}

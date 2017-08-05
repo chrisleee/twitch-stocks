@@ -2,8 +2,8 @@ import * as request from 'request-promise-native';
 import { log } from 'util';
 import { Twitch } from './Twitch';
 import mongoose = require('mongoose');
-import { logger } from '../logger';
-import { Channel, IChannel } from '../server/models/channels';
+import { logger } from './logger';
+import { Channel, IChannel } from './models/channels';
 mongoose.Promise = global.Promise;
 
 export class Application {

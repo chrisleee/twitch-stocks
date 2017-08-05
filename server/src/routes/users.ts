@@ -1,7 +1,7 @@
 import { Application, Request, Response, Router } from 'express';
 import { Document, Error } from 'mongoose';
-import { logger } from '../../logger';
 import { User } from '../models/users';
+import { logger } from './../logger';
 
 function route(app: Application, router: Router): void {
   router.route('/users').get((req: Request, res: Response): void => {
