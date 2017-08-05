@@ -20,8 +20,6 @@ Come check out the live site: https://twitch-stocks.now.sh/
 
 ## Getting Started
 
-### Front-end
-
 Firstly, check out the project's [Roadmap](https://github.com/ChrisALee/twitch-stocks/wiki/Roadmap) and [issues](https://github.com/ChrisALee/twitch-stocks/issues).
 
 1. Install [Node.js](https://nodejs.org/en/ "Node.js").
@@ -42,58 +40,11 @@ git clone https://github.com/ChrisALee/twitch-stocks.git
 cd twitch-stocks
 ```
 
-5. Run NPM install. This will give you all the dependencies needed to locally run the project.
+5. Choose one of the three directories to work on and follow from step 4:
 
-```
-npm install
-```
-
-6. Run the project.
-
-```
-npm run dev
-```
-
-7. Go to http://localhost:3000 to view the project.
-
-### Back-end
-
-1. Pull the `server` branch
-
-2. Run npm install to get the dependencies needed for the backend
-
-```
-npm install
-```
-
-3. Add your .env file.
-
-This is a small file of the form:
-
-```
-DB_USER=...
-DB_PASSWORD=...
-DB_HOST=...
-...
-```
-
-Fill it in with the relevent data before you run the server, or it will be unable to connect to a mongodb instance
-
-3. Run the project. The backend can be run independently from the front-end, or concurrently.
-
-To run independently, use
-
-```
-npm run server-dev
-```
-
-To run in conjunction with the front-end, use
-
-```
-npm run server
-```
-
-The server will start on port 3001 by default.
+[Client](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/client)
+[Server](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/server)
+[Twitch](https://github.com/ChrisALee/twitch-stocks/tree/separate-services/twitch)
 
 **Note to those on Windows:**
 
