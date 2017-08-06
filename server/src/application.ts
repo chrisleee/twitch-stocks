@@ -1,3 +1,5 @@
+import * as passport from 'passport';
+import { Strategy, ExtractJwt } from 'passport-jwt';
 import * as bodyParser from 'body-parser';
 import { Express, Router } from 'express';
 import { Server } from 'http';
@@ -9,6 +11,7 @@ import channels from './routes/channels';
 import login from './routes/login';
 import stock from './routes/stock';
 import users from './routes/users';
+import { User, IUser } from './models/users';
 import mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
@@ -84,6 +87,30 @@ export class WebAPI {
     app.use(bodyParser.urlencoded({ extended: true }));
     this.configurePassport();
     app.use(passport.initialize());
+  }
+
+  private configurePassport() {
+    const opts: any = {};
+    opts['jwtFromRequest'] = ExtractJwt.fromAuthHeader();
+    opts['secretOrKey'] = 'secret';
+    passport.use(
+      new Strategy(opts, (payload, done) => {
+        logger.debug('JWT payload received: ', payload);
+        User.findOne({ _id: payload.username }, (err, user) => {
+          if (err) {
+            logger.error('Error finding user to authorize');
+            return done(err, false);
+          }
+          if (user) {
+            logger.debug('User authorized');
+            return done(null, user);
+          } else {
+            logger.debug('User unauthorized');
+            return done(null, false);
+          }
+        });
+      }),
+    );
   }
 
   /**
