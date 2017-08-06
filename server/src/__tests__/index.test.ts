@@ -22,10 +22,16 @@ describe('get /channels', () => {
     done();
   });
   it('should get json of channels', done => {
-    request(app.app).get('/api/channels').then(response => {
-      expect(response.status).toBe(200);
-      done();
-    });
+    request(app.app)
+      .get('/api/channels')
+      .set(
+        'Authorization',
+        'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxvZ2luIiwiZW1haWwiOiJmYWtlQGZha2UuY29tIiwicGFzc3dvcmQiOiJwYXNzd29yZCJ9.fBoFl098koeHBUMIrpfeHVaqUuOqpwqAUxV9uiC1Pks',
+      )
+      .then(response => {
+        expect(response.status).toBe(200);
+        done();
+      });
   });
   it('should give 404 for random path', done => {
     request(app.app).get('/api/channels/test').then(response => {
