@@ -1,9 +1,9 @@
 import { Application, Request, Response, Router } from 'express';
 import { Document, Error } from 'mongoose';
+import * as passport from 'passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Channel } from '../models/channels';
 import { logger } from './../logger';
-import * as passport from 'passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
 
 /**
  * Defines the route for the channels endpoint.
