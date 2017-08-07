@@ -14,20 +14,17 @@ Follow these steps to contribute:
 * Make the appropriate changes in the files
 * Add changes to reflect the changes made
 * Run TSLint
-* Commit your changes (git commit -am 'Improve feature')
+* Commit your changes (npm run cm) [0]
 * Push to the branch (git push origin improve-feature)
 * Create a Pull Request
 
+[0] - It is recommended to use the built-in [Commitizen](https://github.com/commitizen/cz-cli) tool for commits.
 
-#### Note: Commits should follow [this](https://github.com/agis/git-style-guide#commits) convention.
-
-
-#### As it says in that link, remember to keep each commit to one change. Also, make sure the commit message is written in the imperative present tense with the first letter capitalized.
-
+### We follow [Angular's Git Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message).
 
 An example from the link:
 ```
-# good - imperative present tense, capitalized, fewer than 50 characters
+# good - imperative present tense and fewer than 100 characters
 Mark huge records as obsolete when clearing hinting faults
 
 # bad
