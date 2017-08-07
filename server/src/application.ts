@@ -92,7 +92,7 @@ export class WebAPI {
   private configurePassport() {
     const opts: any = {};
     opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-    opts.secretOrKey = 'secret';
+    opts.secretOrKey = process.env.JWT_SECRET;
     passport.use(
       new JWTStrategy(opts, (payload, done) => {
         logger.debug('JWT payload received: ', payload);

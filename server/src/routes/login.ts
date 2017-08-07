@@ -1,3 +1,4 @@
+import * as dotenv from 'dotenv';
 import { Application, Request, Response, Router } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { Document, Error } from 'mongoose';
@@ -5,13 +6,17 @@ import * as passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IUser, User } from '../models/users';
 import { logger } from './../logger';
-
-const secret = 'secret';
+dotenv.config();
 
 function route(app: Application, router: Router) {
   router.route('/login').post(async (req: Request, res: Response) => {
     logger.debug(req.body);
     let user: IUser | undefined | null;
+    if (!process.env.JWT_SECRET) {
+      logger.error('No JWT secret defined in .env file');
+      res.status(401).json({ message: 'No JWT secret defined' });
+      return;
+    }
     try {
       user = await User.findOne({ _id: req.body.username });
       logger.debug(`User attempting to login: ${user}`);
@@ -27,11 +32,13 @@ function route(app: Application, router: Router) {
     // Hash the received client password here before comparing to the stored pwd
     if (user.password === req.body.password) {
       const payload = {
-        username: user._id,
         email: user.email,
         password: user.password,
+        username: user._id,
       };
-      const token = jwt.sign(payload, secret, { expiresIn: '30s' }); // This is set low for testing. Suggest raising to 12h at minimum for production
+      const token = jwt.sign(payload, process.env.JWT_SECRET || 'no_secret', {
+        expiresIn: '1m',
+      }); // This is set low for testing. Suggest raising to 12h at minimum for production
       res.json({ message: 'auth ok', token });
       return;
     } else {
