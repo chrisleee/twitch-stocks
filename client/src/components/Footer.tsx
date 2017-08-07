@@ -10,7 +10,7 @@ const Container = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
+  padding: 1.2rem;
   text-align: center;
 `;
 
