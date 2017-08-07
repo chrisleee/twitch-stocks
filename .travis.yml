@@ -10,12 +10,15 @@ before_script:
   - npm prune
 script:
   - cd client
+  - npm install
   - npm run tslint
   - npm test
   - cd ../server
+  - npm install
   - npm run tslint
   - npm test
   - cd ../twitch
+  - npm install
   - npm run tslint
   - npm test
   - cd ..
