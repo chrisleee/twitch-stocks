@@ -6,14 +6,12 @@
   "scripts": {
     "pre-commits": "cd client && npm run lint-staged && cd ../server && npm run lint-staged && cd ../twitch && npm run lint-staged"
   },
-  "pre-commit": "pre-commits"
+  "pre-commit": "pre-commits",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
