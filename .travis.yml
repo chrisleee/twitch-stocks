@@ -23,7 +23,6 @@ script:
   - npm test
   - cd ..
 after_success:
-  - git fetch --tags
   - npm run semantic-release
 branches:
   except:
