@@ -1,6 +1,30 @@
 language: node_js
-
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
 node_js:
-    - stable
-
-before_install: cd client
+  - stable
+before_script:
+  - npm prune
+script:
+  - cd client
+  - npm install
+  - npm run tslint
+  - npm test
+  - cd ../server
+  - npm install
+  - npm run tslint
+  - npm test
+  - cd ../twitch
+  - npm install
+  - npm run tslint
+  - npm test
+  - cd ..
+after_success:
+  - git fetch --tags
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

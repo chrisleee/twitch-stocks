@@ -1,17 +1,24 @@
 {
   "name": "twitch-stocks",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "A web platform that allows you to invest in Twitch Streamers with imaginary points.",
   "main": "index.js",
   "scripts": {
-    "pre-commits": "cd client && npm run lint-staged && cd ../server && npm run lint-staged && cd ../twitch && npm run lint-staged"
+    "cm": "git-cz",
+    "precommit": "cd client && npm run lint-staged && cd ../server && npm run lint-staged && cd ../twitch && npm run lint-staged",
+    "commitmsg": "validate-commit-msg",
+    "semantic-release": "semantic-release pre && semantic-release post"
   },
-  "pre-commit": "pre-commits",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
+    "url": "https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": ["twitch"],
+  "release": {
+    "getLastRelease": "last-release-git"
+  },
+  "keywords": [
+    "twitch"
+  ],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
@@ -19,6 +26,45 @@
   },
   "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
   "devDependencies": {
-    "pre-commit": "^1.2.2"
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.14.3",
+    "last-release-git": "0.0.3",
+    "semantic-release": "^6.3.6",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": false,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": true
+    }
   }
 }
