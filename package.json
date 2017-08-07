@@ -13,9 +13,6 @@
     "type": "git",
     "url": "https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "release": {
-    "getLastRelease": "last-release-git"
-  },
   "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
