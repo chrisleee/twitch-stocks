@@ -15,8 +15,8 @@
     "server-dev": "concurrently \"npm run server:build\" \"npm run server:watch\"",
     "server": "npm run server:watch"
   },
-  "pre-commit": "lint-staged",
   "lint-staged": {
+    "gitDir": "../",
     "*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",

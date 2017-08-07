@@ -16,8 +16,8 @@
     "coveralls": "jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint-staged": "lint-staged"
   },
-  "pre-commit": "lint-staged",
   "lint-staged": {
+    "gitDir": "../",
     "*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",
