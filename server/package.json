@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "gitDir": "../",
-    "*.ts*": [
+    "server/**/*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",
       "git add",
@@ -25,11 +25,7 @@
     ]
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -40,9 +36,7 @@
     "type": "git",
     "url": "git+https://github.com/ChrisALee/twitch-stocks.git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
@@ -75,7 +69,6 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "nodemon": "^1.11.0",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.5.3",
     "superagent": "^3.5.2",
     "supertest": "^3.0.0",
