@@ -7,7 +7,7 @@
     "cm": "git-cz",
     "precommit": "cd client && npm run lint-staged && cd ../server && npm run lint-staged && cd ../twitch && npm run lint-staged",
     "commitmsg": "validate-commit-msg",
-    "semantic-release": "semantic-release pre && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,7 @@
   "release": {
     "getLastRelease": "last-release-git"
   },
-  "keywords": [
-    "twitch"
-  ],
+  "keywords": ["twitch"],
   "author": "Chris Lee",
   "license": "GPL-3.0",
   "bugs": {
@@ -29,7 +27,6 @@
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.3",
-    "last-release-git": "0.0.3",
     "semantic-release": "^6.3.6",
     "validate-commit-msg": "^2.14.0"
   },
@@ -53,9 +50,7 @@
       ],
       "scope": {
         "required": false,
-        "allowed": [
-          "*"
-        ],
+        "allowed": ["*"],
         "validate": false,
         "multiple": false
       },
