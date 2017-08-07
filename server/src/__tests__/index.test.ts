@@ -16,18 +16,77 @@ describe('Get /', () => {
   });
 });
 
-describe('get /channels', () => {
+describe('get /api/login to generate JWT token', () => {
   afterEach(done => {
     app.server.close();
     done();
   });
+  it('should give 401 error for unsuccessful login', done => {
+    request(app.app)
+      .post('/api/login')
+      .send('username=null')
+      .send('password=null')
+      .then(response => {
+        expect(response.status).toBe(401);
+        expect(response.text).toMatch(
+          JSON.stringify({ message: 'no such user found' }),
+        );
+        done();
+      });
+  });
+  it('should give 401 if incorrect password given', done => {
+    request(app.app)
+      .post('/api/login')
+      .send('username=test_login')
+      .send('password=null')
+      .then(response => {
+        expect(response.status).toBe(401);
+        expect(response.text).toMatch(
+          JSON.stringify({ message: 'passwords do not match' }),
+        );
+        done();
+      });
+  });
+  it('should give 200 if correct username/pwd supplied', done => {
+    request(app.app)
+      .post('/api/login')
+      .send('username=test_login')
+      .send('password=password')
+      .then(response => {
+        expect(response.status).toBe(200);
+        expect(response.text).toMatch(
+          JSON.stringify({ message: 'auth ok', token: response.body.token }),
+        );
+        done();
+      });
+  });
+});
+
+describe('get /channels with auth', () => {
+  let token: any;
+  afterEach(done => {
+    app.server.close();
+    done();
+  });
+  beforeEach(done => {
+    const username = 'username=test_login';
+    const password = 'password=password';
+    request(app.app)
+      .post('/api/login')
+      .send(username)
+      .send(password)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        }
+        token = res.body.token;
+        done();
+      });
+  });
   it('should get json of channels', done => {
     request(app.app)
       .get('/api/channels')
-      .set(
-        'Authorization',
-        'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxvZ2luIiwiZW1haWwiOiJmYWtlQGZha2UuY29tIiwicGFzc3dvcmQiOiJwYXNzd29yZCJ9.fBoFl098koeHBUMIrpfeHVaqUuOqpwqAUxV9uiC1Pks',
-      )
+      .set('Authorization', 'JWT ' + token)
       .then(response => {
         expect(response.status).toBe(200);
         done();
