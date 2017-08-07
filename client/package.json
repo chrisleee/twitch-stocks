@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "gitDir": "../",
-    "*.ts*": [
+    "client/**/*.ts*": [
       "tslint -c tslint.json -p tsconfig.json --fix",
       "prettier --parser typescript --single-quote --trailing-comma all --write",
       "git add",
@@ -78,7 +78,6 @@
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.5.3",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
