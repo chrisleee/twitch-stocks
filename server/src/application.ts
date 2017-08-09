@@ -84,6 +84,13 @@ export class WebAPI {
     app.use(bodyParser.urlencoded({ extended: true }));
     this.configurePassport();
     app.use(passport.initialize());
+    app.use(this.allowCors);
+  }
+
+  private allowCors(req: any, res: any, next: any) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
   }
 
   /**
