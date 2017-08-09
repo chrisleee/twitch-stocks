@@ -22,6 +22,9 @@ export default class HeaderLoginRegister extends React.Component<{}, {}> {
         <Link href="/register">
           <a>Register</a>
         </Link>
+        <Link href="/user">
+          <a>User</a>
+        </Link>
       </Navbar>
     );
   }

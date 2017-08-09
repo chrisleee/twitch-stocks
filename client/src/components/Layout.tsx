@@ -4,7 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 
 interface ILayoutProps {
-  children: string | JSX.Element;
+  children: string | JSX.Element | JSX.Element[];
 }
 
 // Re-usable layout for dashboard, buy/sell, etc. pages
