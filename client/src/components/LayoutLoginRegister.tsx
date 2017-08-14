@@ -1,16 +1,17 @@
 import * as React from 'react';
 
 import HeaderLoginRegister from './HeaderLoginRegister';
+import LoginForm from './LoginForm';
 
 interface ILayoutLoginRegisterProps {
-  children: string | JSX.Element;
+  children: string | JSX.Element | JSX.Element[];
 }
 
 // Re-usable layout for login and register pages
 export default class LayoutLoginRegister extends React.Component<
   ILayoutLoginRegisterProps,
   {}
-> {
+  > {
   constructor(props: ILayoutLoginRegisterProps) {
     super(props);
   }
@@ -19,7 +20,7 @@ export default class LayoutLoginRegister extends React.Component<
     return (
       <div>
         <HeaderLoginRegister />
-        {this.props.children}
+          {this.props.children}
       </div>
     );
   }
