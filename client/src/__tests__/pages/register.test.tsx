@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 
 import LayoutLoginRegister from './../../components/LayoutLoginRegister';
+import RegisterForm from './../../components/RegisterForm';
 import Register from './../../pages/register';
 
 describe('Register Page', () => {
@@ -20,7 +21,7 @@ describe('Register Page', () => {
       expect(
         wrapper.find('LayoutLoginRegister').at(0).equals(
           <LayoutLoginRegister>
-            <p>Register Page</p>
+            <RegisterForm />
           </LayoutLoginRegister>,
         ),
       ).toBe(true);
