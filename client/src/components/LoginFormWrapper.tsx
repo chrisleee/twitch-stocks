@@ -1,12 +1,8 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import { OuterCenteredWrapper } from './styles';
 
-const FormWrapper = styled.div`
-  // background: red;
+const Wrapper = OuterCenteredWrapper.extend`
   height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export default class LoginFormWrapper extends React.Component<any, any> {
@@ -16,9 +12,9 @@ export default class LoginFormWrapper extends React.Component<any, any> {
 
   public render() {
     return (
-      <FormWrapper>
+      <Wrapper>
         {this.props.children}
-      </FormWrapper>
+      </Wrapper>
     );
   }
 }

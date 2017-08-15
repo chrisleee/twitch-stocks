@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-export const FormWrapper = styled.div`
+export const InnerCenteredWrapper = styled.div`
   margin: 0 auto;
   padding: 40px;
-  font-family: Helvetica Neue, Helvetica, Arial;
   width: auto;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `;
 
 export const Title = styled.div`
@@ -32,4 +30,10 @@ export const Footnote = styled.div`
   // background-color: orange;
   text-align:center;
   font-family: Helvetica Neue, Helvetica, Arial;
+`;
+
+export const OuterCenteredWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
