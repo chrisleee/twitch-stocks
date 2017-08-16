@@ -26,7 +26,7 @@ export const Button = styled.button`
   padding: 0 20px 0 20px;
 `;
 export const Footnote = styled.div`
-  text-align:center;
+  text-align: center;
   font-family: Helvetica Neue, Helvetica, Arial;
 `;
 
@@ -36,14 +36,13 @@ export const OuterCenteredWrapper = styled.div`
   align-items: center;
 `;
 
-export const PageTitle = styled.h1`
-  font-size: 4em;
-`;
+export const PageTitle = styled.h1`font-size: 4em;`;
 
-export const PageIntroText = styled.p`
-  font-size: 1.2em;
-`;
+export const PageIntroText = styled.p`font-size: 1.2em;`;
 
-export const Body = styled.div`
-  font-family: Helvetica, Arial;
+export const Body = styled.div`font-family: Helvetica, Arial;`;
+
+export const FormWrapper = InnerCenteredWrapper.extend`
+  font-family: Helvetica Neue, Helvetica, Arial;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;

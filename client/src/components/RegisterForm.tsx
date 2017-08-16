@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import LoginFormWrapper from './LoginFormWrapper';
 import {
   Button,
-  InnerCenteredWrapper,
+  FormWrapper,
   Input,
   OuterCenteredWrapper,
   Title,
@@ -78,39 +78,41 @@ export default class RegisterForm extends React.Component<any, any> {
       <div>
         <LoginFormWrapper>
           <OuterCenteredWrapper>
-            <form onSubmit={this.submit}>
-              <Title>Sign Up</Title>
-              <div>
-                <Input
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={this.state.username}
-                  onChange={this.handleUsername}
-                />
-              </div>
-              <div>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
-                />
-              </div>
-              <div>
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="Choose a password"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-              </div>
-              <div>
-                <Button type="submit">Sign Up</Button>
-              </div>
-            </form>
+            <FormWrapper>
+              <form onSubmit={this.submit}>
+                <Title>Sign Up</Title>
+                <div>
+                  <Input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.handleUsername}
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                    value={this.state.email}
+                    onChange={this.handleEmail}
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="Choose a password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                  />
+                </div>
+                <div>
+                  <Button type="submit">Sign Up</Button>
+                </div>
+              </form>
+            </FormWrapper>
           </OuterCenteredWrapper>
         </LoginFormWrapper>
         {this.props.children}

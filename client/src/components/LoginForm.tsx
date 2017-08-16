@@ -3,12 +3,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import styled from 'styled-components';
 import LoginFormWrapper from './LoginFormWrapper';
-import { Button, Footnote, InnerCenteredWrapper, Input, Title } from './styles';
-
-const FormWrapper = InnerCenteredWrapper.extend`
-  font-family: Helvetica Neue, Helvetica, Arial;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-`;
+import { Button, Footnote, FormWrapper, Input, Title } from './styles';
 
 export default class LoginForm extends React.Component<any, any> {
   constructor(props: any) {
@@ -72,9 +67,7 @@ export default class LoginForm extends React.Component<any, any> {
         <LoginFormWrapper>
           <FormWrapper>
             <form onSubmit={this.submit}>
-              <Title>
-                Sign In
-            </Title>
+              <Title>Sign In</Title>
               <div>
                 <Input
                   type="text"
