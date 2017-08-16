@@ -16,14 +16,8 @@ describe('Index Page', () => {
       wrapper = shallow(<Index />);
     });
 
-    it('contains LayoutLanding', () => {
-      expect(
-        wrapper.find('LayoutLanding').at(0).equals(
-          <LayoutLanding>
-            <p>Index Page</p>
-          </LayoutLanding>,
-        ),
-      ).toBe(true);
+    it('contains 2 steps from the getting started section', () => {
+      expect(wrapper.contains([<h3>Step 3</h3>, <p>???</p>])).toBe(true);
     });
   });
 });

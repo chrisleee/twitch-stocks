@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  position: absolute;
+  // position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
