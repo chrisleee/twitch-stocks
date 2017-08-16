@@ -11,7 +11,6 @@ import {
 } from '../components/styles';
 
 const OuterWrap = OuterCenteredWrapper.extend`
-  // background: red;
   background: #642b73; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -27,14 +26,12 @@ const OuterWrap = OuterCenteredWrapper.extend`
 `;
 
 const Wrap = InnerCenteredWrapper.extend`
-  // background: blue;
   text-align: center;
   font-family: Helvetica, Arial;
   position: relative;
 `;
 
 const Bottom = styled.div`
-  // background-color: purple;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -76,7 +73,6 @@ const StepsWrap = InnerCenteredWrapper.extend`background-color: blue;`;
 const FeatureWrap = InnerCenteredWrapper.extend`
   display: flex;
   flex-direction: column;
-  // background-color: blue;
 `;
 
 const FeatureContent = styled.div`
@@ -86,10 +82,8 @@ const FeatureContent = styled.div`
 `;
 
 const FeatureBox = styled.div`
-  // background: blue;
   padding: 5px;
   margin: 5px;
-  // justify-content: space-between;
 `;
 
 export default class Index extends React.Component<{}, {}> {
