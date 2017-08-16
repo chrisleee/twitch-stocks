@@ -14,11 +14,13 @@ export default class MyDocument extends Document<{}> {
           <title>Twitch-Stocks</title>
           {styleTags}
         </Head>
-        <style jsx global> {`
+        <style>
+          {' '}{`
           body {
            margin: 0;
           }
-        `}</style>
+        `}
+        </style>
         <body>
           <div className="root">
             {main}

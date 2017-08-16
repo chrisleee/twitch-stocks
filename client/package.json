@@ -52,6 +52,7 @@
   "homepage": "https://github.com/ChrisALee/twitch-stocks#readme",
   "dependencies": {
     "@types/dotenv": "^4.0.0",
+    "@types/isomorphic-fetch": "0.0.34",
     "@types/react": "^15.0.38",
     "@types/winston": "^2.3.4",
     "babel-plugin-inline-dotenv": "^1.1.1",

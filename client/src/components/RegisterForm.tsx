@@ -3,7 +3,13 @@ import Link from 'next/link';
 import * as React from 'react';
 import styled from 'styled-components';
 import LoginFormWrapper from './LoginFormWrapper';
-import { Button, FormWrapper, Input, Title } from './styles';
+import {
+  Button,
+  InnerCenteredWrapper,
+  Input,
+  OuterCenteredWrapper,
+  Title,
+} from './styles';
 
 export default class RegisterForm extends React.Component<any, any> {
   constructor(props: any) {
@@ -71,11 +77,9 @@ export default class RegisterForm extends React.Component<any, any> {
     return (
       <div>
         <LoginFormWrapper>
-          <FormWrapper>
+          <OuterCenteredWrapper>
             <form onSubmit={this.submit}>
-              <Title>
-                Sign Up
-            </Title>
+              <Title>Sign Up</Title>
               <div>
                 <Input
                   type="text"
@@ -107,11 +111,10 @@ export default class RegisterForm extends React.Component<any, any> {
                 <Button type="submit">Sign Up</Button>
               </div>
             </form>
-          </FormWrapper>
+          </OuterCenteredWrapper>
         </LoginFormWrapper>
         {this.props.children}
       </div>
     );
   }
 }
-
