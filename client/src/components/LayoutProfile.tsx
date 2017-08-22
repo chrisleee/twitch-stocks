@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 import Footer from './Footer';
 import HeaderDefault from './HeaderDefault';
+import HeaderTop from './HeaderTop';
 import ItemContainer from './ItemContainer';
 import { Body, InnerCenteredWrapper, OuterCenteredWrapper } from './styles';
 
@@ -21,6 +23,15 @@ export default class LayoutProfile extends React.Component<IProfileProps, {}> {
     return (
       <div>
         <HeaderDefault />
+        <HeaderTop>
+          {/* These links will drive the UI on the page rather than navigate to a different page */}
+          <Link href="#">
+            <a>Dashboard</a>
+          </Link>
+          <Link href="#">
+            <a>Trade</a>
+          </Link>
+        </HeaderTop>
         <Margin>
           <h1>Profile name</h1>
           <OuterCenteredWrapper>

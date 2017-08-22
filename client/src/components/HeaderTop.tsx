@@ -8,6 +8,7 @@ const Navbar = styled.nav`
   justify-content: space-around;
   height: 48px;
   align-items: center;
+  border-bottom: 2px solid black;
 `;
 
 const RightA = styled(Link)`
