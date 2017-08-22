@@ -13,14 +13,14 @@ describe('<HeaderLoginRegister />', () => {
     let wrapper: any;
 
     beforeEach(() => {
-      wrapper = shallow(<HeaderLoginRegister />);
+      wrapper = shallow(<HeaderLoginRegister />).dive();
     });
 
     it('contains link to /', () => {
       expect(
-        wrapper.find('Link').at(0).equals(
+        wrapper.contains(
           <Link href="/">
-            <a>Twitch-Stocks</a>
+            <a>Twitch Stocks</a>
           </Link>,
         ),
       ).toBe(true);
@@ -28,7 +28,7 @@ describe('<HeaderLoginRegister />', () => {
 
     it('contains link to /login', () => {
       expect(
-        wrapper.find('Link').at(1).equals(
+        wrapper.contains(
           <Link href="/login">
             <a>Login</a>
           </Link>,
@@ -38,7 +38,7 @@ describe('<HeaderLoginRegister />', () => {
 
     it('contains link to /register', () => {
       expect(
-        wrapper.find('Link').at(2).equals(
+        wrapper.contains(
           <Link href="/register">
             <a>Register</a>
           </Link>,
