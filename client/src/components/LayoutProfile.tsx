@@ -6,6 +6,7 @@ import Footer from './Footer';
 import HeaderDefault from './HeaderDefault';
 import HeaderTop from './HeaderTop';
 import ItemContainer from './ItemContainer';
+import SearchBar from './SearchBar';
 import { Body, InnerCenteredWrapper, OuterCenteredWrapper } from './styles';
 
 const Margin = Body.extend`margin: 8px;`;
@@ -31,6 +32,7 @@ export default class LayoutProfile extends React.Component<IProfileProps, {}> {
           <Link href="#">
             <a>Trade</a>
           </Link>
+          <SearchBar />
         </HeaderTop>
         <Margin>
           <h1>Profile name</h1>
