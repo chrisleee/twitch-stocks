@@ -93,9 +93,13 @@ export default class LoginForm extends React.Component<any, any> {
           </FormWrapper>
         </LoginFormWrapper>
         <Footnote>
-          <Link href="/reset">Forgot password?</Link>
+          <Link href="/reset">
+            <a>Forgot password?</a>
+          </Link>
           <span> - </span>
-          <Link href="/register">Sign up for an account</Link>
+          <Link href="/register">
+            <a>Sign up for an account</a>
+          </Link>
         </Footnote>
         {this.props.children}
       </div>
