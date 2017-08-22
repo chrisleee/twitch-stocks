@@ -1,7 +1,8 @@
 import * as React from 'react';
 
+import Link from 'next/link';
 import Footer from './Footer';
-import HeaderLanding from './HeaderLanding';
+import HeaderDefault from './HeaderDefault';
 import { Body } from './styles';
 
 interface ILayoutLandingProps {
@@ -12,15 +13,16 @@ interface ILayoutLandingProps {
 export default class LayoutLanding extends React.Component<
   ILayoutLandingProps,
   {}
-  > {
+> {
   constructor(props: ILayoutLandingProps) {
     super(props);
   }
 
   public render() {
     return (
-      <Body> {/* <Body> simply sets the font for the entire page for consistency */}
-        <HeaderLanding />
+      <Body>
+        {' '}{/* <Body> simply sets the font for the entire page for consistency */}
+        <HeaderDefault />
         {this.props.children}
         <Footer />
       </Body>

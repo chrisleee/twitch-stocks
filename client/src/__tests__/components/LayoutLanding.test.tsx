@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 
 import Footer from './../../components/Footer';
-import HeaderLanding from './../../components/HeaderLanding';
+import HeaderLanding from './../../components/HeaderDefault';
 import LayoutLanding from './../../components/LayoutLanding';
 
 describe('<LayoutLanding />', () => {
@@ -26,9 +26,7 @@ describe('<LayoutLanding />', () => {
     });
 
     it('contains HeaderLanding', () => {
-      expect(
-        wrapper.find('HeaderLanding').at(0).equals(<HeaderLanding />),
-      ).toBe(true);
+      expect(wrapper.contains(<HeaderLanding />)).toBe(true);
     });
 
     it('contains children', () => {

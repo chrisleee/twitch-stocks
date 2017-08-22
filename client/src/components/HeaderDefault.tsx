@@ -1,20 +1,15 @@
 import Link from 'next/link';
 import * as React from 'react';
 import styled from 'styled-components';
-
-const Navbar = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
+import HeaderTop from './HeaderTop';
 
 // Re-usable header for outer pages, such as landing page
-export default class HeaderLanding extends React.Component<{}, {}> {
+export default class HeaderDefault extends React.Component<{}, {}> {
   public render() {
     return (
-      <Navbar>
+      <HeaderTop>
         <Link href="/">
-          <a>Twitch-Stocks</a>
+          <a>Twitch Stocks</a>
         </Link>
         <Link href="/login">
           <a>Login</a>
@@ -22,7 +17,10 @@ export default class HeaderLanding extends React.Component<{}, {}> {
         <Link href="/register">
           <a>Register</a>
         </Link>
-      </Navbar>
+        <Link href="/">
+          <a>Logout</a>
+        </Link>
+      </HeaderTop>
     );
   }
 }

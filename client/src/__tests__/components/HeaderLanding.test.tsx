@@ -2,25 +2,25 @@ import { shallow } from 'enzyme';
 import Link from 'next/link';
 import * as React from 'react';
 
-import HeaderLanding from './../../components/HeaderLanding';
+import HeaderDefault from './../../components/HeaderDefault';
 
 describe('<HeaderLanding />', () => {
   it('renders without crashing', () => {
-    const wrapper = shallow(<HeaderLanding />);
+    const wrapper = shallow(<HeaderDefault />);
   });
 
   describe('Shallow Render Components', () => {
     let wrapper: any;
 
     beforeEach(() => {
-      wrapper = shallow(<HeaderLanding />);
+      wrapper = shallow(<HeaderDefault />);
     });
 
     it('contains link to /', () => {
       expect(
-        wrapper.find('Link').at(0).equals(
+        wrapper.contains(
           <Link href="/">
-            <a>Twitch-Stocks</a>
+            <a>Twitch Stocks</a>
           </Link>,
         ),
       ).toBe(true);
