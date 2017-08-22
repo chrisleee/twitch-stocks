@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import HeaderLoginRegister from './HeaderLoginRegister';
 import LoginForm from './LoginForm';
+import { Body } from './styles';
 
 interface ILayoutLoginRegisterProps {
   children: string | JSX.Element | JSX.Element[];
@@ -11,17 +12,17 @@ interface ILayoutLoginRegisterProps {
 export default class LayoutLoginRegister extends React.Component<
   ILayoutLoginRegisterProps,
   {}
-  > {
+> {
   constructor(props: ILayoutLoginRegisterProps) {
     super(props);
   }
 
   public render() {
     return (
-      <div>
+      <Body>
         <HeaderLoginRegister />
-          {this.props.children}
-      </div>
+        {this.props.children}
+      </Body>
     );
   }
 }
