@@ -32,7 +32,7 @@ export default class LayoutProfile extends React.Component<IProfileProps, {}> {
         <HeaderDefault />
         <HeaderTop>
           {/* These links will drive the UI on the page rather than navigate to a different page */}
-          <RightAlignedHeaderItemLeft>
+          <RightAlignedHeaderItemLeft width="150px">
             <Link href="#">
               <a>Dashboard</a>
             </Link>

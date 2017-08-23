@@ -60,6 +60,6 @@ export const RightAlignedHeaderItemLeft = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  min-width: 150px;
+  min-width: ${props => (props.width ? props.width : '')};
   padding-left: 10px;
 `;
