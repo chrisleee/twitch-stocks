@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { MdSearch } from 'react-icons/lib/md';
 import { Button, Input } from './styles';
 
 export default class SearchBar extends React.Component<{}, {}> {
@@ -29,7 +30,9 @@ export default class SearchBar extends React.Component<{}, {}> {
             placeholder="Search"
             onChange={this.handleSearch}
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit">
+            <MdSearch size={24} />
+          </Button>
         </form>
       </div>
     );
