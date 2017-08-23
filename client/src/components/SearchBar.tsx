@@ -1,7 +1,20 @@
 import * as React from 'react';
 
 import { MdSearch } from 'react-icons/lib/md';
+import styled from 'styled-components';
 import { Button, Input } from './styles';
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: stretch;
+`;
+
+const Search = Input.extend`
+  margin-bottom: 0px;
+  width: 200px;
+`;
+
+const SearchButton = Button.extend`height: auto;`;
 
 export default class SearchBar extends React.Component<{}, {}> {
   constructor(props: any) {
@@ -23,17 +36,17 @@ export default class SearchBar extends React.Component<{}, {}> {
   public render() {
     return (
       <div>
-        <form onSubmit={this.submit}>
-          <Input
+        <SearchForm onSubmit={this.submit}>
+          <Search
             type="text"
             name="search"
             placeholder="Search"
             onChange={this.handleSearch}
           />
-          <Button type="submit">
+          <SearchButton type="submit">
             <MdSearch size={24} />
-          </Button>
-        </form>
+          </SearchButton>
+        </SearchForm>
       </div>
     );
   }

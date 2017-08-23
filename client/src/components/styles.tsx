@@ -50,3 +50,16 @@ export const FormWrapper = InnerCenteredWrapper.extend`
 export const Panel = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
+
+export const RightAlignedHeaderItem = styled.div`
+  margin-left: auto;
+  padding-right: 10px;
+`;
+
+export const RightAlignedHeaderItemLeft = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  min-width: 150px;
+  padding-left: 10px;
+`;

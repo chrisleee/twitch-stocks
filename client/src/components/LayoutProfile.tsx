@@ -7,7 +7,13 @@ import HeaderDefault from './HeaderDefault';
 import HeaderTop from './HeaderTop';
 import ItemContainer from './ItemContainer';
 import SearchBar from './SearchBar';
-import { Body, InnerCenteredWrapper, OuterCenteredWrapper } from './styles';
+import {
+  Body,
+  InnerCenteredWrapper,
+  OuterCenteredWrapper,
+  RightAlignedHeaderItem,
+  RightAlignedHeaderItemLeft,
+} from './styles';
 
 const Margin = Body.extend`margin: 8px;`;
 
@@ -22,17 +28,21 @@ export default class LayoutProfile extends React.Component<IProfileProps, {}> {
 
   public render() {
     return (
-      <div>
+      <Body>
         <HeaderDefault />
         <HeaderTop>
           {/* These links will drive the UI on the page rather than navigate to a different page */}
-          <Link href="#">
-            <a>Dashboard</a>
-          </Link>
-          <Link href="#">
-            <a>Trade</a>
-          </Link>
-          <SearchBar />
+          <RightAlignedHeaderItemLeft>
+            <Link href="#">
+              <a>Dashboard</a>
+            </Link>
+            <Link href="#">
+              <a>Trade</a>
+            </Link>
+          </RightAlignedHeaderItemLeft>
+          <RightAlignedHeaderItem>
+            <SearchBar />
+          </RightAlignedHeaderItem>
         </HeaderTop>
         <Margin>
           <h1>Profile name</h1>
@@ -53,7 +63,7 @@ export default class LayoutProfile extends React.Component<IProfileProps, {}> {
           </ItemContainer>
           <Footer />
         </Margin>
-      </div>
+      </Body>
     );
   }
 }
