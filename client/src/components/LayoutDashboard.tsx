@@ -17,12 +17,15 @@ import {
 
 const Margin = Body.extend`margin: 8px;`;
 
-interface IProfileProps {
+interface IDashboardProps {
   children: string | JSX.Element | JSX.Element[];
 }
 
-export default class LayoutProfile extends React.Component<IProfileProps, {}> {
-  constructor(props: IProfileProps) {
+export default class LayoutDashboard extends React.Component<
+  IDashboardProps,
+  {}
+> {
+  constructor(props: IDashboardProps) {
     super(props);
   }
 
