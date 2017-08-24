@@ -121,33 +121,6 @@ export class WebAPI {
   }
 
   /**
-   * Setup passport with strategies
-   */
-  private configurePassport() {
-    const opts: any = {};
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-    opts.secretOrKey = process.env.JWT_SECRET;
-    passport.use(
-      new JWTStrategy(opts, (payload, done) => {
-        logger.debug('JWT payload received: ', payload);
-        User.findOne({ _id: payload.username }, (err, user) => {
-          if (err) {
-            logger.error('Error finding user to authorize');
-            return done(err, false);
-          }
-          if (user) {
-            logger.debug('User authorized');
-            return done(undefined, user);
-          } else {
-            logger.debug('User unauthorized');
-            return done(undefined, false, { message: 'User not found' });
-          }
-        });
-      }),
-    );
-  }
-
-  /**
    * Connects to the mongodb database using credentials in the .env file.
    * Returns the database connection
    */
