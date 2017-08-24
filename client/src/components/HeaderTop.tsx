@@ -6,8 +6,9 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 48px;
+  height: 55px;
   align-items: center;
+  border-bottom: 2px solid black;
 `;
 
 const RightA = styled(Link)`

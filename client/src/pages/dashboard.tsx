@@ -1,13 +1,10 @@
 import * as React from 'react';
 
-import Layout from '../components/Layout';
+import styled from 'styled-components';
+import LayoutDashboard from '../components/LayoutDashboard';
 
 export default class Dashboard extends React.Component<{}, {}> {
   public render() {
-    return (
-      <Layout>
-        <p>Dashboard Page</p>
-      </Layout>
-    );
+    return <LayoutDashboard>Dashboard Page</LayoutDashboard>;
   }
 }

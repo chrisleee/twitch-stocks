@@ -3,6 +3,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Footer from './Footer';
 import HeaderDefault from './HeaderDefault';
+import HeaderTop from './HeaderTop';
 import { Body } from './styles';
 
 interface ILayoutLandingProps {

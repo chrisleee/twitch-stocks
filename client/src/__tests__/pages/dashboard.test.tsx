@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
-import Layout from './../../components/Layout';
+import LayoutDashboard from './../../components/LayoutDashboard';
 import Dashboard from './../../pages/dashboard';
 
 describe('Dashboard Page', () => {
@@ -18,11 +18,7 @@ describe('Dashboard Page', () => {
 
     it('contains Layout', () => {
       expect(
-        wrapper.find('Layout').at(0).equals(
-          <Layout>
-            <p>Dashboard Page</p>
-          </Layout>,
-        ),
+        wrapper.contains(<LayoutDashboard>Dashboard Page</LayoutDashboard>),
       ).toBe(true);
     });
   });
