@@ -21,7 +21,6 @@ describe('Login Page', () => {
       expect(
         wrapper.find('LayoutLoginRegister').at(0).equals(
           <LayoutLoginRegister>
-            <p>Login Page</p>
             <LoginForm />
           </LayoutLoginRegister>,
         ),

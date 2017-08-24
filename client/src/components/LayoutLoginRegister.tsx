@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import HeaderLoginRegister from './HeaderLoginRegister';
+import LoginForm from './LoginForm';
+import { Body } from './styles';
 
 interface ILayoutLoginRegisterProps {
   children: string | JSX.Element | JSX.Element[];
@@ -17,10 +19,10 @@ export default class LayoutLoginRegister extends React.Component<
 
   public render() {
     return (
-      <div>
+      <Body>
         <HeaderLoginRegister />
         {this.props.children}
-      </div>
+      </Body>
     );
   }
 }

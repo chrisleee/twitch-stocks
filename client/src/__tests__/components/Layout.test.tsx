@@ -1,8 +1,9 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
+import Link from 'next/link';
 import Footer from './../../components/Footer';
-import Header from './../../components/Header';
+import HeaderDefault from './../../components/HeaderDefault';
 import Layout from './../../components/Layout';
 
 describe('<Layout />', () => {
@@ -26,7 +27,9 @@ describe('<Layout />', () => {
     });
 
     it('contains Header', () => {
-      expect(wrapper.find('Header').at(0).equals(<Header />)).toBe(true);
+      expect(
+        wrapper.find('HeaderDefault').at(0).equals(<HeaderDefault />),
+      ).toBe(true);
     });
 
     it('contains children', () => {
