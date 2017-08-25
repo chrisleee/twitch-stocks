@@ -1,5 +1,6 @@
 import fetch = require('isomorphic-fetch');
 import Link from 'next/link';
+import Router from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 import LoginFormWrapper from './LoginFormWrapper';
@@ -39,6 +40,8 @@ export default class LoginForm extends React.Component<any, any> {
       .then(json => {
         this.setToken(json.token);
         this.setProfile(this.state.username);
+        // console.log(json.token);
+        Router.push('/dashboard');
       })
       .catch(err => {
         // console.log('Error posting', err);
