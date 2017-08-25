@@ -38,10 +38,12 @@ export default class LoginForm extends React.Component<any, any> {
         return response.json();
       })
       .then(json => {
-        this.setToken(json.token);
-        this.setProfile(this.state.username);
-        // console.log(json.token);
-        Router.push('/dashboard');
+        if (json.token) {
+          this.setToken(json.token);
+          this.setProfile(this.state.username);
+          // console.log(json.token);
+          Router.push('/dashboard');
+        }
       })
       .catch(err => {
         // console.log('Error posting', err);

@@ -26,11 +26,10 @@ describe('<Header />', () => {
       ).toBe(true);
     });
 
-    // Temporarily set to '/' for now until we have auth
     it('contains link to /logout', () => {
       expect(
         wrapper.contains(
-          <Link href="/">
+          <Link href="/logout">
             <a>Logout</a>
           </Link>,
         ),

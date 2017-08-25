@@ -17,7 +17,7 @@ export default class HeaderDefault extends React.Component<{}, {}> {
         <Link href="/register">
           <a>Register</a>
         </Link>
-        <Link href="/">
+        <Link href="/logout">
           <a>Logout</a>
         </Link>
       </HeaderTop>
