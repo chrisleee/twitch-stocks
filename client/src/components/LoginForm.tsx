@@ -25,30 +25,21 @@ export default class LoginForm extends React.Component<any, any> {
     this.setState({ password: e.target.value });
   }
 
-  public submit(e: any) {
+  public async submit(e: any) {
     // This will work when the routes are added on the server
     e.preventDefault();
-    fetch('http://localhost:3001/api/login', {
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        if (json.token) {
-          this.setToken(json.token);
-          this.setProfile(this.state.username);
-          // console.log(json.token);
-          Router.push('/dashboard');
-        }
-      })
-      .catch(err => {
-        // console.log('Error posting', err);
-      });
+    const response = await Authenticate.login({
+      password: this.state.password,
+      username: this.state.username,
+    });
+    const json = JSON.parse(response);
+    if (json.err) {
+      // Unknown error, handle it here
+    } else if (json.token) {
+      this.setToken(json.token);
+      this.setProfile(this.state.username);
+      Router.push('/dashboard');
+    }
   }
 
   public setProfile(username: string) {
