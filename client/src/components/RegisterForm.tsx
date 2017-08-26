@@ -17,6 +17,9 @@ interface IRegisterFormState {
   _id: string;
   password: string;
   email: string;
+  usernameValid: boolean;
+  emailValid: boolean;
+  passwordValid: boolean;
 }
 
 export default class RegisterForm extends React.Component<
@@ -25,7 +28,14 @@ export default class RegisterForm extends React.Component<
 > {
   constructor(props: any) {
     super(props);
-    this.state = { _id: '', password: '', email: '' };
+    this.state = {
+      _id: '',
+      email: '',
+      emailValid: false,
+      password: '',
+      passwordValid: false,
+      usernameValid: false,
+    };
 
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -36,19 +46,52 @@ export default class RegisterForm extends React.Component<
 
   public handleUsername(e: React.FormEvent<HTMLInputElement>) {
     this.setState({ _id: e.currentTarget.value });
+    if (this.state._id !== '') {
+      this.setState({ usernameValid: true });
+    }
   }
 
   public handlePassword(e: React.FormEvent<HTMLInputElement>) {
     this.setState({ password: e.currentTarget.value });
+    if (this.state.password.length > 1) {
+      this.setState({ passwordValid: true });
+    }
   }
 
   public handleEmail(e: React.FormEvent<HTMLInputElement>) {
     this.setState({ email: e.currentTarget.value });
+    if (this.validateEmail(this.state.email)) {
+      this.setState({ emailValid: true });
+    }
+  }
+
+  /**
+   * Uses ugly regex from http://emailregex.com/
+   * @param email string to validate
+   */
+  public validateEmail(email: string) {
+    if (
+      email.match(
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      )
+    ) {
+      return true;
+    }
+    return false;
   }
 
   public async submit(e: React.FormEvent<any>) {
     e.preventDefault();
-
+    if (!this.state.usernameValid) {
+      alert('Please enter valid username');
+      return;
+    } else if (!this.state.emailValid) {
+      alert('Please enter a valid email address');
+      return;
+    } else if (!this.state.passwordValid) {
+      alert('Please enter a valid password');
+      return;
+    }
     const response = await Authenticate.register({
       _id: this.state._id,
       email: this.state.email,
