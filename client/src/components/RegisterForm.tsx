@@ -11,10 +11,19 @@ import {
   Title,
 } from './styles';
 
-export default class RegisterForm extends React.Component<any, any> {
+interface IRegisterFormState {
+  _id: string;
+  password: string;
+  email: string;
+}
+
+export default class RegisterForm extends React.Component<
+  any,
+  IRegisterFormState
+> {
   constructor(props: any) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { _id: '', password: '', email: '' };
 
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -23,19 +32,19 @@ export default class RegisterForm extends React.Component<any, any> {
     this.submit = this.submit.bind(this);
   }
 
-  public handleUsername(e: any) {
-    this.setState({ username: e.target.value });
+  public handleUsername(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({ _id: e.currentTarget.value });
   }
 
-  public handlePassword(e: any) {
-    this.setState({ password: e.target.value });
+  public handlePassword(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({ password: e.currentTarget.value });
   }
 
-  public handleEmail(e: any) {
-    this.setState({ email: e.target.value });
+  public handleEmail(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({ email: e.currentTarget.value });
   }
 
-  public submit(e: any) {
+  public submit(e: React.FormEvent<any>) {
     // This will work when the routes are added on the server
     e.preventDefault();
     fetch('http://localhost:3001/api/register', {
@@ -50,7 +59,7 @@ export default class RegisterForm extends React.Component<any, any> {
       })
       .then(json => {
         this.setToken(json.token);
-        this.setProfile(this.state.username);
+        this.setProfile(this.state._id);
       })
       .catch(err => {
         // console.log('Error posting', err);
@@ -62,7 +71,7 @@ export default class RegisterForm extends React.Component<any, any> {
   }
 
   public getProfile() {
-    localStorage.getItem('username');
+    return localStorage.getItem('username');
   }
 
   public setToken(token: string) {
@@ -86,7 +95,7 @@ export default class RegisterForm extends React.Component<any, any> {
                     type="text"
                     name="username"
                     placeholder="Username"
-                    value={this.state.username}
+                    value={this.state._id}
                     onChange={this.handleUsername}
                   />
                 </div>

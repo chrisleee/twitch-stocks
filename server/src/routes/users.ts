@@ -34,6 +34,7 @@ function route(app: Application, router: Router): void {
     .post((req: Request, res: Response): void => {
       const user = new User({
         _id: req.body._id,
+        password: req.body.password,
       });
       user.save((saveErr: Error, record: Document): Response => {
         if (saveErr) {

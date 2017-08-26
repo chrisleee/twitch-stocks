@@ -7,6 +7,7 @@ import { logger } from './logger';
 import { IUser, User } from './models/users';
 import channels from './routes/channels';
 import login from './routes/login';
+import register from './routes/register';
 import stock from './routes/stock';
 import users from './routes/users';
 import mongoose = require('mongoose');
@@ -72,6 +73,7 @@ export class WebAPI {
     stock(app, router);
     users(app, router);
     login(app, router);
+    register(app, router);
     // Add more routes here as needed
   }
 
@@ -89,7 +91,10 @@ export class WebAPI {
 
   private allowCors(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    );
     next();
   }
 
