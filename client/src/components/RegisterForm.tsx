@@ -1,7 +1,9 @@
 import fetch = require('isomorphic-fetch');
 import Link from 'next/link';
+import Router from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
+import { Authenticate } from '../lib/login';
 import LoginFormWrapper from './LoginFormWrapper';
 import {
   Button,
@@ -44,26 +46,34 @@ export default class RegisterForm extends React.Component<
     this.setState({ email: e.currentTarget.value });
   }
 
-  public submit(e: React.FormEvent<any>) {
-    // This will work when the routes are added on the server
+  public async submit(e: React.FormEvent<any>) {
     e.preventDefault();
-    fetch('http://localhost:3001/api/register', {
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setToken(json.token);
-        this.setProfile(this.state._id);
-      })
-      .catch(err => {
-        // console.log('Error posting', err);
-      });
+
+    const response = await Authenticate.register({
+      _id: this.state._id,
+      email: this.state.email,
+      password: this.state.password,
+    });
+    const json = JSON.parse(response);
+    if (json.err) {
+      // Unknown error; handle it here
+      // console.log('Could not create user');
+    } else if (json.code && json.code === 11000) {
+      // console.log('Username already exists, pick a different username');
+    } else {
+      // console.log('Created user');
+      // User is created; now log them in an get a JWT
+      const loginDetails = {
+        password: this.state.password,
+        username: this.state._id,
+      };
+      const token = await Authenticate.login(loginDetails);
+      if (token) {
+        localStorage.setItem('username', this.state._id);
+        localStorage.setItem('token', token);
+        Router.push('/dashboard');
+      }
+    }
   }
 
   public setProfile(username: string) {
