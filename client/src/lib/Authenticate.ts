@@ -21,7 +21,7 @@ export class Authenticate {
    */
   public static async login(state: ILoginState) {
     let response: Response;
-    let token: string | undefined;
+    let token: string;
     try {
       response = await fetch('http://localhost:3001/api/login', {
         body: JSON.stringify(state),
@@ -33,7 +33,7 @@ export class Authenticate {
       const json = await response.json();
       token = json.token;
     } catch (e) {
-      token = undefined;
+      token = '{"err":"true", "message":"could not get token"}';
     }
     return token;
   }

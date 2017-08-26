@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Authenticate } from '../lib/login';
+import { Authenticate } from '../lib/Authenticate';
 import LoginFormWrapper from './LoginFormWrapper';
 import {
   Button,
