@@ -32,11 +32,10 @@ export default class LoginForm extends React.Component<any, any> {
       password: this.state.password,
       username: this.state.username,
     });
-    const json = JSON.parse(response);
-    if (json.err) {
+    if (response.err) {
       // Unknown error, handle it here
-    } else if (json.token) {
-      this.setToken(json.token);
+    } else if (response.token) {
+      this.setToken(response.token);
       this.setProfile(this.state.username);
       Router.push('/dashboard');
     }

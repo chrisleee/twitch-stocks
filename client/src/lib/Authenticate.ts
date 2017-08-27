@@ -11,6 +11,12 @@ interface IRegisterState {
   email: string;
 }
 
+interface IResponse {
+  message: string;
+  token?: string;
+  err?: boolean;
+}
+
 /**
  * Class exposes static methods to simplify logging in and registering from the authentication server
  */
@@ -21,7 +27,7 @@ export class Authenticate {
    */
   public static async login(state: ILoginState) {
     let response: Response;
-    let token: string;
+    let token: IResponse;
     try {
       response = await fetch('http://localhost:3001/api/login', {
         body: JSON.stringify(state),
@@ -31,9 +37,9 @@ export class Authenticate {
         method: 'POST',
       });
       const json = await response.json();
-      token = json.token;
+      token = json;
     } catch (e) {
-      token = '{"err":"true", "message":"could not get token"}';
+      token = { err: true, message: 'could not get token' };
     }
     return token;
   }

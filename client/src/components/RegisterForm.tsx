@@ -111,9 +111,9 @@ export default class RegisterForm extends React.Component<
         username: this.state._id,
       };
       const token = await Authenticate.login(loginDetails);
-      if (token) {
+      if (token.token) {
         localStorage.setItem('username', this.state._id);
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', token.token);
         Router.push('/dashboard');
       }
     }
