@@ -7,7 +7,12 @@ import { Authenticate } from '../lib/Authenticate';
 import LoginFormWrapper from './LoginFormWrapper';
 import { Button, Footnote, FormWrapper, Input, Title } from './styles';
 
-export default class LoginForm extends React.Component<any, any> {
+interface ILoginFormState {
+  username: string;
+  password: string;
+}
+
+export default class LoginForm extends React.Component<any, ILoginFormState> {
   constructor(props: any) {
     super(props);
     this.state = { username: '', password: '' };
@@ -17,15 +22,15 @@ export default class LoginForm extends React.Component<any, any> {
     this.submit = this.submit.bind(this);
   }
 
-  public handleUsername(e: any) {
-    this.setState({ username: e.target.value });
+  public handleUsername(e: React.FormEvent<any>) {
+    this.setState({ username: e.currentTarget.value });
   }
 
-  public handlePassword(e: any) {
-    this.setState({ password: e.target.value });
+  public handlePassword(e: React.FormEvent<any>) {
+    this.setState({ password: e.currentTarget.value });
   }
 
-  public async submit(e: any) {
+  public async submit(e: React.FormEvent<any>) {
     // This will work when the routes are added on the server
     e.preventDefault();
     const response = await Authenticate.login({
