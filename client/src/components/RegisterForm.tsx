@@ -4,6 +4,7 @@ import Router from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Authenticate } from '../lib/Authenticate';
+import FormMessage from './FormMessage';
 import LoginFormWrapper from './LoginFormWrapper';
 import {
   Button,
@@ -144,6 +145,9 @@ export default class RegisterForm extends React.Component<
               <form onSubmit={this.submit}>
                 <Title>Sign Up</Title>
                 <div>
+                  <FormMessage type="error" display={!this.state.usernameValid}>
+                    Username is invalid
+                  </FormMessage>
                   <Input
                     type="text"
                     name="username"
@@ -153,6 +157,9 @@ export default class RegisterForm extends React.Component<
                   />
                 </div>
                 <div>
+                  <FormMessage type="error" display={!this.state.emailValid}>
+                    Email is invalid
+                  </FormMessage>
                   <Input
                     type="email"
                     name="email"
@@ -162,6 +169,9 @@ export default class RegisterForm extends React.Component<
                   />
                 </div>
                 <div>
+                  <FormMessage type="error" display={!this.state.passwordValid}>
+                    Password is invalid
+                  </FormMessage>
                   <Input
                     type="password"
                     name="password"
