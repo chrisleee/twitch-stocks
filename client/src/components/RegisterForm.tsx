@@ -138,57 +138,54 @@ export default class RegisterForm extends React.Component<
 
   public render() {
     return (
-      <div>
-        <LoginFormWrapper>
-          <OuterCenteredWrapper>
-            <FormWrapper>
-              <form onSubmit={this.submit}>
-                <Title>Sign Up</Title>
-                <div>
-                  <FormMessage type="error" display={!this.state.usernameValid}>
-                    Username is invalid
-                  </FormMessage>
-                  <Input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={this.state._id}
-                    onChange={this.handleUsername}
-                  />
-                </div>
-                <div>
-                  <FormMessage type="error" display={!this.state.emailValid}>
-                    Email is invalid
-                  </FormMessage>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                    value={this.state.email}
-                    onChange={this.handleEmail}
-                  />
-                </div>
-                <div>
-                  <FormMessage type="error" display={!this.state.passwordValid}>
-                    Password is invalid
-                  </FormMessage>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Choose a password"
-                    value={this.state.password}
-                    onChange={this.handlePassword}
-                  />
-                </div>
-                <div>
-                  <Button type="submit">Sign Up</Button>
-                </div>
-              </form>
-            </FormWrapper>
-          </OuterCenteredWrapper>
-        </LoginFormWrapper>
-        {this.props.children}
-      </div>
+      <LoginFormWrapper>
+        <OuterCenteredWrapper>
+          <FormWrapper>
+            <form onSubmit={this.submit}>
+              <Title>Sign Up</Title>
+              <div>
+                <FormMessage type="error" display={!this.state.usernameValid}>
+                  Username is invalid
+                </FormMessage>
+                <Input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={this.state._id}
+                  onChange={this.handleUsername}
+                />
+              </div>
+              <div>
+                <FormMessage type="error" display={!this.state.emailValid}>
+                  Email is invalid
+                </FormMessage>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email address"
+                  value={this.state.email}
+                  onChange={this.handleEmail}
+                />
+              </div>
+              <div>
+                <FormMessage type="error" display={!this.state.passwordValid}>
+                  Password is invalid
+                </FormMessage>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Choose a password"
+                  value={this.state.password}
+                  onChange={this.handlePassword}
+                />
+              </div>
+              <div>
+                <Button type="submit">Sign Up</Button>
+              </div>
+            </form>
+          </FormWrapper>
+        </OuterCenteredWrapper>
+      </LoginFormWrapper>
     );
   }
 }

@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
+import FormMessage from './../../components/FormMessage';
 import RegisterForm from './../../components/RegisterForm';
 import { Button, Input } from './../../components/styles';
 
@@ -20,6 +21,9 @@ describe('<RegisterForm />', () => {
       expect(
         wrapper.containsMatchingElement(
           <div>
+            <FormMessage type="error" display={true}>
+              Username is invalid
+            </FormMessage>
             <Input name="username" />
           </div>,
         ),
@@ -30,6 +34,9 @@ describe('<RegisterForm />', () => {
       expect(
         wrapper.containsMatchingElement(
           <div>
+            <FormMessage type="error" display={true}>
+              Email is invalid
+            </FormMessage>
             <Input name="email" />
           </div>,
         ),
@@ -40,6 +47,9 @@ describe('<RegisterForm />', () => {
       expect(
         wrapper.containsMatchingElement(
           <div>
+            <FormMessage type="error" display={true}>
+              Password is invalid
+            </FormMessage>
             <Input name="password" />
           </div>,
         ),
