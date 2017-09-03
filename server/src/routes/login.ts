@@ -32,8 +32,8 @@ function route(app: Application, router: Router) {
     // Hash the received client password here before comparing to the stored pwd
     if (user.password === req.body.password) {
       const payload = {
-        email: user.email,
-        password: user.password,
+        // email: user.email,
+        // password: user.password,
         username: user._id,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET || 'no_secret', {
