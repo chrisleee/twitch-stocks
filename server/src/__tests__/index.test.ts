@@ -186,6 +186,7 @@ describe('get /channels with auth', () => {
 });
 
 describe('get /stock', () => {
+  let token: string;
   afterEach(done => {
     server.close();
     done();
@@ -204,11 +205,29 @@ describe('get /stock', () => {
     });
     done();
   });
+  beforeEach(done => {
+    const username = 'username=test_login';
+    const password = 'password=password';
+    request(app)
+      .post('/api/login')
+      .send(username)
+      .send(password)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        }
+        token = res.body.token;
+        done();
+      });
+  });
   it('should get json of stock', done => {
-    request(app).get('/api/stock').then(response => {
-      expect(response.status).toBe(200);
-      done();
-    });
+    request(app)
+      .get('/api/stock')
+      .set('Authorization', 'JWT ' + token)
+      .then(response => {
+        expect(response.status).toBe(200);
+        done();
+      });
   });
   it('should give 404 for random path', done => {
     request(app).get('/api/stock/test').then(response => {
@@ -219,6 +238,7 @@ describe('get /stock', () => {
 });
 
 describe('get /users', () => {
+  let token: string;
   afterEach(done => {
     server.close();
     done();
@@ -237,11 +257,29 @@ describe('get /users', () => {
     });
     done();
   });
+  beforeEach(done => {
+    const username = 'username=test_login';
+    const password = 'password=password';
+    request(app)
+      .post('/api/login')
+      .send(username)
+      .send(password)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        }
+        token = res.body.token;
+        done();
+      });
+  });
   it('should get json of users', done => {
-    request(app).get('/api/users').then(response => {
-      expect(response.status).toBe(200);
-      done();
-    });
+    request(app)
+      .get('/api/users')
+      .set('Authorization', 'JWT ' + token)
+      .then(response => {
+        expect(response.status).toBe(200);
+        done();
+      });
   });
   it('should give 404 for invalid path', done => {
     request(app).get('/api/users/test').then(response => {
@@ -252,6 +290,7 @@ describe('get /users', () => {
 });
 
 describe('get a user from /users/user/', () => {
+  let token: string;
   afterEach(done => {
     server.close();
     done();
@@ -269,22 +308,46 @@ describe('get a user from /users/user/', () => {
       }
     });
   });
+  beforeEach(done => {
+    const username = 'username=test_login';
+    const password = 'password=password';
+    request(app)
+      .post('/api/login')
+      .send(username)
+      .send(password)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        }
+        token = res.body.token;
+        done();
+      });
+  });
   it('should get json of test user', done => {
-    request(app).get('/api/users/user/test_login').then(response => {
-      expect(response.status).toBe(200);
-      done();
-    });
+    request(app)
+      .get('/api/users/user/test_login')
+      .set('Authorization', 'JWT ' + token)
+      .then(response => {
+        expect(response.status).toBe(200);
+        done();
+      });
   });
   // This test is probably not ideal; fix it later if there is a better way
   // to test individual users
   it('should give error for invalid user', done => {
-    request(app).get('/api/users/user/invalidTest').then(response => {
-      expect(response.status).toBe(404);
-      expect(response.text).toBe(
-        JSON.stringify({ Error: 'Unable to find user' }),
-      );
-      done();
-    });
+    request(app)
+      .get('/api/users/user/invalidTest')
+      .set('Authorization', `JWT ${token}`)
+      .then(response => {
+        expect(response.status).toBe(401);
+        expect(response.text).toBe(
+          JSON.stringify({
+            err: true,
+            message: 'Cannot request data from another user',
+          }),
+        );
+        done();
+      });
   });
 });
 
