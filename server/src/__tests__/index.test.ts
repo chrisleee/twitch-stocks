@@ -1,15 +1,14 @@
 import * as request from 'supertest';
 import { WebAPI } from '../application';
-import * as app from '../index';
-import * as db from '../index';
+import { app, db, server } from '../index';
 
 describe('Get /', () => {
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   it('should return 404', done => {
-    request(app.app).get('/').then(response => {
+    request(app).get('/').then(response => {
       expect(response.status).toBe(404);
       done();
     });
@@ -18,11 +17,11 @@ describe('Get /', () => {
 
 describe('get /api/login to generate JWT token', () => {
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   it('should give 401 error for unsuccessful login', done => {
-    request(app.app)
+    request(app)
       .post('/api/login')
       .send('username=null')
       .send('password=null')
@@ -35,7 +34,7 @@ describe('get /api/login to generate JWT token', () => {
       });
   });
   it('should give 401 if incorrect password given', done => {
-    request(app.app)
+    request(app)
       .post('/api/login')
       .send('username=test_login')
       .send('password=null')
@@ -48,7 +47,7 @@ describe('get /api/login to generate JWT token', () => {
       });
   });
   it('should give 200 if correct username/pwd supplied', done => {
-    request(app.app)
+    request(app)
       .post('/api/login')
       .send('username=test_login')
       .send('password=password')
@@ -65,13 +64,13 @@ describe('get /api/login to generate JWT token', () => {
 describe('get /channels with auth', () => {
   let token: any;
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   beforeEach(done => {
     const username = 'username=test_login';
     const password = 'password=password';
-    request(app.app)
+    request(app)
       .post('/api/login')
       .send(username)
       .send(password)
@@ -84,7 +83,7 @@ describe('get /channels with auth', () => {
       });
   });
   it('should get json of channels', done => {
-    request(app.app)
+    request(app)
       .get('/api/channels')
       .set('Authorization', 'JWT ' + token)
       .then(response => {
@@ -93,7 +92,7 @@ describe('get /channels with auth', () => {
       });
   });
   it('should give 404 for random path', done => {
-    request(app.app).get('/api/channels/test').then(response => {
+    request(app).get('/api/channels/test').then(response => {
       expect(response.status).toBe(404);
       done();
     });
@@ -102,17 +101,17 @@ describe('get /channels with auth', () => {
 
 describe('get /stock', () => {
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   it('should get json of stock', done => {
-    request(app.app).get('/api/stock').then(response => {
+    request(app).get('/api/stock').then(response => {
       expect(response.status).toBe(200);
       done();
     });
   });
   it('should give 404 for random path', done => {
-    request(app.app).get('/api/stock/test').then(response => {
+    request(app).get('/api/stock/test').then(response => {
       expect(response.status).toBe(404);
       done();
     });
@@ -121,17 +120,17 @@ describe('get /stock', () => {
 
 describe('get /users', () => {
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   it('should get json of users', done => {
-    request(app.app).get('/api/users').then(response => {
+    request(app).get('/api/users').then(response => {
       expect(response.status).toBe(200);
       done();
     });
   });
   it('should give 404 for invalid path', done => {
-    request(app.app).get('/api/users/test').then(response => {
+    request(app).get('/api/users/test').then(response => {
       expect(response.status).toBe(404);
       done();
     });
@@ -140,11 +139,11 @@ describe('get /users', () => {
 
 describe('get a user from /users/user/', () => {
   afterEach(done => {
-    app.server.close();
+    server.close();
     done();
   });
   it('should get json of test user', done => {
-    request(app.app).get('/api/users/user/test').then(response => {
+    request(app).get('/api/users/user/test_login').then(response => {
       expect(response.status).toBe(200);
       done();
     });
@@ -152,7 +151,7 @@ describe('get a user from /users/user/', () => {
   // This test is probably not ideal; fix it later if there is a better way
   // to test individual users
   it('should give error for invalid user', done => {
-    request(app.app).get('/api/users/user/invalidTest').then(response => {
+    request(app).get('/api/users/user/invalidTest').then(response => {
       expect(response.status).toBe(404);
       expect(response.text).toBe(
         JSON.stringify({ Error: 'Unable to find user' }),
@@ -163,5 +162,5 @@ describe('get a user from /users/user/', () => {
 });
 
 afterAll(() => {
-  app.db.close();
+  db.close();
 });
