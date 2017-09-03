@@ -1,6 +1,7 @@
 import * as request from 'supertest';
 import { WebAPI } from '../application';
 import { app, db, server } from '../index';
+import { User } from '../models/users';
 
 describe('Get /', () => {
   afterEach(done => {
@@ -15,9 +16,80 @@ describe('Get /', () => {
   });
 });
 
+describe('Register a new user', () => {
+  afterEach(done => {
+    server.close();
+    done();
+  });
+
+  beforeAll(done => {
+    User.collection.drop();
+    done();
+  });
+
+  afterAll(done => {
+    User.collection.drop();
+    done();
+  });
+
+  it('should post /register to create a new user', done => {
+    request(app)
+      .post('/api/register')
+      .send('_id=test_login')
+      .send('email=fake@fake.com')
+      .send('password=password')
+      .then(response => {
+        expect(response.status).toBe(200);
+        done();
+      });
+  });
+
+  it('should return error due to invalid username', done => {
+    request(app).post('/api/register').send('_id=te').then(response => {
+      expect(response.status).toBe(400);
+      done();
+    });
+  });
+  it('should return error due to invalid email', done => {
+    request(app)
+      .post('/api/register')
+      .send('_id=test')
+      .send('email=fake.com')
+      .then(response => {
+        expect(response.status).toBe(400);
+        done();
+      });
+  });
+  it('should return error due to invalid password', done => {
+    request(app)
+      .post('/api/register')
+      .send('_id=test')
+      .send('email=fake@fake.com')
+      .send('password=short')
+      .then(response => {
+        expect(response.status).toBe(400);
+        done();
+      });
+  });
+});
+
 describe('get /api/login to generate JWT token', () => {
   afterEach(done => {
     server.close();
+    done();
+  });
+  beforeAll(done => {
+    User.collection.drop();
+    const user = new User({
+      _id: 'test_login',
+      email: 'fake@fake.com',
+      password: 'password',
+    });
+    user.save((err, rec) => {
+      if (!err) {
+        done();
+      }
+    });
     done();
   });
   it('should give 401 error for unsuccessful login', done => {
@@ -67,6 +139,20 @@ describe('get /channels with auth', () => {
     server.close();
     done();
   });
+  beforeAll(done => {
+    User.collection.drop();
+    const user = new User({
+      _id: 'test_login',
+      email: 'fake@fake.com',
+      password: 'password',
+    });
+    user.save((err, rec) => {
+      if (!err) {
+        done();
+      }
+    });
+    done();
+  });
   beforeEach(done => {
     const username = 'username=test_login';
     const password = 'password=password';
@@ -104,6 +190,20 @@ describe('get /stock', () => {
     server.close();
     done();
   });
+  beforeAll(done => {
+    User.collection.drop();
+    const user = new User({
+      _id: 'test_login',
+      email: 'fake@fake.com',
+      password: 'password',
+    });
+    user.save((err, rec) => {
+      if (!err) {
+        done();
+      }
+    });
+    done();
+  });
   it('should get json of stock', done => {
     request(app).get('/api/stock').then(response => {
       expect(response.status).toBe(200);
@@ -121,6 +221,20 @@ describe('get /stock', () => {
 describe('get /users', () => {
   afterEach(done => {
     server.close();
+    done();
+  });
+  beforeAll(done => {
+    User.collection.drop();
+    const user = new User({
+      _id: 'test_login',
+      email: 'fake@fake.com',
+      password: 'password',
+    });
+    user.save((err, rec) => {
+      if (!err) {
+        done();
+      }
+    });
     done();
   });
   it('should get json of users', done => {
@@ -142,6 +256,19 @@ describe('get a user from /users/user/', () => {
     server.close();
     done();
   });
+  beforeAll(done => {
+    User.collection.drop();
+    const user = new User({
+      _id: 'test_login',
+      email: 'fake@fake.com',
+      password: 'password',
+    });
+    user.save((err, rec) => {
+      if (!err) {
+        done();
+      }
+    });
+  });
   it('should get json of test user', done => {
     request(app).get('/api/users/user/test_login').then(response => {
       expect(response.status).toBe(200);
@@ -162,5 +289,7 @@ describe('get a user from /users/user/', () => {
 });
 
 afterAll(() => {
-  db.close();
+  User.collection.drop().then(e => {
+    db.close();
+  });
 });
