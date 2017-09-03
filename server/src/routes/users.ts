@@ -14,13 +14,17 @@ function route(app: Application, router: Router): void {
       passport.authenticate('jwt', { session: false }),
       (req: Request, res: Response): void => {
         logger.info(`GET /users from ${req.ip}`);
-        User.find((err: Error, users): Response => {
-          if (err) {
-            logger.error('Cannot find users');
-            return res.send(err);
-          }
-          return res.send(users);
-        });
+        User.find(
+          {},
+          { password: 0, email: 0 },
+          (err: Error, users): Response => {
+            if (err) {
+              logger.error('Cannot find users');
+              return res.send(err);
+            }
+            return res.send(users);
+          },
+        );
       },
     );
 
