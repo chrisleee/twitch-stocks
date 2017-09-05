@@ -76,6 +76,16 @@ export class WebAPI {
    */
   private configureMiddleware(app: Express): void {
     app.use(bodyParser.json());
+    app.use(this.allowCors);
+  }
+
+  private allowCors(req: any, res: any, next: any) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    next();
   }
 
   /**
