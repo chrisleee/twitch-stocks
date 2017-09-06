@@ -1,25 +1,30 @@
 import { Application, Request, Response, Router } from 'express';
+import mongoose = require('mongoose');
+import * as passport from 'passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Channel } from '../models/channels';
 import { Stock } from '../models/stock';
 import { logger } from './../logger';
-import mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 function route(app: Application, router: Router): void {
   router
     .route('/stock')
-    .get((req: Request, res: Response): void => {
-      logger.info(`GET /stock from ${req.ip}`);
-      Stock.find((err: Error, stocks): Response => {
-        if (err) {
-          logger.error('Error finding stock');
-          return res.send(err);
-        }
-        return res.send(stocks);
-      })
-        .populate('channel')
-        .exec();
-    })
+    .get(
+      passport.authenticate('jwt', { session: false }),
+      (req: Request, res: Response): void => {
+        logger.info(`GET /stock from ${req.ip}`);
+        Stock.find((err: Error, stocks): Response => {
+          if (err) {
+            logger.error('Error finding stock');
+            return res.send(err);
+          }
+          return res.send(stocks);
+        })
+          .populate('channel')
+          .exec();
+      },
+    )
     .post((req: Request, res: Response): void => {
       // Example using object references
       Channel.findOne(

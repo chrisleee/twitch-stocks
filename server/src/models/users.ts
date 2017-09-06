@@ -14,11 +14,11 @@ export interface IUser extends Document {
 
 const userSchema = new Schema(
   {
-    _id: String,
+    _id: { type: String, required: true },
     buyingStocks: [String],
     email: String,
     ownedStocks: [String],
-    password: String,
+    password: { type: String, required: true },
     points: Number,
     sellingStocks: [String],
     settings: {},

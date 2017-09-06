@@ -23,7 +23,7 @@ describe('Login Page', () => {
           <LayoutLoginRegister>
             <LoginForm />
           </LayoutLoginRegister>,
-        )
+        ),
       ).toBe(true);
     });
   });

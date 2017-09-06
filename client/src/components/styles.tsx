@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { StyledFunction } from 'styled-components';
 
 export const InnerCenteredWrapper = styled.div`
   margin: 0 auto;
@@ -63,3 +63,28 @@ export const RightAlignedHeaderItemLeft = styled.div`
   min-width: ${props => (props.width ? props.width : '')};
   padding-left: 10px;
 `;
+
+const formFeedback: StyledFunction<
+  IFormFeedbackProps & React.HTMLProps<HTMLDivElement>
+> =
+  styled.div;
+
+export const FormFeedback = formFeedback`
+  color: ${props => getMessageColor(props)};
+  display: ${props => (props.display === true ? 'block' : 'none')}
+`;
+
+interface IFormFeedbackProps {
+  display: boolean;
+}
+
+function getMessageColor(props: any) {
+  if (props.type === 'error') {
+    return 'red';
+  } else if (props.type === 'warning') {
+    return 'orange';
+  } else if (props.type === 'info') {
+    return 'green';
+  }
+  return 'black';
+}

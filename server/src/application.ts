@@ -1,8 +1,13 @@
 import * as bodyParser from 'body-parser';
 import { Express, Router } from 'express';
 import { Server } from 'http';
+import * as passport from 'passport';
+import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt';
 import { logger } from './logger';
+import { IUser, User } from './models/users';
 import channels from './routes/channels';
+import login from './routes/login';
+import register from './routes/register';
 import stock from './routes/stock';
 import users from './routes/users';
 import mongoose = require('mongoose');
@@ -67,6 +72,8 @@ export class WebAPI {
     channels(app, router);
     stock(app, router);
     users(app, router);
+    login(app, router);
+    register(app, router);
     // Add more routes here as needed
   }
 
@@ -76,6 +83,46 @@ export class WebAPI {
    */
   private configureMiddleware(app: Express): void {
     app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    this.configurePassport();
+    app.use(passport.initialize());
+    app.use(this.allowCors);
+  }
+
+  private allowCors(req: any, res: any, next: any) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    next();
+  }
+
+  /**
+   * Setup passport with strategies
+   */
+  private configurePassport() {
+    const opts: any = {};
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+    opts.secretOrKey = process.env.JWT_SECRET;
+    passport.use(
+      new JWTStrategy(opts, (payload, done) => {
+        logger.debug('JWT payload received: ', payload);
+        User.findOne({ _id: payload.username }, (err, user) => {
+          if (err) {
+            logger.error('Error finding user to authorize');
+            return done(err, false);
+          }
+          if (user) {
+            logger.debug('User authorized');
+            return done(undefined, user);
+          } else {
+            logger.debug('User unauthorized');
+            return done(undefined, false, { message: 'User not found' });
+          }
+        });
+      }),
+    );
   }
 
   /**
