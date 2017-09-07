@@ -1,5 +1,23 @@
 import fetch = require('isomorphic-fetch');
+import Link from 'next/link';
 import * as React from 'react';
+import styled from 'styled-components';
+import HeaderTop from './HeaderTop';
+import { RightAlignedHeaderItem, RightAlignedHeaderItemLeft } from './styles';
+import TopStreamersInfopane from './TopStreamersInfopane';
+
+const Nav = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  margin-bottom: 5px;
+`;
+
+const A = styled.a`padding: 0 5px 0 5px;`;
+
+const RightNav = RightAlignedHeaderItemLeft.extend`padding-left: 0px;`;
 
 interface ITopStreamersState {
   streamers: Array<{ [key: string]: any }>;
@@ -44,24 +62,26 @@ export default class TopStreamers extends React.Component<
     return (
       <div>
         {/* Header bar */}
-        <div>Val 1 - Val 2 - Val 3</div>
-        <ul>
-          {this.state.streamers.map(streamer => {
-            if (streamer.averageViewers) {
-              return (
-                <li key={streamer._id}>
-                  {streamer.channelDisplayName} -{' '}
-                  {Math.round(streamer.averageViewers.allTime.value)}
-                </li>
-              );
-            } else {
-              return;
-            }
-          })}
-        </ul>
-        {/* prices and gains */}
-        <div>Current price - real gain/wk - percentage gain/wk</div>
-        {/* Graph */}
+        <Nav>
+          <RightNav>
+            {this.state.streamers.map(streamer => {
+              if (streamer.averageViewers) {
+                return (
+                  <A key={streamer._id} href={streamer._id}>
+                    {streamer.channelDisplayName} -{' '}
+                    {Math.round(streamer.averageViewers.allTime.value)}
+                  </A>
+                );
+              } else {
+                return;
+              }
+            })}
+          </RightNav>
+          <RightAlignedHeaderItem>
+            Day - Week - Month - All Time
+          </RightAlignedHeaderItem>
+        </Nav>
+        <TopStreamersInfopane streamer={this.state.streamers[0]} />
         <div>Graph goes here when built</div>
       </div>
     );
