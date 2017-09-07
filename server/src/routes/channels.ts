@@ -10,9 +10,13 @@ import { logger } from './../logger';
  * @param router express router
  */
 function route(app: Application, router: Router): void {
-  router.route('/channels').get((req: Request, res: Response): void => {
+  router.route('/channels').get((req: Request, res: Response) => {
     logger.info(`GET /channels from ${req.ip}`);
-    Channel.find((err: Error, channels): Response => {
+    let sortOpts: any = {};
+    if (req.query.sort) {
+      sortOpts = setSortOrder(req.query.sort);
+    }
+    Channel.find().sort(sortOpts).exec((err: Error, channels): Response => {
       if (err) {
         logger.error('Cannot find channels');
         return res.send(err);
@@ -20,6 +24,51 @@ function route(app: Application, router: Router): void {
       return res.send(channels);
     });
   });
+}
+
+function setSortOrder(query: string) {
+  const sortOpts: any = {};
+  const sort = query.split(',');
+  if (sort[0] === 'peakViewers') {
+    switch (sort[1]) {
+      case 'allTime':
+        sortOpts['peakViewers.allTime.value'] = 1;
+        break;
+      case 'month':
+        sortOpts['peakViewers.month.value'] = 1;
+        break;
+      case 'week':
+        sortOpts['peakViewers.week.value'] = 1;
+        break;
+      case 'day':
+        sortOpts['peakViewers.day.value'] = 1;
+        break;
+    }
+  } else if (sort[0] === 'averageViewers') {
+    switch (sort[1]) {
+      case 'allTime':
+        sortOpts['averageViewers.allTime.value'] = 1;
+        break;
+      case 'month':
+        sortOpts['averageViewers.month.value'] = 1;
+        break;
+      case 'week':
+        sortOpts['averageViewers.week.value'] = 1;
+        break;
+      case 'day':
+        sortOpts['averageViewers.day.value'] = 1;
+        break;
+    }
+  }
+  if (sort[2] && sort[2] === 'desc') {
+    for (const key in sortOpts) {
+      if (key) {
+        sortOpts[key] = -1;
+      }
+    }
+  }
+  logger.debug('Sort order is: ', sortOpts);
+  return sortOpts;
 }
 
 export default route;
