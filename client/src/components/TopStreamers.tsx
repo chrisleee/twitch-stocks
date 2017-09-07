@@ -24,7 +24,7 @@ export default class TopStreamers extends React.Component<
     return json;
   }
 
-  public componentDidMount() {
+  public componentWillMount() {
     this.getStreamers().then(res => {
       this.setState({ streamers: res });
       // console.log(res);
@@ -46,12 +46,12 @@ export default class TopStreamers extends React.Component<
         {/* Header bar */}
         <div>Val 1 - Val 2 - Val 3</div>
         <ul>
-          {this.state.streamers.map((streamer, index) => {
-            if (index < 3 && streamer.averageViewers) {
+          {this.state.streamers.map(streamer => {
+            if (streamer.averageViewers) {
               return (
-                <li>
+                <li key={streamer._id}>
                   {streamer.channelDisplayName} -{' '}
-                  {streamer.averageViewers.allTime.value}
+                  {Math.round(streamer.averageViewers.allTime.value)}
                 </li>
               );
             } else {

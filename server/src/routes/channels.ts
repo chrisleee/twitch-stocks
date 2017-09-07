@@ -12,11 +12,18 @@ import { logger } from './../logger';
 function route(app: Application, router: Router): void {
   router.route('/channels').get((req: Request, res: Response) => {
     logger.info(`GET /channels from ${req.ip}`);
-    let sortOpts: any = {};
+    let dbQuery = Channel.find();
     if (req.query.sort) {
-      sortOpts = setSortOrder(req.query.sort);
+      const sortOpts = setSortOrder(req.query.sort);
+      dbQuery = dbQuery.sort(sortOpts);
+      logger.debug('Sort order is: ', sortOpts);
     }
-    Channel.find().sort(sortOpts).exec((err: Error, channels): Response => {
+    if (req.query.limit) {
+      const limit = parseInt(req.query.limit, 10);
+      dbQuery = dbQuery.limit(limit);
+      logger.debug('Query limit is: ', limit);
+    }
+    dbQuery.exec((err: Error, channels): Response => {
       if (err) {
         logger.error('Cannot find channels');
         return res.send(err);
@@ -67,7 +74,6 @@ function setSortOrder(query: string) {
       }
     }
   }
-  logger.debug('Sort order is: ', sortOpts);
   return sortOpts;
 }
 
