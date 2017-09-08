@@ -21,6 +21,8 @@ const RightNav = RightAlignedHeaderItemLeft.extend`padding-left: 0px;`;
 
 interface ITopStreamersState {
   streamers: Array<{ [key: string]: any }>;
+  currentStreamer: { [key: string]: any };
+  currentPeriod: string;
 }
 
 export default class TopStreamers extends React.Component<
@@ -29,9 +31,14 @@ export default class TopStreamers extends React.Component<
 > {
   constructor(props: any) {
     super(props);
-    this.state = { streamers: [{}] };
+    this.state = {
+      currentPeriod: 'week',
+      currentStreamer: {},
+      streamers: [{}],
+    };
     // this.getStreamers = this.getStreamers.bind(this);
     this.setState = this.setState.bind(this);
+    this.handlePeriodClick = this.handlePeriodClick.bind(this);
   }
 
   public async getStreamers() {
@@ -45,17 +52,11 @@ export default class TopStreamers extends React.Component<
   public componentWillMount() {
     this.getStreamers().then(res => {
       this.setState({ streamers: res });
-      // console.log(res);
-      // this.processStreamers(res);
     });
   }
 
-  public processStreamers(streamers: Array<{ [key: string]: any }>) {
-    // const len = streamers.length;
-    const iterations = 3;
-    for (let i = 0; i < iterations; i++) {
-      // console.log(streamers[i].averageViewers);
-    }
+  public handlePeriodClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
+    this.setState({ currentPeriod: e.currentTarget.id });
   }
 
   public render() {
@@ -78,10 +79,27 @@ export default class TopStreamers extends React.Component<
             })}
           </RightNav>
           <RightAlignedHeaderItem>
-            Day - Week - Month - All Time
+            <a id="day" href="#" onClick={this.handlePeriodClick}>
+              Day
+            </a>
+            {' - '}
+            <a id="week" href="#" onClick={this.handlePeriodClick}>
+              Week
+            </a>
+            {' - '}
+            <a id="month" href="#" onClick={this.handlePeriodClick}>
+              Month
+            </a>
+            {' - '}
+            <a id="allTime" href="#" onClick={this.handlePeriodClick}>
+              All Time
+            </a>
           </RightAlignedHeaderItem>
         </Nav>
-        <TopStreamersInfopane streamer={this.state.streamers[0]} />
+        <TopStreamersInfopane
+          streamer={this.state.streamers[0]}
+          period={this.state.currentPeriod}
+        />
         <div>Graph goes here when built</div>
       </div>
     );

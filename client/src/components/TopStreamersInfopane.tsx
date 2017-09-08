@@ -10,17 +10,17 @@ const Info = styled.div`font-size: 1.8em;`;
 
 const Byline = styled.div`font-size: 0.75em;`;
 
-interface ITopStreamersInfopane {
+interface ITopStreamersInfopaneProps {
   streamer: { [key: string]: any };
+  period: string;
 }
 
 export default class TopStreamersInfopane extends React.Component<
-  ITopStreamersInfopane,
+  ITopStreamersInfopaneProps,
   any
 > {
-  constructor(props: any) {
+  constructor(props: ITopStreamersInfopaneProps) {
     super(props);
-    this.setState = this.setState.bind(this);
   }
 
   public render() {
@@ -29,7 +29,9 @@ export default class TopStreamersInfopane extends React.Component<
         <InfoBox>
           <Info>
             {this.props.streamer.averageViewers
-              ? Math.round(this.props.streamer.averageViewers.day.value)
+              ? Math.round(
+                  this.props.streamer.averageViewers[this.props.period].value,
+                )
               : ''}
           </Info>
           <Byline>Average viewers</Byline>
@@ -37,7 +39,9 @@ export default class TopStreamersInfopane extends React.Component<
         <InfoBox>
           <Info>
             {this.props.streamer.peakViewers
-              ? Math.round(this.props.streamer.peakViewers.day.value)
+              ? Math.round(
+                  this.props.streamer.peakViewers[this.props.period].value,
+                )
               : ''}
           </Info>
           <Byline>Peak Viewers</Byline>
