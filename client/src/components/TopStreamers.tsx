@@ -39,6 +39,7 @@ export default class TopStreamers extends React.Component<
     // this.getStreamers = this.getStreamers.bind(this);
     this.setState = this.setState.bind(this);
     this.handlePeriodClick = this.handlePeriodClick.bind(this);
+    this.handleStreamerClick = this.handleStreamerClick.bind(this);
   }
 
   public async getStreamers() {
@@ -51,12 +52,17 @@ export default class TopStreamers extends React.Component<
 
   public componentWillMount() {
     this.getStreamers().then(res => {
-      this.setState({ streamers: res });
+      this.setState({ streamers: res, currentStreamer: res[0] });
     });
   }
 
   public handlePeriodClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
     this.setState({ currentPeriod: e.currentTarget.id });
+  }
+
+  public async handleStreamerClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
+    const index = parseInt(e.currentTarget.id.split('-')[1], 10);
+    await this.setState({ currentStreamer: this.state.streamers[index] });
   }
 
   public render() {
@@ -65,11 +71,17 @@ export default class TopStreamers extends React.Component<
         {/* Header bar */}
         <Nav>
           <RightNav>
-            {this.state.streamers.map(streamer => {
+            {this.state.streamers.map((streamer, index) => {
               if (streamer.averageViewers) {
                 return (
-                  <A key={streamer._id} href={streamer._id}>
-                    {streamer.channelDisplayName} -{' '}
+                  <A
+                    id={`${streamer._id}-${index}`}
+                    key={streamer._id}
+                    href="#"
+                    onClick={this.handleStreamerClick}
+                  >
+                    {streamer.channelDisplayName}
+                    {' - '}
                     {Math.round(streamer.averageViewers.allTime.value)}
                   </A>
                 );
@@ -97,7 +109,7 @@ export default class TopStreamers extends React.Component<
           </RightAlignedHeaderItem>
         </Nav>
         <TopStreamersInfopane
-          streamer={this.state.streamers[0]}
+          streamer={this.state.currentStreamer}
           period={this.state.currentPeriod}
         />
         <div>Graph goes here when built</div>
