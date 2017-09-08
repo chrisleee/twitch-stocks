@@ -36,7 +36,6 @@ export default class TopStreamers extends React.Component<
       currentStreamer: {},
       streamers: [{}],
     };
-    // this.getStreamers = this.getStreamers.bind(this);
     this.setState = this.setState.bind(this);
     this.handlePeriodClick = this.handlePeriodClick.bind(this);
     this.handleStreamerClick = this.handleStreamerClick.bind(this);
@@ -60,9 +59,9 @@ export default class TopStreamers extends React.Component<
     this.setState({ currentPeriod: e.currentTarget.id });
   }
 
-  public async handleStreamerClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
+  public handleStreamerClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
     const index = parseInt(e.currentTarget.id.split('-')[1], 10);
-    await this.setState({ currentStreamer: this.state.streamers[index] });
+    this.setState({ currentStreamer: this.state.streamers[index] });
   }
 
   public render() {
