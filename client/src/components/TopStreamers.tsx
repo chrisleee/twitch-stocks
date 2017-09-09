@@ -4,6 +4,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import HeaderTop from './HeaderTop';
 import { RightAlignedHeaderItem, RightAlignedHeaderItemLeft } from './styles';
+import TopStreamersGraph from './TopStreamersGraph';
 import TopStreamersInfopane from './TopStreamersInfopane';
 
 const Nav = styled.div`
@@ -111,7 +112,7 @@ export default class TopStreamers extends React.Component<
           streamer={this.state.currentStreamer}
           period={this.state.currentPeriod}
         />
-        <div>Graph goes here when built</div>
+        <TopStreamersGraph />
       </div>
     );
   }
