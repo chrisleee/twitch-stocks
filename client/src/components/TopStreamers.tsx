@@ -16,7 +16,16 @@ const Nav = styled.div`
   margin-bottom: 5px;
 `;
 
-const A = styled.a`padding: 0 5px 0 5px;`;
+const StreamerAnchor = styled.a`
+  padding: 0 5px 0 5px;
+  border-bottom: ${props => (props.data === 'active' ? '1px black solid' : '')};
+  font-size: 1.05em;
+  font-weight: ${props => (props.data === 'active' ? 'bold' : '')};
+  color: ${props => (props.data === 'active' ? '#3865ff' : '#686868;')};
+  text-decoration: none;
+`;
+
+const PeriodAnchor = StreamerAnchor.extend`padding: auto;`;
 
 const RightNav = RightAlignedHeaderItemLeft.extend`padding-left: 0px;`;
 
@@ -57,10 +66,12 @@ export default class TopStreamers extends React.Component<
   }
 
   public handlePeriodClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
+    e.preventDefault();
     this.setState({ currentPeriod: e.currentTarget.id });
   }
 
   public handleStreamerClick(e: React.SyntheticEvent<HTMLAnchorElement>) {
+    e.preventDefault();
     const index = parseInt(e.currentTarget.id.split('-')[1], 10);
     this.setState({ currentStreamer: this.state.streamers[index] });
   }
@@ -74,16 +85,21 @@ export default class TopStreamers extends React.Component<
             {this.state.streamers.map((streamer, index) => {
               if (streamer.averageViewers) {
                 return (
-                  <A
+                  <StreamerAnchor
                     id={`${streamer._id}-${index}`}
                     key={streamer._id}
                     href="#"
                     onClick={this.handleStreamerClick}
+                    data={
+                      this.state.currentStreamer === streamer
+                        ? 'active'
+                        : 'not-active'
+                    }
                   >
                     {streamer.channelDisplayName}
                     {' - '}
                     {Math.round(streamer.averageViewers.allTime.value)}
-                  </A>
+                  </StreamerAnchor>
                 );
               } else {
                 return;
@@ -91,21 +107,49 @@ export default class TopStreamers extends React.Component<
             })}
           </RightNav>
           <RightAlignedHeaderItem>
-            <a id="day" href="#" onClick={this.handlePeriodClick}>
+            <PeriodAnchor
+              id="day"
+              href="#"
+              onClick={this.handlePeriodClick}
+              data={
+                this.state.currentPeriod === 'day' ? 'active' : 'not-active'
+              }
+            >
               Day
-            </a>
+            </PeriodAnchor>
             {' - '}
-            <a id="week" href="#" onClick={this.handlePeriodClick}>
+            <PeriodAnchor
+              id="week"
+              href="#"
+              onClick={this.handlePeriodClick}
+              data={
+                this.state.currentPeriod === 'week' ? 'active' : 'not-active'
+              }
+            >
               Week
-            </a>
+            </PeriodAnchor>
             {' - '}
-            <a id="month" href="#" onClick={this.handlePeriodClick}>
+            <PeriodAnchor
+              id="month"
+              href="#"
+              onClick={this.handlePeriodClick}
+              data={
+                this.state.currentPeriod === 'month' ? 'active' : 'not-active'
+              }
+            >
               Month
-            </a>
+            </PeriodAnchor>
             {' - '}
-            <a id="allTime" href="#" onClick={this.handlePeriodClick}>
+            <PeriodAnchor
+              id="allTime"
+              href="#"
+              onClick={this.handlePeriodClick}
+              data={
+                this.state.currentPeriod === 'allTime' ? 'active' : 'not-active'
+              }
+            >
               All Time
-            </a>
+            </PeriodAnchor>
           </RightAlignedHeaderItem>
         </Nav>
         <TopStreamersInfopane
