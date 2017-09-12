@@ -90,7 +90,6 @@ describe('get /api/login to generate JWT token', () => {
         done();
       }
     });
-    done();
   });
   it('should give 401 error for unsuccessful login', done => {
     request(app)
@@ -151,7 +150,6 @@ describe('get /channels with auth', () => {
         done();
       }
     });
-    done();
   });
   beforeEach(done => {
     const username = 'username=test_login';
@@ -203,7 +201,6 @@ describe('get /stock', () => {
         done();
       }
     });
-    done();
   });
   beforeEach(done => {
     const username = 'username=test_login';
@@ -255,7 +252,6 @@ describe('get /users', () => {
         done();
       }
     });
-    done();
   });
   beforeEach(done => {
     const username = 'username=test_login';

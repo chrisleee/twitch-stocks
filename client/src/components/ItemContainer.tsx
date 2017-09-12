@@ -20,7 +20,7 @@ const TitleBar = styled.div`
 const Content = styled.div`padding: 5px 5px 2px 5px;`;
 
 interface IItemContainerProps {
-  children: string | JSX.Element | JSX.Element[];
+  children: string | Array<string | JSX.Element> | JSX.Element;
   title: string | undefined;
   color: string | undefined;
   width: string | undefined;

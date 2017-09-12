@@ -14,6 +14,7 @@ import {
   RightAlignedHeaderItem,
   RightAlignedHeaderItemLeft,
 } from './styles';
+import TopStreamers from './TopStreamers';
 
 const Margin = Body.extend`margin: 8px;`;
 
@@ -76,7 +77,7 @@ export default class LayoutDashboard extends React.Component<
             </ItemContainer>
           </OuterCenteredWrapper>
           <ItemContainer title="Top Streamers" color="lightgrey" width="100%">
-            Some streamers
+            <TopStreamers />
           </ItemContainer>
           <Footer />
         </Margin>
