@@ -37,7 +37,7 @@ function route(app: Application, router: Router) {
         username: user._id,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET || 'no_secret', {
-        expiresIn: '1m',
+        expiresIn: '1h',
       }); // This is set low for testing. Suggest raising to 12h at minimum for production
       res.json({ message: 'auth ok', token });
       return;

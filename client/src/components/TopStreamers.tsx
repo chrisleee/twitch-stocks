@@ -51,9 +51,19 @@ export default class TopStreamers extends React.Component<
     this.handleStreamerClick = this.handleStreamerClick.bind(this);
   }
 
+  public getToken() {
+    return localStorage.getItem('token');
+  }
+
   public async getStreamers() {
     const response = await fetch(
       'http://localhost:3001/api/channels?sort=averageViewers,allTime,desc&limit=3',
+      {
+        headers: {
+          Authorization: `JWT ${this.getToken()}`,
+          'Content-Type': 'application/json',
+        },
+      },
     );
     const json = await response.json();
     return json;
