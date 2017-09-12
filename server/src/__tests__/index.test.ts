@@ -79,7 +79,7 @@ describe('get a user from /users/user/', () => {
     done();
   });
   it('should get json of test user', done => {
-    request(app.app).get('/api/users/user/test').then(response => {
+    request(app.app).get('/api/users/user/test_login').then(response => {
       expect(response.status).toBe(200);
       done();
     });
