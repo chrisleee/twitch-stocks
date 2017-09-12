@@ -54,7 +54,7 @@ export default class RegisterForm extends React.Component<
 
   public handlePassword(e: React.FormEvent<HTMLInputElement>) {
     this.setState({ password: e.currentTarget.value });
-    if (this.state.password.length > 1) {
+    if (this.state.password.length > 6) {
       this.setState({ passwordValid: true });
     }
   }
@@ -102,8 +102,10 @@ export default class RegisterForm extends React.Component<
     if (json.err) {
       // Unknown error; handle it here
       // console.log('Could not create user');
+      return;
     } else if (json.code && json.code === 11000) {
       // console.log('Username already exists, pick a different username');
+      return;
     } else {
       // console.log('Created user');
       // User is created; now log them in an get a JWT
