@@ -8,9 +8,9 @@ export default class Login extends React.Component<{}, {}> {
   public render() {
     return (
       <div>
-      <LayoutLoginRegister>
-        <LoginForm />
-      </LayoutLoginRegister>
+        <LayoutLoginRegister>
+          <LoginForm />
+        </LayoutLoginRegister>
       </div>
     );
   }

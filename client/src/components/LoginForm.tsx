@@ -1,11 +1,18 @@
 import fetch = require('isomorphic-fetch');
 import Link from 'next/link';
+import Router from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
+import { Authenticate } from '../lib/Authenticate';
 import LoginFormWrapper from './LoginFormWrapper';
 import { Button, Footnote, FormWrapper, Input, Title } from './styles';
 
-export default class LoginForm extends React.Component<any, any> {
+interface ILoginFormState {
+  username: string;
+  password: string;
+}
+
+export default class LoginForm extends React.Component<any, ILoginFormState> {
   constructor(props: any) {
     super(props);
     this.state = { username: '', password: '' };
@@ -15,34 +22,28 @@ export default class LoginForm extends React.Component<any, any> {
     this.submit = this.submit.bind(this);
   }
 
-  public handleUsername(e: any) {
-    this.setState({ username: e.target.value });
+  public handleUsername(e: React.FormEvent<any>) {
+    this.setState({ username: e.currentTarget.value });
   }
 
-  public handlePassword(e: any) {
-    this.setState({ password: e.target.value });
+  public handlePassword(e: React.FormEvent<any>) {
+    this.setState({ password: e.currentTarget.value });
   }
 
-  public submit(e: any) {
+  public async submit(e: React.FormEvent<any>) {
     // This will work when the routes are added on the server
     e.preventDefault();
-    fetch('http://localhost:3001/api/login', {
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setToken(json.token);
-        this.setProfile(this.state.username);
-      })
-      .catch(err => {
-        // console.log('Error posting', err);
-      });
+    const response = await Authenticate.login({
+      password: this.state.password,
+      username: this.state.username,
+    });
+    if (response.err) {
+      // Unknown error, handle it here
+    } else if (response.token) {
+      this.setToken(response.token);
+      this.setProfile(this.state.username);
+      Router.push('/dashboard');
+    }
   }
 
   public setProfile(username: string) {

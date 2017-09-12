@@ -20,14 +20,26 @@ const Margin = Body.extend`margin: 8px;`;
 
 interface IDashboardProps {
   children: string | JSX.Element | JSX.Element[];
+  username?: string | null;
+}
+
+interface IDashboardState {
+  username?: string | null;
 }
 
 export default class LayoutDashboard extends React.Component<
   IDashboardProps,
-  {}
+  IDashboardState
 > {
   constructor(props: IDashboardProps) {
     super(props);
+    this.state = { username: '' };
+    this.setState = this.setState.bind(this);
+  }
+
+  public componentDidMount() {
+    const username = localStorage.getItem('username');
+    this.setState({ username });
   }
 
   public render() {
@@ -49,7 +61,9 @@ export default class LayoutDashboard extends React.Component<
           </RightAlignedHeaderItem>
         </HeaderTop>
         <Margin>
-          <h1>Profile name</h1>
+          <h1>
+            {this.state.username}
+          </h1>
           <OuterCenteredWrapper>
             <ItemContainer title="Portfolio" color="lightgrey" width="50%">
               Balance: 0

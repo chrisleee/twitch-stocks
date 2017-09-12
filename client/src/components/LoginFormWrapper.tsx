@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { OuterCenteredWrapper } from './styles';
 
-const Wrapper = OuterCenteredWrapper.extend`
-  height: 500px;
-`;
+const Wrapper = OuterCenteredWrapper.extend`height: 500px;`;
 
 export default class LoginFormWrapper extends React.Component<any, any> {
   constructor(props: any) {
