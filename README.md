@@ -16,7 +16,7 @@ Maybe you're feeling risky and want to invest in a low-viewer streamer in the ho
 
 ~~Come check out the live site: https://twitch-stocks.now.sh/~~
 
-### _Note_: This project has been abandoned.##
+### _Note_: This project has been abandoned.
 
 #### If you are looking for a Twitch Stock trading app, check out the unaffiliated site: https://twitchstocks.com
 
